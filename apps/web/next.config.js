@@ -4,13 +4,7 @@ import { withSaasUIPro } from './saas-ui.config.js'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: [
-    /* '@saas-ui/date-picker' */
-  ],
   experimental: {
-    // Improve performance on dev,
-    // @see: https://nextjs.org/docs/app/api-reference/next-config-js/optimizePackageImports
-    // optimizePackageImports: [],
     turbo: {
       resolveAlias: {
         // Fixes turbopack support with Next Auth

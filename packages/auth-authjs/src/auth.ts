@@ -44,7 +44,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       id: 'email',
       apiKey: env.RESEND_API_KEY,
       from: env.EMAIL_FROM,
-      ...(env.RESEND_API_KEY ? {} : { sendVerificationRequest: printVerificationRequest }),
+      ...(env.RESEND_API_KEY
+        ? {}
+        : { sendVerificationRequest: printVerificationRequest }),
     }),
   ],
 })
