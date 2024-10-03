@@ -16,7 +16,7 @@
     "date-fns": "^4.1.0",
     "intl-messageformat": "^10.5.14",
     "negotiator": "^0.6.3",
-    "react-intl": "^6.6.8",
+    "react-intl": "^6.7.0",
     "server-only": "^0.0.1"
   },
   "peerDependencies": {
