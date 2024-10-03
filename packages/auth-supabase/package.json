@@ -1,0 +1,30 @@
+{
+  "name": "@acme/auth-supabase",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./middleware": "./src/middleware.ts",
+    "./env": "./src/env.ts"
+  },
+  "dependencies": {
+    "@acme/api": "workspace:*",
+    "@saas-ui/supabase": "^2.2.1",
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "env": "workspace:*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "next": "^14.2.13",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.6.2"
+  },
+  "peerDependencies": {
+    "next": ">=14",
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

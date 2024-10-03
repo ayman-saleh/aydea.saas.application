@@ -1,0 +1,31 @@
+{
+  "name": "@acme/email",
+  "description": "Email service and templates",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "email dev"
+  },
+  "exports": {
+    ".": {
+      "default": "./index.ts"
+    },
+    "./*": "./emails/*.tsx"
+  },
+  "imports": {
+    "#emails/*": "./emails/*"
+  },
+  "dependencies": {
+    "@react-email/components": "^0.0.25",
+    "env": "workspace:*",
+    "react": "^18.3.1",
+    "react-email": "^3.0.1",
+    "resend": "^4.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.8",
+    "typescript": "^5.6.2"
+  }
+}

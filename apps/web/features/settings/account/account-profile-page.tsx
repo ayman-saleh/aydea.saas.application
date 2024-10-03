@@ -1,0 +1,140 @@
+'use client'
+
+import { useRef, useState } from 'react'
+
+import {
+  Avatar,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  FormControl,
+  FormLabel,
+  Input,
+  Tooltip,
+} from '@chakra-ui/react'
+import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
+import { FormLayout, useSnackbar } from '@saas-ui/react'
+import { z } from 'zod'
+
+import { UserDTO } from '@acme/api/types'
+import { Form } from '@acme/ui/form'
+import { SettingsPage } from '@acme/ui/settings-page'
+
+import { useCurrentUser } from '#features/common/hooks/use-current-user'
+import { api } from '#lib/trpc/react'
+
+const schema = z.object({
+  name: z
+    .string()
+    .min(2, 'Please enter your name')
+    .max(40, 'Too long')
+    .describe('Name'),
+  email: z
+    .string()
+    .email({ message: 'Please enter your email address' })
+    .describe('Email'),
+})
+
+function ProfileDetails({ user }: { user: UserDTO }) {
+  const snackbar = useSnackbar()
+
+  const utils = api.useUtils()
+
+  const { isPending, mutateAsync } = api.users.updateProfile.useMutation({
+    onSettled: () => {
+      utils.auth.me.invalidate()
+    },
+  })
+
+  return (
+    <Section variant="annotated">
+      <SectionHeader
+        title="Basic details"
+        description="Update your personal information."
+      />
+      <SectionBody>
+        <Card>
+          <Form
+            schema={schema}
+            defaultValues={{
+              name: user?.name ?? '',
+              email: user?.email ?? '',
+            }}
+            onSubmit={(data) => {
+              mutateAsync(data).then(() =>
+                snackbar.success({
+                  description: 'Profile updated',
+                }),
+              )
+            }}
+          >
+            {({ Field }) => (
+              <CardBody>
+                <FormLayout>
+                  <ProfileAvatar user={user} />
+                  <Field name="name" label="Name" />
+                  <Field name="email" label="Email" />
+                  <ButtonGroup>
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      isLoading={isPending}
+                    >
+                      Save
+                    </Button>
+                  </ButtonGroup>
+                </FormLayout>
+              </CardBody>
+            )}
+          </Form>
+        </Card>
+      </SectionBody>
+    </Section>
+  )
+}
+
+function ProfileAvatar({ user }: { user: UserDTO }) {
+  const [previewUrl, setPreviewUrl] = useState<string | undefined>()
+  const ref = useRef<HTMLInputElement>(null)
+
+  const selectFile = () => {
+    ref.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target?.files
+
+    if (files?.[0]) {
+      setPreviewUrl(URL.createObjectURL(files[0]))
+    }
+  }
+
+  const avatarSrc = previewUrl ?? user.avatar ?? undefined
+
+  return (
+    <FormControl>
+      <FormLabel>Profile picture</FormLabel>
+      <Tooltip label="Upload a picture">
+        <Avatar
+          name={user.name ?? undefined}
+          src={avatarSrc}
+          size="lg"
+          onClick={selectFile}
+          cursor="pointer"
+        />
+      </Tooltip>
+      <Input type="file" ref={ref} onChange={handleFileChange} display="none" />
+    </FormControl>
+  )
+}
+
+export function AccountProfilePage() {
+  const [user] = useCurrentUser()
+
+  return (
+    <SettingsPage title="Profile" description="Manage your profile">
+      {user && <ProfileDetails user={user} />}
+    </SettingsPage>
+  )
+}
