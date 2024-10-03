@@ -1,6 +1,6 @@
 {
   "name": "@acme/billing-stripe",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe"

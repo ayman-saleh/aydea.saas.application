@@ -1,6 +1,6 @@
 {
   "name": "@acme/auth-supabase",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",

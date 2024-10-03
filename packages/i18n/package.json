@@ -1,12 +1,14 @@
 {
   "name": "@acme/i18n",
-  "main": "src/index.ts",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "extract": "formatjs extract './src/**/*.ts*' '../ui/**/*.ts*' '../../apps/web/{app,features}/**/*.ts*' --flatten",
     "compile": "formatjs compile",
     "extract-compile": "yarn extract --out-file temp.json && formatjs compile 'temp.json' --out-file lang/en.json && rm temp.json"
+  },
+  "exports": {
+    ".": "./src/index.ts"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
@@ -18,9 +20,10 @@
     "server-only": "^0.0.1"
   },
   "peerDependencies": {
-    "react": ">=16.8.6"
+    "react": ">=18"
   },
   "devDependencies": {
-    "@formatjs/cli": "^6.2.12"
+    "@formatjs/cli": "^6.2.12",
+    "react": "^18.3.1"
   }
 }

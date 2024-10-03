@@ -1,6 +1,6 @@
 {
   "name": "@tooling/mocks",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Mocks for testing",
   "private": true,
   "main": "src/index.ts",

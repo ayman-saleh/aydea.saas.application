@@ -1,6 +1,6 @@
 {
   "name": "@acme/next",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "Next.js helpers and utilities",
   "private": true,
   "type": "module",

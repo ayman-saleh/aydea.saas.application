@@ -1,7 +1,7 @@
 {
   "name": "@acme/config",
   "main": "index.ts",
-  "version": "8.0.2",
+  "version": "1.0.0",
   "type": "module",
   "dependencies": {
     "@saas-ui-pro/billing": "^0.12.0",
