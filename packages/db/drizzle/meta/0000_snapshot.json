@@ -1,11 +1,11 @@
 {
-  "id": "9067581e-11c1-471f-a332-89d849c962d8",
+  "id": "2c5cfd4c-d24c-45d1-b590-84e962e5ce11",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.saasui_activity_logs": {
-      "name": "saasui_activity_logs",
+    "public.activity_logs": {
+      "name": "activity_logs",
       "schema": "",
       "columns": {
         "id": {
@@ -13,7 +13,7 @@
           "type": "char(24)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'ix4r2qapizpokdo2x9xx1k4y'"
+          "default": "'hsnznlrf8w5i5hwhheg74guc'"
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -76,8 +76,8 @@
         }
       },
       "indexes": {
-        "saasui_activity_logs_workspace_id_id_index": {
-          "name": "saasui_activity_logs_workspace_id_id_index",
+        "activity_logs_workspace_id_id_index": {
+          "name": "activity_logs_workspace_id_id_index",
           "columns": [
             {
               "expression": "workspace_id",
@@ -102,8 +102,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.saasui_billing_accounts": {
-      "name": "saasui_billing_accounts",
+    "public.billing_accounts": {
+      "name": "billing_accounts",
       "schema": "",
       "columns": {
         "id": {
@@ -111,7 +111,7 @@
           "type": "char(24)",
           "primaryKey": true,
           "notNull": true,
-          "default": "'bc4ip38krrccvmqnb5orlen0'"
+          "default": "'bicungxfrnpjxrc7g5q0cevs'"
         },
         "customer_id": {
           "name": "customer_id",
@@ -144,8 +144,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "saasui_billing_accounts_customer_id_unique": {
-          "name": "saasui_billing_accounts_customer_id_unique",
+        "billing_accounts_customer_id_unique": {
+          "name": "billing_accounts_customer_id_unique",
           "nullsNotDistinct": false,
           "columns": [
             "customer_id"
@@ -153,8 +153,8 @@
         }
       }
     },
-    "public.saasui_billing_entitlements": {
-      "name": "saasui_billing_entitlements",
+    "public.billing_entitlements": {
+      "name": "billing_entitlements",
       "schema": "",
       "columns": {
         "id": {
@@ -162,7 +162,7 @@
           "type": "char(24)",
           "primaryKey": true,
           "notNull": true,
-          "default": "'a58oezyxenz8b47gnzevlg6h'"
+          "default": "'vb0tkxhukmvtuhqo3s83v0rc'"
         },
         "account_id": {
           "name": "account_id",
@@ -214,10 +214,10 @@
         }
       },
       "foreignKeys": {
-        "saasui_billing_entitlements_account_id_saasui_billing_accounts_id_fk": {
-          "name": "saasui_billing_entitlements_account_id_saasui_billing_accounts_id_fk",
-          "tableFrom": "saasui_billing_entitlements",
-          "tableTo": "saasui_billing_accounts",
+        "billing_entitlements_account_id_billing_accounts_id_fk": {
+          "name": "billing_entitlements_account_id_billing_accounts_id_fk",
+          "tableFrom": "billing_entitlements",
+          "tableTo": "billing_accounts",
           "columnsFrom": [
             "account_id"
           ],
@@ -231,8 +231,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.saasui_billing_plans": {
-      "name": "saasui_billing_plans",
+    "public.billing_plans": {
+      "name": "billing_plans",
       "schema": "",
       "columns": {
         "id": {
@@ -319,8 +319,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.saasui_billing_subscriptions": {
-      "name": "saasui_billing_subscriptions",
+    "public.billing_subscriptions": {
+      "name": "billing_subscriptions",
       "schema": "",
       "columns": {
         "id": {
@@ -426,10 +426,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "saasui_billing_subscriptions_account_id_saasui_billing_accounts_id_fk": {
-          "name": "saasui_billing_subscriptions_account_id_saasui_billing_accounts_id_fk",
-          "tableFrom": "saasui_billing_subscriptions",
-          "tableTo": "saasui_billing_accounts",
+        "billing_subscriptions_account_id_billing_accounts_id_fk": {
+          "name": "billing_subscriptions_account_id_billing_accounts_id_fk",
+          "tableFrom": "billing_subscriptions",
+          "tableTo": "billing_accounts",
           "columnsFrom": [
             "account_id"
           ],
@@ -443,8 +443,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.saasui_contacts": {
-      "name": "saasui_contacts",
+    "public.contacts": {
+      "name": "contacts",
       "schema": "",
       "columns": {
         "id": {
@@ -452,7 +452,7 @@
           "type": "char(24)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'np0m3kg7kog5jir9h6ukguuv'"
+          "default": "'i2rqmx2xfl3bcchtbtu3y7tq'"
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -533,8 +533,8 @@
         }
       },
       "indexes": {
-        "saasui_contacts_workspace_id_id_index": {
-          "name": "saasui_contacts_workspace_id_id_index",
+        "contacts_workspace_id_id_index": {
+          "name": "contacts_workspace_id_id_index",
           "columns": [
             {
               "expression": "workspace_id",
@@ -558,8 +558,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "saasui_contacts_workspace_id_email_unique": {
-          "name": "saasui_contacts_workspace_id_email_unique",
+        "contacts_workspace_id_email_unique": {
+          "name": "contacts_workspace_id_email_unique",
           "nullsNotDistinct": false,
           "columns": [
             "workspace_id",
@@ -568,8 +568,8 @@
         }
       }
     },
-    "public.saasui_notification": {
-      "name": "saasui_notification",
+    "public.notification": {
+      "name": "notification",
       "schema": "",
       "columns": {
         "id": {
@@ -577,7 +577,7 @@
           "type": "char(24)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'ebcylqnnfsvws38550jjuvyj'"
+          "default": "'r154lp8fzmtlcxu54v5oputu'"
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -665,8 +665,8 @@
         }
       },
       "indexes": {
-        "saasui_notification_workspace_id_id_index": {
-          "name": "saasui_notification_workspace_id_id_index",
+        "notification_workspace_id_id_index": {
+          "name": "notification_workspace_id_id_index",
           "columns": [
             {
               "expression": "workspace_id",
@@ -691,8 +691,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.saasui_tags": {
-      "name": "saasui_tags",
+    "public.tags": {
+      "name": "tags",
       "schema": "",
       "columns": {
         "id": {
@@ -736,10 +736,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "saasui_tags_workspace_id_saasui_workspaces_id_fk": {
-          "name": "saasui_tags_workspace_id_saasui_workspaces_id_fk",
-          "tableFrom": "saasui_tags",
-          "tableTo": "saasui_workspaces",
+        "tags_workspace_id_workspaces_id_fk": {
+          "name": "tags_workspace_id_workspaces_id_fk",
+          "tableFrom": "tags",
+          "tableTo": "workspaces",
           "columnsFrom": [
             "workspace_id"
           ],
@@ -751,8 +751,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "saasui_tags_workspace_id_id_pk": {
-          "name": "saasui_tags_workspace_id_id_pk",
+        "tags_workspace_id_id_pk": {
+          "name": "tags_workspace_id_id_pk",
           "columns": [
             "workspace_id",
             "id"
@@ -761,8 +761,8 @@
       },
       "uniqueConstraints": {}
     },
-    "public.saasui_users": {
-      "name": "saasui_users",
+    "public.users": {
+      "name": "users",
       "schema": "",
       "columns": {
         "id": {
@@ -835,8 +835,8 @@
         }
       }
     },
-    "public.saasui_workspace_invitations": {
-      "name": "saasui_workspace_invitations",
+    "public.workspace_invitations": {
+      "name": "workspace_invitations",
       "schema": "",
       "columns": {
         "id": {
@@ -844,7 +844,7 @@
           "type": "char(24)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'j8bi8yljzol1mqjk66r29u1r'"
+          "default": "'ibwu7w06zmb227z8mak4gnnx'"
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -905,8 +905,8 @@
         }
       },
       "indexes": {
-        "saasui_workspace_invitations_workspace_id_email_index": {
-          "name": "saasui_workspace_invitations_workspace_id_email_index",
+        "workspace_invitations_workspace_id_email_index": {
+          "name": "workspace_invitations_workspace_id_email_index",
           "columns": [
             {
               "expression": "workspace_id",
@@ -928,10 +928,10 @@
         }
       },
       "foreignKeys": {
-        "saasui_workspace_invitations_user_id_saasui_users_id_fk": {
-          "name": "saasui_workspace_invitations_user_id_saasui_users_id_fk",
-          "tableFrom": "saasui_workspace_invitations",
-          "tableTo": "saasui_users",
+        "workspace_invitations_user_id_users_id_fk": {
+          "name": "workspace_invitations_user_id_users_id_fk",
+          "tableFrom": "workspace_invitations",
+          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
@@ -941,10 +941,10 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "saasui_workspace_invitations_invited_by_saasui_users_id_fk": {
-          "name": "saasui_workspace_invitations_invited_by_saasui_users_id_fk",
-          "tableFrom": "saasui_workspace_invitations",
-          "tableTo": "saasui_users",
+        "workspace_invitations_invited_by_users_id_fk": {
+          "name": "workspace_invitations_invited_by_users_id_fk",
+          "tableFrom": "workspace_invitations",
+          "tableTo": "users",
           "columnsFrom": [
             "invited_by"
           ],
@@ -958,8 +958,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.saasui_workspace_member_settings": {
-      "name": "saasui_workspace_member_settings",
+    "public.workspace_member_settings": {
+      "name": "workspace_member_settings",
       "schema": "",
       "columns": {
         "user_id": {
@@ -1009,10 +1009,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "saasui_workspace_member_settings_user_id_saasui_users_id_fk": {
-          "name": "saasui_workspace_member_settings_user_id_saasui_users_id_fk",
-          "tableFrom": "saasui_workspace_member_settings",
-          "tableTo": "saasui_users",
+        "workspace_member_settings_user_id_users_id_fk": {
+          "name": "workspace_member_settings_user_id_users_id_fk",
+          "tableFrom": "workspace_member_settings",
+          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
@@ -1022,10 +1022,10 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "saasui_workspace_member_settings_workspace_id_saasui_workspaces_id_fk": {
-          "name": "saasui_workspace_member_settings_workspace_id_saasui_workspaces_id_fk",
-          "tableFrom": "saasui_workspace_member_settings",
-          "tableTo": "saasui_workspaces",
+        "workspace_member_settings_workspace_id_workspaces_id_fk": {
+          "name": "workspace_member_settings_workspace_id_workspaces_id_fk",
+          "tableFrom": "workspace_member_settings",
+          "tableTo": "workspaces",
           "columnsFrom": [
             "workspace_id"
           ],
@@ -1047,8 +1047,8 @@
       },
       "uniqueConstraints": {}
     },
-    "public.saasui_workspace_members": {
-      "name": "saasui_workspace_members",
+    "public.workspace_members": {
+      "name": "workspace_members",
       "schema": "",
       "columns": {
         "user_id": {
@@ -1100,10 +1100,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "saasui_workspace_members_user_id_saasui_users_id_fk": {
-          "name": "saasui_workspace_members_user_id_saasui_users_id_fk",
-          "tableFrom": "saasui_workspace_members",
-          "tableTo": "saasui_users",
+        "workspace_members_user_id_users_id_fk": {
+          "name": "workspace_members_user_id_users_id_fk",
+          "tableFrom": "workspace_members",
+          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
@@ -1113,10 +1113,10 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "saasui_workspace_members_workspace_id_saasui_workspaces_id_fk": {
-          "name": "saasui_workspace_members_workspace_id_saasui_workspaces_id_fk",
-          "tableFrom": "saasui_workspace_members",
-          "tableTo": "saasui_workspaces",
+        "workspace_members_workspace_id_workspaces_id_fk": {
+          "name": "workspace_members_workspace_id_workspaces_id_fk",
+          "tableFrom": "workspace_members",
+          "tableTo": "workspaces",
           "columnsFrom": [
             "workspace_id"
           ],
@@ -1138,8 +1138,8 @@
       },
       "uniqueConstraints": {}
     },
-    "public.saasui_workspaces": {
-      "name": "saasui_workspaces",
+    "public.workspaces": {
+      "name": "workspaces",
       "schema": "",
       "columns": {
         "id": {
@@ -1147,7 +1147,7 @@
           "type": "char(24)",
           "primaryKey": true,
           "notNull": true,
-          "default": "'hgh7zxkl6xkt1ae445xnyavj'"
+          "default": "'lmeao09qm2qhrxrxl5c4m3xu'"
         },
         "owner_id": {
           "name": "owner_id",
@@ -1207,6 +1207,318 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.auth_account": {
+      "name": "auth_account",
+      "schema": "",
+      "columns": {
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "providerAccountId": {
+          "name": "providerAccountId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "token_type": {
+          "name": "token_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_state": {
+          "name": "session_state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_account_userId_auth_user_id_fk": {
+          "name": "auth_account_userId_auth_user_id_fk",
+          "tableFrom": "auth_account",
+          "tableTo": "auth_user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "auth_account_provider_providerAccountId_pk": {
+          "name": "auth_account_provider_providerAccountId_pk",
+          "columns": [
+            "provider",
+            "providerAccountId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.auth_authenticator": {
+      "name": "auth_authenticator",
+      "schema": "",
+      "columns": {
+        "credentialID": {
+          "name": "credentialID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "providerAccountId": {
+          "name": "providerAccountId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "credentialPublicKey": {
+          "name": "credentialPublicKey",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "counter": {
+          "name": "counter",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "credentialDeviceType": {
+          "name": "credentialDeviceType",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "credentialBackedUp": {
+          "name": "credentialBackedUp",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transports": {
+          "name": "transports",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_authenticator_userId_auth_user_id_fk": {
+          "name": "auth_authenticator_userId_auth_user_id_fk",
+          "tableFrom": "auth_authenticator",
+          "tableTo": "auth_user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "auth_authenticator_userId_credentialID_pk": {
+          "name": "auth_authenticator_userId_credentialID_pk",
+          "columns": [
+            "userId",
+            "credentialID"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "auth_authenticator_credentialID_unique": {
+          "name": "auth_authenticator_credentialID_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "credentialID"
+          ]
+        }
+      }
+    },
+    "public.auth_session": {
+      "name": "auth_session",
+      "schema": "",
+      "columns": {
+        "sessionToken": {
+          "name": "sessionToken",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_session_userId_auth_user_id_fk": {
+          "name": "auth_session_userId_auth_user_id_fk",
+          "tableFrom": "auth_session",
+          "tableTo": "auth_user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.auth_user": {
+      "name": "auth_user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emailVerified": {
+          "name": "emailVerified",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "auth_user_email_unique": {
+          "name": "auth_user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "public.auth_verificationToken": {
+      "name": "auth_verificationToken",
+      "schema": "",
+      "columns": {
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "auth_verificationToken_identifier_token_pk": {
+          "name": "auth_verificationToken_identifier_token_pk",
+          "columns": [
+            "identifier",
+            "token"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     }
   },
@@ -1292,6 +1604,7 @@
     }
   },
   "schemas": {},
+  "sequences": {},
   "_meta": {
     "columns": {},
     "schemas": {},

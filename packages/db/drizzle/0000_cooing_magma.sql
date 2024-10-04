@@ -52,8 +52,8 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_activity_logs" (
-	"id" char(24) DEFAULT 'ix4r2qapizpokdo2x9xx1k4y' NOT NULL,
+CREATE TABLE IF NOT EXISTS "activity_logs" (
+	"id" char(24) DEFAULT 'hsnznlrf8w5i5hwhheg74guc' NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"actor_id" char(24),
 	"actor_type" "actor_type" DEFAULT 'system' NOT NULL,
@@ -65,24 +65,24 @@ CREATE TABLE IF NOT EXISTS "saasui_activity_logs" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_billing_accounts" (
-	"id" char(24) PRIMARY KEY DEFAULT 'bc4ip38krrccvmqnb5orlen0' NOT NULL,
+CREATE TABLE IF NOT EXISTS "billing_accounts" (
+	"id" char(24) PRIMARY KEY DEFAULT 'bicungxfrnpjxrc7g5q0cevs' NOT NULL,
 	"customer_id" varchar(255),
 	"email" varchar(255),
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now(),
-	CONSTRAINT "saasui_billing_accounts_customer_id_unique" UNIQUE("customer_id")
+	CONSTRAINT "billing_accounts_customer_id_unique" UNIQUE("customer_id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_billing_entitlements" (
-	"id" char(24) PRIMARY KEY DEFAULT 'a58oezyxenz8b47gnzevlg6h' NOT NULL,
+CREATE TABLE IF NOT EXISTS "billing_entitlements" (
+	"id" char(24) PRIMARY KEY DEFAULT 'vb0tkxhukmvtuhqo3s83v0rc' NOT NULL,
 	"account_id" varchar(255) NOT NULL,
 	"feature" text NOT NULL,
 	"enabled" boolean DEFAULT true,
 	"limit" real
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_billing_plans" (
+CREATE TABLE IF NOT EXISTS "billing_plans" (
 	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"name" varchar(64) NOT NULL,
 	"description" varchar(255),
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS "saasui_billing_plans" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_billing_subscriptions" (
+CREATE TABLE IF NOT EXISTS "billing_subscriptions" (
 	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"account_id" varchar(255) NOT NULL,
 	"plan_id" varchar(255) NOT NULL,
@@ -116,8 +116,8 @@ CREATE TABLE IF NOT EXISTS "saasui_billing_subscriptions" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_contacts" (
-	"id" char(24) DEFAULT 'np0m3kg7kog5jir9h6ukguuv' NOT NULL,
+CREATE TABLE IF NOT EXISTS "contacts" (
+	"id" char(24) DEFAULT 'i2rqmx2xfl3bcchtbtu3y7tq' NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"first_name" varchar(255),
@@ -130,11 +130,11 @@ CREATE TABLE IF NOT EXISTS "saasui_contacts" (
 	"sort_order" real,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now(),
-	CONSTRAINT "saasui_contacts_workspace_id_email_unique" UNIQUE("workspace_id","email")
+	CONSTRAINT "contacts_workspace_id_email_unique" UNIQUE("workspace_id","email")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_notification" (
-	"id" char(24) DEFAULT 'ebcylqnnfsvws38550jjuvyj' NOT NULL,
+CREATE TABLE IF NOT EXISTS "notification" (
+	"id" char(24) DEFAULT 'r154lp8fzmtlcxu54v5oputu' NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"type" varchar(255),
 	"target_id" char(24) NOT NULL,
@@ -150,17 +150,17 @@ CREATE TABLE IF NOT EXISTS "saasui_notification" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_tags" (
+CREATE TABLE IF NOT EXISTS "tags" (
 	"id" varchar(40) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"color" varchar(255),
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now(),
-	CONSTRAINT "saasui_tags_workspace_id_id_pk" PRIMARY KEY("workspace_id","id")
+	CONSTRAINT "tags_workspace_id_id_pk" PRIMARY KEY("workspace_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_users" (
+CREATE TABLE IF NOT EXISTS "users" (
 	"id" varchar(36) PRIMARY KEY NOT NULL,
 	"avatar" varchar(255),
 	"email" varchar(255),
@@ -173,8 +173,8 @@ CREATE TABLE IF NOT EXISTS "saasui_users" (
 	CONSTRAINT "users_email_unique" UNIQUE NULLS NOT DISTINCT("email")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_workspace_invitations" (
-	"id" char(24) DEFAULT 'j8bi8yljzol1mqjk66r29u1r' NOT NULL,
+CREATE TABLE IF NOT EXISTS "workspace_invitations" (
+	"id" char(24) DEFAULT 'ibwu7w06zmb227z8mak4gnnx' NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"user_id" varchar(36),
 	"email" varchar(255) NOT NULL,
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS "saasui_workspace_invitations" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_workspace_member_settings" (
+CREATE TABLE IF NOT EXISTS "workspace_member_settings" (
 	"user_id" varchar(255) NOT NULL,
 	"workspace_id" varchar(255) NOT NULL,
 	"notification_channels" jsonb,
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS "saasui_workspace_member_settings" (
 	CONSTRAINT "workspace_member_settings_pk" PRIMARY KEY("user_id","workspace_id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_workspace_members" (
+CREATE TABLE IF NOT EXISTS "workspace_members" (
 	"user_id" varchar(255) NOT NULL,
 	"workspace_id" varchar(255) NOT NULL,
 	"role" varchar(20) NOT NULL,
@@ -208,8 +208,8 @@ CREATE TABLE IF NOT EXISTS "saasui_workspace_members" (
 	CONSTRAINT "workspace_members_pk" PRIMARY KEY("user_id","workspace_id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "saasui_workspaces" (
-	"id" char(24) PRIMARY KEY DEFAULT 'hgh7zxkl6xkt1ae445xnyavj' NOT NULL,
+CREATE TABLE IF NOT EXISTS "workspaces" (
+	"id" char(24) PRIMARY KEY DEFAULT 'lmeao09qm2qhrxrxl5c4m3xu' NOT NULL,
 	"owner_id" varchar(255),
 	"slug" varchar(255) NOT NULL,
 	"name" varchar(255) NOT NULL,
@@ -218,63 +218,131 @@ CREATE TABLE IF NOT EXISTS "saasui_workspaces" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "auth_account" (
+	"userId" text NOT NULL,
+	"type" text NOT NULL,
+	"provider" text NOT NULL,
+	"providerAccountId" text NOT NULL,
+	"refresh_token" text,
+	"access_token" text,
+	"expires_at" integer,
+	"token_type" text,
+	"scope" text,
+	"id_token" text,
+	"session_state" text,
+	CONSTRAINT "auth_account_provider_providerAccountId_pk" PRIMARY KEY("provider","providerAccountId")
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "auth_authenticator" (
+	"credentialID" text NOT NULL,
+	"userId" text NOT NULL,
+	"providerAccountId" text NOT NULL,
+	"credentialPublicKey" text NOT NULL,
+	"counter" integer NOT NULL,
+	"credentialDeviceType" text NOT NULL,
+	"credentialBackedUp" boolean NOT NULL,
+	"transports" text,
+	CONSTRAINT "auth_authenticator_userId_credentialID_pk" PRIMARY KEY("userId","credentialID"),
+	CONSTRAINT "auth_authenticator_credentialID_unique" UNIQUE("credentialID")
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "auth_session" (
+	"sessionToken" text PRIMARY KEY NOT NULL,
+	"userId" text NOT NULL,
+	"expires" timestamp NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "auth_user" (
+	"id" text PRIMARY KEY NOT NULL,
+	"name" text,
+	"email" text,
+	"emailVerified" timestamp,
+	"image" text,
+	CONSTRAINT "auth_user_email_unique" UNIQUE("email")
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "auth_verificationToken" (
+	"identifier" text NOT NULL,
+	"token" text NOT NULL,
+	"expires" timestamp NOT NULL,
+	CONSTRAINT "auth_verificationToken_identifier_token_pk" PRIMARY KEY("identifier","token")
+);
+--> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_billing_entitlements" ADD CONSTRAINT "saasui_billing_entitlements_account_id_saasui_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."saasui_billing_accounts"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "billing_entitlements" ADD CONSTRAINT "billing_entitlements_account_id_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."billing_accounts"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_billing_subscriptions" ADD CONSTRAINT "saasui_billing_subscriptions_account_id_saasui_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."saasui_billing_accounts"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "billing_subscriptions" ADD CONSTRAINT "billing_subscriptions_account_id_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."billing_accounts"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_tags" ADD CONSTRAINT "saasui_tags_workspace_id_saasui_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."saasui_workspaces"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "tags" ADD CONSTRAINT "tags_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_workspace_invitations" ADD CONSTRAINT "saasui_workspace_invitations_user_id_saasui_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."saasui_users"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "workspace_invitations" ADD CONSTRAINT "workspace_invitations_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_workspace_invitations" ADD CONSTRAINT "saasui_workspace_invitations_invited_by_saasui_users_id_fk" FOREIGN KEY ("invited_by") REFERENCES "public"."saasui_users"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "workspace_invitations" ADD CONSTRAINT "workspace_invitations_invited_by_users_id_fk" FOREIGN KEY ("invited_by") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_workspace_member_settings" ADD CONSTRAINT "saasui_workspace_member_settings_user_id_saasui_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."saasui_users"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_settings_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_workspace_member_settings" ADD CONSTRAINT "saasui_workspace_member_settings_workspace_id_saasui_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."saasui_workspaces"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_settings_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_workspace_members" ADD CONSTRAINT "saasui_workspace_members_user_id_saasui_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."saasui_users"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "saasui_workspace_members" ADD CONSTRAINT "saasui_workspace_members_workspace_id_saasui_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."saasui_workspaces"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "saasui_activity_logs_workspace_id_id_index" ON "saasui_activity_logs" USING btree ("workspace_id","id");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "billing_entitlements_idx" ON "saasui_billing_entitlements" USING btree ("account_id","feature");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "saasui_contacts_workspace_id_id_index" ON "saasui_contacts" USING btree ("workspace_id","id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "saasui_notification_workspace_id_id_index" ON "saasui_notification" USING btree ("workspace_id","id");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "saasui_workspace_invitations_workspace_id_email_index" ON "saasui_workspace_invitations" USING btree ("workspace_id","email");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "slug_idx" ON "saasui_workspaces" USING btree ("slug");
+DO $$ BEGIN
+ ALTER TABLE "auth_account" ADD CONSTRAINT "auth_account_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "auth_authenticator" ADD CONSTRAINT "auth_authenticator_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "auth_session" ADD CONSTRAINT "auth_session_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "activity_logs_workspace_id_id_index" ON "activity_logs" USING btree ("workspace_id","id");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "billing_entitlements_idx" ON "billing_entitlements" USING btree ("account_id","feature");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "contacts_workspace_id_id_index" ON "contacts" USING btree ("workspace_id","id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "notification_workspace_id_id_index" ON "notification" USING btree ("workspace_id","id");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "workspace_invitations_workspace_id_email_index" ON "workspace_invitations" USING btree ("workspace_id","email");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "slug_idx" ON "workspaces" USING btree ("slug");
