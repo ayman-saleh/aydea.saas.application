@@ -34,8 +34,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@chakra-ui/cli": "^2.5.2",
-    "@changesets/cli": "^2.27.8",
+    "@chakra-ui/cli": "^2.5.4",
+    "@changesets/cli": "^2.27.9",
     "@eslint/js": "^8.57.0",
     "@formatjs/cli": "^6.2.12",
     "@ngneat/falso": "^7.2.0",
