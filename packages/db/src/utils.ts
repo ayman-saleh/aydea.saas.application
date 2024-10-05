@@ -15,13 +15,18 @@ export const cuid = (name: string) => char(name, { length: 24 })
 
 export const id = {
   get id() {
-    return cuid('id').primaryKey().notNull().default(createId())
+    return cuid('id')
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId())
   },
 }
 
 export const workspaceId = {
   get id() {
-    return cuid('id').notNull().default(createId())
+    return cuid('id')
+      .notNull()
+      .$defaultFn(() => createId())
   },
   get workspaceId() {
     return cuid('workspace_id').notNull()

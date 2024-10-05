@@ -1,5 +1,5 @@
 {
-  "id": "2c5cfd4c-d24c-45d1-b590-84e962e5ce11",
+  "id": "832fbac5-bde9-4757-a869-cdf62d8fe36a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -12,8 +12,7 @@
           "name": "id",
           "type": "char(24)",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'hsnznlrf8w5i5hwhheg74guc'"
+          "notNull": true
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -110,8 +109,7 @@
           "name": "id",
           "type": "char(24)",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'bicungxfrnpjxrc7g5q0cevs'"
+          "notNull": true
         },
         "customer_id": {
           "name": "customer_id",
@@ -161,8 +159,7 @@
           "name": "id",
           "type": "char(24)",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'vb0tkxhukmvtuhqo3s83v0rc'"
+          "notNull": true
         },
         "account_id": {
           "name": "account_id",
@@ -451,8 +448,7 @@
           "name": "id",
           "type": "char(24)",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'i2rqmx2xfl3bcchtbtu3y7tq'"
+          "notNull": true
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -576,8 +572,7 @@
           "name": "id",
           "type": "char(24)",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'r154lp8fzmtlcxu54v5oputu'"
+          "notNull": true
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -843,8 +838,7 @@
           "name": "id",
           "type": "char(24)",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'ibwu7w06zmb227z8mak4gnnx'"
+          "notNull": true
         },
         "workspace_id": {
           "name": "workspace_id",
@@ -1146,8 +1140,7 @@
           "name": "id",
           "type": "char(24)",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'lmeao09qm2qhrxrxl5c4m3xu'"
+          "notNull": true
         },
         "owner_id": {
           "name": "owner_id",

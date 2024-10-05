@@ -53,7 +53,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "activity_logs" (
-	"id" char(24) DEFAULT 'hsnznlrf8w5i5hwhheg74guc' NOT NULL,
+	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"actor_id" char(24),
 	"actor_type" "actor_type" DEFAULT 'system' NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS "activity_logs" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "billing_accounts" (
-	"id" char(24) PRIMARY KEY DEFAULT 'bicungxfrnpjxrc7g5q0cevs' NOT NULL,
+	"id" char(24) PRIMARY KEY NOT NULL,
 	"customer_id" varchar(255),
 	"email" varchar(255),
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS "billing_accounts" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "billing_entitlements" (
-	"id" char(24) PRIMARY KEY DEFAULT 'vb0tkxhukmvtuhqo3s83v0rc' NOT NULL,
+	"id" char(24) PRIMARY KEY NOT NULL,
 	"account_id" varchar(255) NOT NULL,
 	"feature" text NOT NULL,
 	"enabled" boolean DEFAULT true,
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS "billing_subscriptions" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "contacts" (
-	"id" char(24) DEFAULT 'i2rqmx2xfl3bcchtbtu3y7tq' NOT NULL,
+	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"first_name" varchar(255),
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS "contacts" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "notification" (
-	"id" char(24) DEFAULT 'r154lp8fzmtlcxu54v5oputu' NOT NULL,
+	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"type" varchar(255),
 	"target_id" char(24) NOT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "workspace_invitations" (
-	"id" char(24) DEFAULT 'ibwu7w06zmb227z8mak4gnnx' NOT NULL,
+	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"user_id" varchar(36),
 	"email" varchar(255) NOT NULL,
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS "workspace_members" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "workspaces" (
-	"id" char(24) PRIMARY KEY DEFAULT 'lmeao09qm2qhrxrxl5c4m3xu' NOT NULL,
+	"id" char(24) PRIMARY KEY NOT NULL,
 	"owner_id" varchar(255),
 	"slug" varchar(255) NOT NULL,
 	"name" varchar(255) NOT NULL,
