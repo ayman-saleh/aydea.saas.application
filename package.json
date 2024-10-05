@@ -19,7 +19,7 @@
     "db:generate": "turbo run db:generate",
     "db:migrate": "turbo run db:migrate",
     "db:studio": "turbo run db:studio",
-    "billing:sync": "tsx --env-file .env.local scripts/sync-billing-plans.ts",
+    "billing:sync": "turbo run billing:sync",
     "clean:changelogs": "tsx scripts/clean-changelogs.ts",
     "workspace:namespace": "tsx scripts/workspace.ts --namespace",
     "clean": "turbo run clean",

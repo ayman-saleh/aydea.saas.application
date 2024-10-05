@@ -22,6 +22,9 @@
     "dev": {
       "cache": true
     },
+    "billing:sync": {
+      "cache": false
+    },
     "db:migrate": {
       "dependsOn": ["db:generate"],
       "inputs": ["drizzle/**"]

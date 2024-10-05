@@ -30,10 +30,11 @@ import {
 export const syncPlans = async (plans: BillingPlanDTO[]) => {
   return await db.transaction(async (tx) => {
     for (const plan of plans) {
+      console.log(`'${JSON.stringify(plan.metadata ?? {})}'::jsonb`)
       const values = {
         ...plan,
         features: sql.raw(`'${JSON.stringify(plan.features ?? [])}'::jsonb`), // FIXME this should be handled by drizzle
-        metadata: sql`${plan.metadata ?? {}}::jsonb`, // FIXME this should be handled by drizzle
+        metadata: sql.raw(`'${JSON.stringify(plan.metadata ?? {})}'::jsonb`), // FIXME this should be handled by drizzle
       }
       await tx.insert(billingPlans).values(values).onConflictDoUpdate({
         target: billingPlans.id,

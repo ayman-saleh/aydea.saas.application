@@ -114,7 +114,6 @@ export const plans: BillingPlan[] = [
       },
     ],
     metadata: {
-      url: 'https://saas-ui.lemonsqueezy.com/checkout/buy/5c76854f-738a-46b8-b32d-932a97d477f5',
       price: '€10,-',
       priceLabel: 'per user/month',
     },
@@ -164,7 +163,6 @@ export const plans: BillingPlan[] = [
       },
     ],
     metadata: {
-      url: 'https://saas-ui.lemonsqueezy.com/checkout/buy/5c76854f-738a-46b8-b32d-932a97d477f5',
       price: '€8,-',
       priceLabel: 'per user/month',
       discount: '20%',
@@ -220,7 +218,6 @@ export const plans: BillingPlan[] = [
       },
     ],
     metadata: {
-      url: 'https://saas-ui.lemonsqueezy.com/checkout/buy/5c76854f-738a-46b8-b32d-932a97d477f5',
       price: '€25,-',
       priceLabel: 'per user/month',
     },
@@ -275,7 +272,6 @@ export const plans: BillingPlan[] = [
       },
     ],
     metadata: {
-      url: 'https://saas-ui.lemonsqueezy.com/checkout/buy/5c76854f-738a-46b8-b32d-932a97d477f5',
       price: '€20,-',
       priceLabel: 'per user/month',
       discount: '20%',

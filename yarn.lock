@@ -89,8 +89,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@acme/config@workspace:packages/config"
   dependencies:
-    "@saas-ui-pro/billing": "npm:^0.12.2"
-    "@saas-ui-pro/feature-flags": "npm:^0.15.2"
+    "@saas-ui-pro/billing": "npm:^0.13.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.16.0"
     "@types/react": "npm:^18.3.11"
     react: "npm:^18.3.1"
   languageName: unknown
@@ -5017,29 +5017,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui-pro/billing@npm:^0.12.2":
-  version: 0.12.2
-  resolution: "@saas-ui-pro/billing@npm:0.12.2"
+"@saas-ui-pro/billing@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "@saas-ui-pro/billing@npm:0.13.0"
   dependencies:
     date-fns: "npm:^4.1.0"
   peerDependencies:
     react: ">=18"
-  checksum: 10/6ad103f267039c53f82969d652988ff7847717b05a9d7fd2cc88d1790380fd24623eaf226c52e6ce0429f852adb097304045695d98681cbc1cd30139370d7c95
+  checksum: 10/eaa9edd2a78cbd3bbde0895f1ce336b5363f7e81a55043135cb7d7bd9a76ab1a9b7004eeebaf47651993f9dc598eac704af38866f26151dc3eca21f59b541436
   languageName: node
   linkType: hard
 
-"@saas-ui-pro/feature-flags@npm:^0.15.2":
-  version: 0.15.2
-  resolution: "@saas-ui-pro/feature-flags@npm:0.15.2"
+"@saas-ui-pro/feature-flags@npm:^0.16.0":
+  version: 0.16.0
+  resolution: "@saas-ui-pro/feature-flags@npm:0.16.0"
   dependencies:
-    "@chakra-ui/utils": "npm:^2.2.1"
     zustand: "npm:^4.5.5"
   peerDependencies:
-    "@chakra-ui/react": ">=2.5.0"
-    "@saas-ui/react": ">=2.0.0"
-    framer-motion: ">=5.5.0"
     react: ">=18"
-  checksum: 10/db652878695a0efbfe71302a5a5a5148b0210af50423a10f416d2eeebea5a17e90b0a361a883ba8fb5b1cd5301ed1315cff61a4d72472c68aec308d52825685c
+  checksum: 10/12bd1ea8e3209e80130b64bc95e7ec487a7518702c08c717a485178ae3384783a7a032c44bc5faf5e64264b8759febeabdfa0b90a341b1a7295c3c2cc01590d2
   languageName: node
   linkType: hard
 
@@ -18456,8 +18452,8 @@ __metadata:
     "@next/bundle-analyzer": "npm:^14.2.14"
     "@next/eslint-plugin-next": "npm:^14.2.14"
     "@react-hookz/web": "npm:^24.0.4"
-    "@saas-ui-pro/billing": "npm:^0.12.2"
-    "@saas-ui-pro/feature-flags": "npm:^0.15.2"
+    "@saas-ui-pro/billing": "npm:^0.13.0"
+    "@saas-ui-pro/feature-flags": "npm:^0.16.0"
     "@saas-ui-pro/onboarding": "npm:^0.14.3"
     "@saas-ui-pro/react": "npm:^0.36.4"
     "@saas-ui/auth": "npm:3.4.1"
