@@ -26,10 +26,6 @@ declare module 'next-auth' {
   }
 }
 
-async function printVerificationRequest(params: any) {
-  console.log(params)
-}
-
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: DrizzleAdapter(db, {
@@ -46,7 +42,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       from: env.EMAIL_FROM,
       ...(env.RESEND_API_KEY
         ? {}
-        : { sendVerificationRequest: printVerificationRequest }),
+        : {
+            sendVerificationRequest: (params) => {
+              console.log('sendVerificationRequest', params)
+            },
+          }),
     }),
   ],
 })
