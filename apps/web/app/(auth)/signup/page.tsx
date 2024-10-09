@@ -1,12 +1,9 @@
+import type { Metadata } from 'next'
+
 import { SignupPage } from '#features/auth/signup/signup-page'
-import { createPage } from '#lib/create-page'
 
-const { Page, metadata } = createPage({
-  title: 'Signup',
-  component: () => {
-    return <SignupPage />
-  },
-})
+export const metadata: Metadata = {
+  title: 'Sign up',
+}
 
-export { metadata }
-export default Page
+export default SignupPage
