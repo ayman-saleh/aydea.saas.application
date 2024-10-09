@@ -28,7 +28,7 @@
     "@saas-ui-pro/billing": "^0.13.0",
     "@saas-ui-pro/feature-flags": "^0.16.0",
     "@saas-ui-pro/onboarding": "^0.15.0",
-    "@saas-ui-pro/react": "^0.36.5",
+    "@saas-ui-pro/react": "^0.37.0",
     "@saas-ui/auth": "3.4.2",
     "@saas-ui/charts": "^0.12.1",
     "@saas-ui/date-picker": "^0.14.0",
@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.2.15",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "^8.1.0",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.16.10",
     "typescript": "^5.6.3",
