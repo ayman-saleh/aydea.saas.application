@@ -1,6 +1,6 @@
 'use client'
 
-import { ColorModeScript } from '@chakra-ui/system'
+import { ColorModeScript } from '@chakra-ui/react'
 
 export function Script(props: { colorMode?: 'light' | 'dark' | 'system' }) {
   return (
