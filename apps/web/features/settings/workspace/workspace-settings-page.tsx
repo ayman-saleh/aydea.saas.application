@@ -114,8 +114,9 @@ function WorkspaceDetails(props: { workspace: WorkspaceDTO }) {
             name: data.name,
             slug: data.slug,
           }).then(() =>
-            snackbar({
-              description: 'Updated the workspace',
+            snackbar.success({
+              title: 'Workspace updated',
+              description: 'Your workspace settings have been updated.',
             }),
           )
         }}
