@@ -32,7 +32,6 @@ export const UpdateWorkspaceSchema = WorkspaceSchema.pick({
   id: true,
   name: true,
   slug: true,
-  email: true,
   logo: true,
 })
   .required({
