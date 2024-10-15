@@ -4,6 +4,15 @@ export function createEnv<Schema extends z.AnyZodObject>(
   schema: Schema,
   clientEnv?: Record<string, string>,
 ): z.infer<Schema> {
+  const env = {
+    ...process.env,
+    ...clientEnv,
+  }
+
+  if (!!process.env.CI || process.env.npm_lifecycle_event === 'lint') {
+    return env as any
+  }
+
   const result = schema.safeParse({
     ...process.env,
     ...clientEnv,
