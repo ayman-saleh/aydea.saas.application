@@ -4,6 +4,8 @@ import slug from 'slug'
 import { z } from 'zod'
 
 import {
+  and,
+  billingSubscriptions,
   createId,
   db,
   eq,
@@ -215,4 +217,51 @@ export const getWorkspace = async (idOrSlug: string) => {
           : [member.role],
     })),
   }
+}
+
+export const getWorkspaceContext = async (idOrSlug: string, userId: string) => {
+  const result = await db
+    .select({
+      id: workspaces.id,
+      ownerId: workspaces.ownerId,
+      slug: workspaces.slug,
+      name: workspaces.name,
+      logo: workspaces.logo,
+      createdAt: workspaces.createdAt,
+      updatedAt: workspaces.updatedAt,
+      subscription: {
+        id: billingSubscriptions.id,
+        planId: billingSubscriptions.planId,
+        status: billingSubscriptions.status,
+        accountId: billingSubscriptions.accountId,
+        startedAt: billingSubscriptions.startedAt,
+        cancelAt: billingSubscriptions.cancelAt,
+        canceledAt: billingSubscriptions.canceledAt,
+        trialEndsAt: billingSubscriptions.trialEndsAt,
+        cancelAtPeriodEnd: billingSubscriptions.cancelAtPeriodEnd,
+        currentPeriodStart: billingSubscriptions.currentPeriodStart,
+        currentPeriodEnd: billingSubscriptions.currentPeriodEnd,
+      },
+      member: {
+        userId: workspaceMembers.userId,
+        role: workspaceMembers.role,
+        status: workspaceMembers.status,
+      },
+    })
+    .from(workspaces)
+    .where(or(eq(workspaces.id, idOrSlug), eq(workspaces.slug, idOrSlug)))
+    .leftJoin(
+      billingSubscriptions,
+      eq(billingSubscriptions.accountId, workspaces.id),
+    )
+    .leftJoin(
+      workspaceMembers,
+      and(
+        eq(workspaceMembers.workspaceId, workspaces.id),
+        eq(workspaceMembers.userId, userId),
+      ),
+    )
+    .limit(1)
+
+  return result[0]
 }

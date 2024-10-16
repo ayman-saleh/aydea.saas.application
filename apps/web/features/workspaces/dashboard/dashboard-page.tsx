@@ -31,7 +31,6 @@ import {
 } from '@acme/ui/date-picker'
 import { SegmentedControl } from '@acme/ui/segmented-control'
 
-import { useCurrentWorkspace } from '#features/common/hooks/use-current-workspace'
 import { WorkspacePageProps } from '#lib/create-page'
 import { api } from '#lib/trpc/react'
 
@@ -42,8 +41,6 @@ import { RevenueChart } from './metrics/revenue-chart'
 import { SalesByCountry } from './metrics/sales-by-country'
 
 export function DashboardPage(props: WorkspacePageProps) {
-  const [workspace] = useCurrentWorkspace()
-
   const [range, setRange] = useState('30d')
   const [dateRange, setDateRange] = useState(getRangeValue('30d'))
   const onPresetChange = (preset: string) => {
@@ -66,7 +63,7 @@ export function DashboardPage(props: WorkspacePageProps) {
 
   const { data, isLoading } = api.dashboard.get.useQuery(
     {
-      workspaceId: workspace.id,
+      workspaceId: props.params.workspace,
       startDate: dateRange.start.toString(),
       endDate: dateRange.end.toString(),
     },
