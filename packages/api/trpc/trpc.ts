@@ -6,7 +6,7 @@ import { TRPCError, initTRPC } from '@trpc/server'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
-import { getWorkspaceMemberById } from '#modules/workspace-members/workspace-members.service'
+import { getWorkspaceContext } from '#modules/workspaces/workspaces.service'
 import { ServiceError } from '#utils/error'
 
 import { createTRPCContext } from './context'
@@ -121,13 +121,25 @@ const scopedProcedure = protectedProcedure
     const { input, ctx } = opts
 
     if (!input.workspaceId) {
-      throw new TRPCError({ code: 'BAD_REQUEST' })
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: 'Workspace ID is required',
+      })
     }
 
-    const member = await getWorkspaceMemberById({
-      workspaceId: input.workspaceId,
-      userId: ctx.session.user.id,
-    })
+    const context = await getWorkspaceContext(
+      input.workspaceId,
+      ctx.session.user.id,
+    )
+
+    if (!context) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Workspace not found',
+      })
+    }
+
+    const { member, ...workspace } = context
 
     if (!member) {
       throw new TRPCError({
@@ -153,9 +165,16 @@ const scopedProcedure = protectedProcedure
       }
     }
 
+    /**
+     * This is a bit of a hack, but allows us to seamlessly support
+     * both workspace id and slug in the workspaceId input variable.
+     */
+    input.workspaceId = workspace.id
+
     return opts.next({
+      input,
       ctx: {
-        workspace: member.workspace,
+        workspace,
         workspaceMember: member,
       },
     })
@@ -165,6 +184,8 @@ const scopedProcedure = protectedProcedure
  * Workspace procedure
  *
  * Procedure that enforces the user is a member of the workspace.
+ *
+ * @input workspaceId - The ID or slug of the workspace to scope the procedure to.
  */
 export const workspaceProcedure =
   protectedProcedure.unstable_concat(scopedProcedure)
@@ -173,6 +194,8 @@ export const workspaceProcedure =
  * Admin procedure
  *
  * Procedure that enforces the user is an admin of the workspace.
+ *
+ * @input workspaceId - The ID or slug of the workspace to scope the procedure to.
  */
 export const adminProcedure = protectedProcedure
   .unstable_concat(scopedProcedure)
