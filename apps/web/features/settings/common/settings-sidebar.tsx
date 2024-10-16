@@ -78,7 +78,7 @@ export const SettingsSidebar = () => {
                 }}
               />
             }
-            variant="tertiary"
+            variant="ghost"
             fontSize="lg"
           >
             Settings
