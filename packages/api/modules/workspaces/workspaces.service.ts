@@ -117,8 +117,6 @@ export const updateWorkspaceById = async (
       .returning()
       .execute()
 
-    console.log($set, workspace[0])
-
     return workspace[0]
   })
 }
