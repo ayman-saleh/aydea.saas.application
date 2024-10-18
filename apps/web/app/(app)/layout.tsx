@@ -11,7 +11,7 @@ export default async function AppRootLayout(props: {
   children: React.ReactNode
 }) {
   const session = await getSession()
-  console.log('session', session)
+
   if (session) {
     await api.auth.me.prefetch()
 

@@ -20,7 +20,7 @@ export function AuthGuard() {
 
   useEffect(() => {
     if (!isLoading && !isLoggingIn && !isAuthenticated) {
-      // router.push('/login')
+      router.push('/login')
     } else if (isAuthenticated && searchParams.get('code')) {
       router.refresh() // refresh to get the session
     }
