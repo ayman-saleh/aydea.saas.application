@@ -25,7 +25,7 @@ export default async function AppRootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
 
   const colorMode = (cookieStore.get('chakra-ui-color-mode')?.value ??
     'dark') as 'light' | 'dark'
