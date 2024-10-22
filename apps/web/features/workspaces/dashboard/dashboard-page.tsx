@@ -157,7 +157,7 @@ export function DashboardPage(props: WorkspacePageProps) {
       >
         <GridItem colSpan={{ base: 1, lg: 2 }} maxW="100vw">
           <Card>
-            <Tabs variant="unstyled" tabIndex={0}>
+            <Tabs variant="unstyled" tabIndex={0} isLazy>
               <TabList
                 overflow="hidden"
                 borderTopRadius="md"
