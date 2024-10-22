@@ -30,7 +30,7 @@
     "@saas-ui-pro/onboarding": "^0.15.0",
     "@saas-ui-pro/react": "^0.37.2",
     "@saas-ui/auth": "3.4.3",
-    "@saas-ui/charts": "^0.13.1",
+    "@saas-ui/charts": "^0.13.2",
     "@saas-ui/date-picker": "^0.14.4",
     "@saas-ui/next-workspaces": "^0.3.0",
     "@saas-ui/react": "^2.10.4",
@@ -55,7 +55,7 @@
     "@next/eslint-plugin-next": "^15.0.0",
     "@svgr/webpack": "^8.1.0",
     "@types/js-cookie": "^3.0.6",
-    "@types/node": "^20.16.13",
+    "@types/node": "^20.16.14",
     "@types/slug": "^5.0.9",
     "typescript": "^5.6.3",
     "webpack": "^5.95.0"

@@ -5644,9 +5644,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui/charts@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "@saas-ui/charts@npm:0.13.1"
+"@saas-ui/charts@npm:^0.13.2":
+  version: 0.13.2
+  resolution: "@saas-ui/charts@npm:0.13.2"
   dependencies:
     "@chakra-ui/styled-system": "npm:^2.11.1"
     recharts: "npm:^2.13.0"
@@ -5655,7 +5655,7 @@ __metadata:
     "@emotion/react": ">=11"
     react: ">=18"
     react-dom: ">=18"
-  checksum: 10/0484e463e81fb8a8bd82817adcd45a423aed07c43091b9dd4598bc4fb86d6b2c38fded91d79752ba69741c8ecbf7050ac01b0d540c3612dc59f9b03680444fbc
+  checksum: 10/62078b1de43e3d072b80e1a1107c3085b209f469620a316e4826281ab3dbd99c416a9079286eba0c3a62228d28550dbc5470f1d1ab6b9784b1d8da1d79169534
   languageName: node
   linkType: hard
 
@@ -17352,7 +17352,7 @@ __metadata:
     "@ngneat/falso": "npm:^7.2.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     "@turbo/gen": "npm:^2.2.3"
-    "@types/node": "npm:^20.16.13"
+    "@types/node": "npm:^20.16.14"
     eslint: "npm:^9.13.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-import-resolver-typescript: "npm:^3.6.3"
@@ -19538,7 +19538,7 @@ __metadata:
     "@saas-ui-pro/onboarding": "npm:^0.15.0"
     "@saas-ui-pro/react": "npm:^0.37.2"
     "@saas-ui/auth": "npm:3.4.3"
-    "@saas-ui/charts": "npm:^0.13.1"
+    "@saas-ui/charts": "npm:^0.13.2"
     "@saas-ui/date-picker": "npm:^0.14.4"
     "@saas-ui/next-workspaces": "npm:^0.3.0"
     "@saas-ui/react": "npm:^2.10.4"
@@ -19549,7 +19549,7 @@ __metadata:
     "@trpc/react-query": "npm:^11.0.0-rc.502"
     "@trpc/server": "npm:^11.0.0-rc.502"
     "@types/js-cookie": "npm:^3.0.6"
-    "@types/node": "npm:^20.16.13"
+    "@types/node": "npm:^20.16.14"
     "@types/slug": "npm:^5.0.9"
     cookies-next: "npm:^4.3.0"
     date-fns: "npm:^4.1.0"
