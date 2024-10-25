@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@acme/db": "workspace:*",
-    "@auth/drizzle-adapter": "^1.7.0",
+    "@auth/drizzle-adapter": "^1.7.2",
     "env": "workspace:*",
     "next-auth": "5.0.0-beta.22",
     "zod": "^3.23.8"
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "eslint": "^8.57.1",
-    "next": "^14.2.15",
+    "next": "^14.2.16",
     "prettier": "^3.3.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
