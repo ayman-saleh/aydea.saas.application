@@ -13,7 +13,7 @@ import { Link } from '@acme/next'
 import { theme } from '@acme/theme'
 import { ModalsProvider } from '@acme/ui/modals'
 
-import { appHotkeys } from '#config/hotkeys'
+import { appHotkeys } from '#config/hotkeys.config'
 
 import { Hotkeys } from '../components/hotkeys'
 
