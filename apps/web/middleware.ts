@@ -1,11 +1,15 @@
 import { auth } from '@acme/auth-authjs/middleware'
 
-export default auth
+const publicRoutes = ['/login', '/signup']
 
-// In case you need more control you can wrap the middleware like this:
-// export default auth((req) => {
-//   console.log(req.auth) // { user: { ... } }
-// })
+export default auth((req) => {
+  if (!req.auth && !publicRoutes.includes(req.nextUrl.pathname)) {
+    const redirectTo = new URL(req.nextUrl.pathname, req.nextUrl.origin)
+    const newUrl = new URL('/login', req.nextUrl.origin)
+    newUrl.searchParams.set('callbackUrl', redirectTo.toString())
+    return Response.redirect(newUrl)
+  }
+})
 
 export const config = {
   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher

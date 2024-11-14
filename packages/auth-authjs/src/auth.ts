@@ -26,15 +26,17 @@ declare module 'next-auth' {
   }
 }
 
+const adapter = DrizzleAdapter(db, {
+  usersTable: users,
+  accountsTable: accounts,
+  sessionsTable: sessions,
+  verificationTokensTable: verificationTokens,
+  authenticatorsTable: authenticators,
+})
+
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
-  adapter: DrizzleAdapter(db, {
-    usersTable: users,
-    accountsTable: accounts,
-    sessionsTable: sessions,
-    verificationTokensTable: verificationTokens,
-    authenticatorsTable: authenticators,
-  }),
+  adapter,
   providers: [
     Resend({
       id: 'email',
