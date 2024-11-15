@@ -11,19 +11,19 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.5.4",
-    "@formatjs/ts-transformer": "^3.13.15",
+    "@formatjs/intl-localematcher": "^0.5.7",
+    "@formatjs/ts-transformer": "^3.13.22",
     "date-fns": "^4.1.0",
-    "intl-messageformat": "^10.7.3",
-    "negotiator": "^0.6.3",
-    "react-intl": "^6.8.4",
+    "intl-messageformat": "^10.7.6",
+    "negotiator": "^0.6.4",
+    "react-intl": "^6.8.7",
     "server-only": "^0.0.1"
   },
   "peerDependencies": {
     "react": ">=18"
   },
   "devDependencies": {
-    "@formatjs/cli": "^6.2.14",
+    "@formatjs/cli": "^6.3.8",
     "react": "^18.3.1"
   }
 }

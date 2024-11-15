@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
-    "drizzle-orm": "^0.35.3",
+    "drizzle-orm": "^0.36.2",
     "drizzle-zod": "^0.5.1",
     "postgres": "3.4.5",
     "slug": "^9.1.0",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "dotenv-cli": "^7.4.2",
-    "drizzle-kit": "^0.26.2",
+    "drizzle-kit": "^0.28.1",
     "pg": "^8.13.1",
     "typescript": "^5.6.3"
   }

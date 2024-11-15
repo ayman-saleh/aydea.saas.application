@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@types/slug": "^5.0.9",
-    "tsx": "^4.19.1",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }
 }
