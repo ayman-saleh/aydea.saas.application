@@ -6,7 +6,7 @@ export default auth((req) => {
   if (!req.auth && !publicRoutes.includes(req.nextUrl.pathname)) {
     const redirectTo = new URL(req.nextUrl.pathname, req.nextUrl.origin)
     const newUrl = new URL('/login', req.nextUrl.origin)
-    newUrl.searchParams.set('callbackUrl', redirectTo.toString())
+    newUrl.searchParams.set('redirectTo', redirectTo.toString())
     return Response.redirect(newUrl)
   }
 })
