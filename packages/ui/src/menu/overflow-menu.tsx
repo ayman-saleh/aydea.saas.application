@@ -7,7 +7,7 @@ import {
   MenuProps,
   Portal,
 } from '@chakra-ui/react'
-import { LuMoreVertical } from 'react-icons/lu'
+import { LuEllipsisVertical } from 'react-icons/lu'
 
 export interface OverflowMenuProps extends MenuProps {
   children: React.ReactNode
@@ -30,7 +30,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = (props) => {
     <Menu {...rest}>
       <MenuButton
         as={IconButton}
-        icon={<LuMoreVertical />}
+        icon={<LuEllipsisVertical />}
         aria-label="Actions"
         size="xs"
         variant="ghost"

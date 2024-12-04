@@ -19,7 +19,7 @@ import {
   HotkeysSearch,
   useHotkeysContext,
 } from '@saas-ui/react'
-import { LuHelpCircle, LuKey } from 'react-icons/lu'
+import { LuCircleHelp, LuKey } from 'react-icons/lu'
 
 import { useModals } from '../modals'
 
@@ -83,7 +83,7 @@ export const HelpCenterDialog: React.FC<HelpCenterDialogProps> = (props) => {
       <Stack height="100%">
         <HelpCard
           title="Documentation"
-          icon={LuHelpCircle}
+          icon={LuCircleHelp}
           href="https://saas-ui.dev/docs"
           target="_blank"
         />
