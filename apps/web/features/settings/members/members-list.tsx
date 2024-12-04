@@ -26,7 +26,7 @@ import {
   StructuredListItem,
 } from '@saas-ui/react'
 import without from 'lodash/without'
-import { LuMoreVertical } from 'react-icons/lu'
+import { LuEllipsisVertical } from 'react-icons/lu'
 import { z } from 'zod'
 
 import {
@@ -140,7 +140,7 @@ function MembersListItem<M extends Member = Member>({
           <Menu>
             <MenuButton
               as={IconButton}
-              icon={<LuMoreVertical />}
+              icon={<LuEllipsisVertical />}
               size="xs"
               variant="ghost"
               isDisabled={isOwner}

@@ -8,13 +8,15 @@ import { WorkspaceNotFound } from '#features/workspaces/workspace.not-found'
 import { HydrateClient, api } from '#lib/trpc/rsc'
 
 export default async function WorkspaceLayout(props: {
-  params: {
+  params: Promise<{
     workspace: string
-  }
+  }>
   children: React.ReactNode
 }) {
+  const slug = (await props.params).workspace
+
   api.workspaces.bySlug.prefetch({
-    slug: props.params.workspace,
+    slug,
   })
 
   return (

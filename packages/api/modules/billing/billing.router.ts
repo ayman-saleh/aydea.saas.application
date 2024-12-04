@@ -231,6 +231,33 @@ export const billingRouter = createTRPCRouter({
 
       const account = await getAccount(input.workspaceId)
 
+      const email = account?.email ?? ctx.session.user.email ?? undefined
+
+      let customerId = await ctx.adapters.billing.findCustomerId?.({
+        id: account?.customerId ?? undefined,
+        accountId: input.workspaceId,
+        email,
+      })
+
+      if (!customerId && ctx.adapters.billing.createCustomer) {
+        customerId = await ctx.adapters.billing.createCustomer?.({
+          accountId: input.workspaceId,
+          name: ctx.workspace?.name,
+          email,
+        })
+
+        await upsertAccount({
+          id: input.workspaceId,
+          customerId,
+        })
+      } else if (!customerId) {
+        ctx.logger.debug('createCustomer not implemented')
+
+        // if the adapter does not support upserting customers, we don't need to store the reference ID
+        // but instead will use the workspace ID as a reference in checkout.
+        customerId = input.workspaceId
+      }
+
       if (!account) {
         throw new TRPCError({
           code: 'NOT_FOUND',
@@ -238,7 +265,7 @@ export const billingRouter = createTRPCRouter({
         })
       }
 
-      if (!account.customerId) {
+      if (!customerId) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
           message: 'Customer ID not found',
@@ -246,7 +273,7 @@ export const billingRouter = createTRPCRouter({
       }
 
       return ctx.adapters.billing?.createBillingPortalSession?.({
-        customerId: account.customerId,
+        customerId: customerId,
         returnUrl: input.returnUrl,
       })
     }),

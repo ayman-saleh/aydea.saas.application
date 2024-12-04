@@ -5,8 +5,8 @@ import { env } from './env'
 
 export type { Session } from '@supabase/supabase-js'
 
-export const createSupabaseServerClient = () => {
-  const cookieStore = cookies()
+export const createSupabaseServerClient = async () => {
+  const cookieStore = await cookies()
 
   return createServerClient(
     env.NEXT_PUBLIC_SUPABASE_URL,
@@ -33,7 +33,7 @@ export const createSupabaseServerClient = () => {
 }
 
 export const getSession = async () => {
-  const client = createSupabaseServerClient()
+  const client = await createSupabaseServerClient()
 
   const {
     data: { session },
@@ -72,7 +72,7 @@ export const getSession = async () => {
 }
 
 export const restoreSession = async ({ code }: { code: string }) => {
-  const client = createSupabaseServerClient()
+  const client = await createSupabaseServerClient()
 
   await client.auth.exchangeCodeForSession(code)
 

@@ -7,7 +7,7 @@ import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client'
 import SuperJSON from 'superjson'
 
 import { getBaseUrl } from '#features/common/util/get-base-url.ts'
-import { getQueryClient } from '#lib/react-query/get-query-client'
+import { getQueryClient } from '#lib/react-query/get-query-client.ts'
 import { ReactQueryDevtools } from '#lib/react-query/react-query-devtools.tsx'
 
 import { api } from './react.ts'

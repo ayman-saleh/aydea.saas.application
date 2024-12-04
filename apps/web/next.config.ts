@@ -1,7 +1,7 @@
 import withBundleAnalyzer from '@next/bundle-analyzer'
+import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig: NextConfig = {}
 
 export default withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',

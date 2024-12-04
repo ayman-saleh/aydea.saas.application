@@ -6,8 +6,8 @@ import { cookies } from 'next/headers'
 
 export const USER_SETTINGS_COOKIE = 'user-settings'
 
-export const getUserSettings = cache(function getUserSettings() {
-  const cookieStore = cookies()
+export const getUserSettings = cache(async function getUserSettings() {
+  const cookieStore = await cookies()
 
   const userSettingsCookie = cookieStore.get(USER_SETTINGS_COOKIE)
 

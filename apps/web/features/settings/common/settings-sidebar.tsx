@@ -12,7 +12,6 @@ import {
   SidebarSection,
   SidebarToggleButton,
   useHotkeysShortcut,
-  useLocalStorage,
 } from '@saas-ui/react'
 import { LuArrowLeft, LuFolder, LuUser } from 'react-icons/lu'
 
@@ -21,6 +20,7 @@ import { LinkButton } from '@acme/ui/button'
 import { useHelpCenter } from '@acme/ui/help-center'
 
 import { usePath } from '#features/common/hooks/use-path'
+import { useUserSettings } from '#lib/user-settings/use-user-settings'
 
 const SettingsLink = (props: NavItemProps & { path: string }) => {
   const { path, ...rest } = props
@@ -44,15 +44,15 @@ export const SettingsSidebar = () => {
     backRef.current?.click()
   })
 
-  const [width, setWidth] = useLocalStorage('app.sidebar.width', 280)
+  const [{ sidebarWidth }, setUserSettings] = useUserSettings()
 
   const onResize: ResizeHandler = ({ width }) => {
-    setWidth(width)
+    setUserSettings('sidebarWidth', width)
   }
 
   return (
     <Resizer
-      defaultWidth={width}
+      defaultWidth={sidebarWidth}
       onResize={onResize}
       isResizable={useBreakpointValue(
         { base: false, lg: true },

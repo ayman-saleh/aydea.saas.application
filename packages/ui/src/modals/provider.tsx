@@ -1,4 +1,4 @@
-import { createModals } from '@saas-ui/react'
+import { createModals } from '@saas-ui/modals'
 
 import { FormDialog } from '../form'
 

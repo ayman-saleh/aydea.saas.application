@@ -4,6 +4,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "module": "preserve",
+    "moduleResolution": "Bundler",
     "target": "ES2022",
     "strict": true,
     "strictNullChecks": true,

@@ -7,8 +7,8 @@ import { Property, PropertyList } from '@saas-ui/react'
 import {
   LuBox,
   LuBriefcase,
+  LuCircleHelp,
   LuGithub,
-  LuHelpCircle,
   LuShield,
 } from 'react-icons/lu'
 
@@ -83,7 +83,7 @@ export function SettingsOverviewPage() {
             <SupportCard
               title="Start guide"
               description="Read how to get started with Saas UI Pro."
-              icon={LuHelpCircle}
+              icon={LuCircleHelp}
               href="https://saas-ui.dev/docs/pro/overview"
             />
             <SupportCard
