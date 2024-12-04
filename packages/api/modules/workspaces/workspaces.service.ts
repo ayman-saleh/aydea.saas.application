@@ -5,6 +5,7 @@ import { z } from 'zod'
 
 import {
   and,
+  billingAccounts,
   billingSubscriptions,
   createId,
   db,
@@ -93,6 +94,15 @@ export const createWorkspace = async (
         })
         .execute()
     }
+
+    // Create a billing account for the workspace
+    // Not linked to Stripe yet, although you can already sync is there.
+    await tx
+      .insert(billingAccounts)
+      .values({
+        id: workspace.id,
+      })
+      .execute()
 
     // Create default tags
     await tx
