@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "email dev"
+    "dev": "email dev --port 4000"
   },
   "exports": {
     ".": {

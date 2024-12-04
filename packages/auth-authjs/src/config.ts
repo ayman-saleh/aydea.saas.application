@@ -18,6 +18,7 @@ export const authConfig = {
   },
   pages: {
     signIn: '/login',
+    newUser: '/signup',
   },
   callbacks: {
     authorized: async ({ auth }) => {

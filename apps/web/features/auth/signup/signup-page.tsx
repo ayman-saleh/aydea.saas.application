@@ -2,15 +2,23 @@
 
 import { Center, Container, Stack, Text } from '@chakra-ui/react'
 import { SignupView } from '@saas-ui/auth'
+import { useSnackbar } from '@saas-ui/react'
+import { useSearchParams } from 'next/navigation'
 
 import { Link } from '@acme/next'
 import { Logo } from '@acme/ui/logo'
 
-import { authProviders, authType } from '#config/auth'
+import { authConfig } from '#config/auth.config'
 
 import { Testimonial } from './testimonial'
 
 export const SignupPage = () => {
+  const snackbar = useSnackbar()
+
+  const searchParams = useSearchParams()
+
+  const redirectTo = searchParams.get('redirectTo')
+
   return (
     <Stack flex="1" direction="row" height="$100vh">
       <Stack
@@ -24,8 +32,21 @@ export const SignupPage = () => {
           <Logo margin="0 auto" mb="12" />
           <SignupView
             title="Sign up"
-            type={authType}
-            providers={authProviders}
+            type={authConfig.authType}
+            providers={authConfig.authProviders}
+            redirectUrl={redirectTo ?? undefined}
+            onError={(error) => {
+              snackbar.error({
+                title: error.message ?? 'Could not sign you up',
+                description:
+                  'Please try again or contact us if the problem persists.',
+              })
+            }}
+            fields={{
+              submit: {
+                children: 'Sign up',
+              },
+            }}
           />
         </Container>
 

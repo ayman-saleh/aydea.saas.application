@@ -5959,6 +5959,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@saas-ui/core@npm:2.8.0":
+  version: 2.8.0
+  resolution: "@saas-ui/core@npm:2.8.0"
+  dependencies:
+    "@chakra-ui/styled-system": "npm:^2.11.1"
+    "@chakra-ui/theme-tools": "npm:^2.2.5"
+    "@chakra-ui/utils": "npm:^2.2.1"
+    "@react-aria/interactions": "npm:^3.22.3"
+    "@react-aria/utils": "npm:^3.25.3"
+    "@saas-ui/react-utils": "npm:2.2.0"
+    "@saas-ui/theme": "npm:2.6.0"
+    "@zag-js/dom-event": "npm:^0.73.0"
+    "@zag-js/dom-utils": "npm:^0.2.4"
+  peerDependencies:
+    "@chakra-ui/react": ">=2.9.0 <3"
+    "@emotion/react": ^11
+    "@emotion/styled": ^11
+    framer-motion: ">=5.5.0"
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: 10/4b79546e694307be8fe618aa6def69d4177efb22e28962db653e222794bd64f91f3943b2ef5f157838127ddb2b8af793388e232a0b3c07c6ebfcd341713d80cd
+  languageName: node
+  linkType: hard
+
 "@saas-ui/core@npm:2.8.1":
   version: 2.8.1
   resolution: "@saas-ui/core@npm:2.8.1"
@@ -6029,7 +6053,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui/forms@npm:2.9.1, @saas-ui/forms@npm:^2.9.0, @saas-ui/forms@npm:^2.9.1":
+"@saas-ui/forms@npm:2.9.1, @saas-ui/forms@npm:^2.9.1":
   version: 2.9.1
   resolution: "@saas-ui/forms@npm:2.9.1"
   dependencies:
@@ -6045,6 +6069,25 @@ __metadata:
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
   checksum: 10/ebb167a1997dfee1dd996f3d5715ed966ae15559395eb607db8b30fb9ceef24eb5445e7c4bd1484180a8fb41341d046f0a21966a525f5186c7a29a4ce99e791d
+  languageName: node
+  linkType: hard
+
+"@saas-ui/forms@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@saas-ui/forms@npm:2.9.0"
+  dependencies:
+    "@chakra-ui/utils": "npm:^2.2.1"
+    "@hookform/resolvers": "npm:^3.9.0"
+    "@saas-ui/core": "npm:2.8.0"
+    react-hook-form: "npm:^7.53.0"
+  peerDependencies:
+    "@chakra-ui/react": ">=2.9.0 <3"
+    "@emotion/react": ">=11.0.0"
+    "@emotion/styled": ">=11.0.0"
+    framer-motion: ">=6.0.0"
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: 10/a8072a8c8f4cb21d230b6f4e80fd604577aa4f5fa1af6ccc07568f548a5a25a464652a36c2c7208bcef087d292da05d0201aca88d86ef31891994be4e6942c34
   languageName: node
   linkType: hard
 
@@ -6116,6 +6159,18 @@ __metadata:
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
   checksum: 10/946e0a06885101e74bbce7b50d0a101b7168a49996e28ac0c12e7eb1e661fefb194fa8cd274471d3d50c791d1939f3081b2d3931a10db706b897ce1e2ca8d092
+  languageName: node
+  linkType: hard
+
+"@saas-ui/react-utils@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@saas-ui/react-utils@npm:2.2.0"
+  dependencies:
+    "@chakra-ui/utils": "npm:^2.2.1"
+  peerDependencies:
+    "@chakra-ui/react": ">=2.9.0 <3"
+    react: ">=18.0.0"
+  checksum: 10/7817cf84e10b43273f6b1577db9af94dfdf6043dbb46c5f36c67ac63c093644082967361633b8091708f47f1f84e7915ea27d566f5ba8c09dbbe4a7a86f8090a
   languageName: node
   linkType: hard
 
@@ -6204,6 +6259,20 @@ __metadata:
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
   checksum: 10/8c733485e502ff751d3cb5a41655be13556b56be62f117cdb868300f505ecc80c375746742920336810eb70afd380e6173413f9bc6b9e7b7a2d3fe6ecc48fb25
+  languageName: node
+  linkType: hard
+
+"@saas-ui/theme@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@saas-ui/theme@npm:2.6.0"
+  dependencies:
+    "@chakra-ui/anatomy": "npm:^2.3.4"
+    "@chakra-ui/styled-system": "npm:^2.11.1"
+    "@chakra-ui/theme-tools": "npm:^2.2.5"
+  peerDependencies:
+    "@chakra-ui/react": ">=2.9.0 <3"
+    react: ">=18.0.0"
+  checksum: 10/c1c098a31967517c2c6d391e813e3ef5a9c2e77f48760ea73c68c6b63e7f885aa155f84cc85b1e175236fde586b48004841f6ed7258720aba403c731d39a2693
   languageName: node
   linkType: hard
 
@@ -8448,6 +8517,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zag-js/dom-event@npm:^0.73.0":
+  version: 0.73.0
+  resolution: "@zag-js/dom-event@npm:0.73.0"
+  dependencies:
+    "@zag-js/dom-query": "npm:0.73.0"
+    "@zag-js/text-selection": "npm:0.73.0"
+    "@zag-js/types": "npm:0.73.0"
+  checksum: 10/045f3577aae8d982656cf8d6f585e52cd9474d10d7708b4e9d876576718a3c975455010f852ee802658d9af0b8dcd9e2b579abaa2b9080c199df17ee847fec9d
+  languageName: node
+  linkType: hard
+
 "@zag-js/dom-event@npm:^0.73.1":
   version: 0.73.1
   resolution: "@zag-js/dom-event@npm:0.73.1"
@@ -8463,6 +8543,13 @@ __metadata:
   version: 0.31.1
   resolution: "@zag-js/dom-query@npm:0.31.1"
   checksum: 10/61f7c28e7bccf1568eb4bbf7b74a9ba41f991be792098f9c512359fae70b460895c3e48f46f86738174b079dbeab58d6771fd2565927cfe2f6c05cb50bfa812f
+  languageName: node
+  linkType: hard
+
+"@zag-js/dom-query@npm:0.73.0":
+  version: 0.73.0
+  resolution: "@zag-js/dom-query@npm:0.73.0"
+  checksum: 10/027c3671a6b210a860cc636a71b7c4e47d38793898fbc2cff9d63b5d796ff9935cf6058df4ca5bd89c6ecfa4805d9ddbeb72f2f2d8261c1e2b9ff03c43c1a5ef
   languageName: node
   linkType: hard
 
@@ -8507,6 +8594,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zag-js/text-selection@npm:0.73.0":
+  version: 0.73.0
+  resolution: "@zag-js/text-selection@npm:0.73.0"
+  dependencies:
+    "@zag-js/dom-query": "npm:0.73.0"
+  checksum: 10/7642dbef1ee7805b7dcd75d01d52a1d8ca26b6379fc3ded91be26ba19dcc2827095707cdd88f124bc1758fb119643c06f6096f22526d3df5cd769c0d9bbf0685
+  languageName: node
+  linkType: hard
+
 "@zag-js/text-selection@npm:0.73.1":
   version: 0.73.1
   resolution: "@zag-js/text-selection@npm:0.73.1"
@@ -8522,6 +8618,15 @@ __metadata:
   dependencies:
     csstype: "npm:3.1.1"
   checksum: 10/e7f76be548c764f6f426240bc7557df710028d27db6bf3335d47e71fb2ba36a2755a6e4b41841fbf1e4c332a111a8b07e68bced98260659523904eb297b8361d
+  languageName: node
+  linkType: hard
+
+"@zag-js/types@npm:0.73.0":
+  version: 0.73.0
+  resolution: "@zag-js/types@npm:0.73.0"
+  dependencies:
+    csstype: "npm:3.1.3"
+  checksum: 10/9bb4640812b60e43839053fcf6a076988da4edb998997c53ccefcf03ae948dcd98470ee516eecf34cb6bd85b80c1ba14c394de169acf4cbb3aa38a9b41d9da82
   languageName: node
   linkType: hard
 
