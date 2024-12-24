@@ -3,7 +3,7 @@
 import { Button } from '@chakra-ui/react'
 import { ErrorPage } from '@saas-ui-pro/react'
 import { useRouter } from 'next/navigation'
-import { FiFrown } from 'react-icons/fi'
+import { LuFrown } from 'react-icons/lu'
 
 export default function Error() {
   const router = useRouter()
@@ -12,7 +12,7 @@ export default function Error() {
     <ErrorPage
       title="Oops something went wrong"
       description="It's not you, it's us. Please try again later."
-      icon={FiFrown}
+      icon={LuFrown}
       h="$100vh"
       actions={
         <>

@@ -3,7 +3,7 @@
 import { Button } from '@chakra-ui/react'
 import { ErrorPage } from '@saas-ui-pro/react'
 import { useRouter } from 'next/navigation'
-import { FiFrown } from 'react-icons/fi'
+import { LuFrown } from 'react-icons/lu'
 
 export default function NotFound() {
   const router = useRouter()
@@ -12,7 +12,7 @@ export default function NotFound() {
     <ErrorPage
       title="Page not found"
       description="Where do you want to go?"
-      icon={FiFrown}
+      icon={LuFrown}
       h="$100vh"
       actions={
         <>

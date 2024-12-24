@@ -6,7 +6,7 @@ import {
 
 // import { theme as glassTheme } from '@saas-ui-pro/theme-glass'
 import { components } from './components'
-import semanticTokens from './foundations/semantic-tokens'
+import { semanticTokens } from './foundations/semantic-tokens'
 
 // import colorScheme from './color-schemes/galaxy'
 // import colorScheme from './color-schemes/earth'

@@ -27,7 +27,7 @@ export function HomePage() {
     } else if (!error) {
       router.push('/getting-started')
     }
-  }, [router, workspace, error])
+  }, [router, workspace, error, user])
 
   return (
     <LoadingOverlay variant="fullscreen" suppressHydrationWarning>

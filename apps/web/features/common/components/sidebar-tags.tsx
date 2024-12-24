@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { Text, useControllableState } from '@chakra-ui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -16,7 +16,7 @@ export const AppSidebarTags = () => {
   const query = useParams()
 
   // @TODO implement this
-  const userTags: Array<string> = []
+  const userTags: Array<string> = useMemo(() => [], [])
 
   const tags = useTags()
 
@@ -48,10 +48,6 @@ export const AppSidebarTags = () => {
     },
     [userTags],
   )
-
-  React.useEffect(() => {
-    setTags(getSortedTags(tags || []))
-  }, [tags])
 
   const [sortedTags, setTags] = useControllableState<TagDTO[]>({
     defaultValue: getSortedTags(tags || []),

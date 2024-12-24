@@ -1,6 +1,6 @@
 import { theme } from '@saas-ui-pro/react'
 
-export default {
+const earth = {
   colors: {
     primary: theme.colors.teal,
     secondary: theme.colors.orange,
@@ -25,3 +25,5 @@ export default {
     },
   },
 }
+
+export default earth

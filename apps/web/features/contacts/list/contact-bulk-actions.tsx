@@ -1,7 +1,7 @@
 import { Button, Tooltip } from '@chakra-ui/react'
 import { BulkActionsSelections } from '@saas-ui-pro/react'
 import { Command } from '@saas-ui/react'
-import { FiCommand, FiTag } from 'react-icons/fi'
+import { LuCommand, LuTag } from 'react-icons/lu'
 
 export const bulkActions = ({
   selections,
@@ -28,7 +28,7 @@ export const bulkActions = ({
       >
         <Button
           variant="secondary"
-          leftIcon={<FiTag size="1em" />}
+          leftIcon={<LuTag size="1em" />}
           onClick={handleAddTags}
         >
           Add tags
@@ -44,7 +44,7 @@ export const bulkActions = ({
       >
         <Button
           variant="secondary"
-          leftIcon={<FiCommand size="1em" />}
+          leftIcon={<LuCommand size="1em" />}
           onClick={handleCommand}
         >
           Command

@@ -19,16 +19,8 @@ const scale = keyframes`
  */
 export const AppLoader: React.FC<LoadingOverlayProps> = (props) => {
   return (
-    <LoadingOverlay
-      {...props}
-      variant="fullscreen"
-      children={
-        <LogoIcon
-          boxSize="6"
-          animation={`5s ease-out ${scale}`}
-          opacity="0.8"
-        />
-      }
-    />
+    <LoadingOverlay {...props} variant="fullscreen">
+      <LogoIcon boxSize="6" animation={`5s ease-out ${scale}`} opacity="0.8" />
+    </LoadingOverlay>
   )
 }

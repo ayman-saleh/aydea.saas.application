@@ -1,6 +1,3 @@
-import { dirname, join } from "path";
-import { mergeConfig } from 'vite'
-
 export default {
   stories: [
     {
@@ -9,12 +6,12 @@ export default {
     },
   ],
   addons: [
-    getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-toolbars"),
-    getAbsolutePath("@storybook/addon-viewport"),
-    getAbsolutePath("@storybook/addon-controls"),
-    getAbsolutePath("@saas-ui/storybook-addon"),
-    '@chromatic-com/storybook'
+    '@storybook/addon-a11y',
+    '@storybook/addon-toolbars',
+    '@storybook/addon-viewport',
+    '@storybook/addon-controls',
+    '@saas-ui/storybook-addon',
+    '@chromatic-com/storybook',
   ],
   staticDirs: ['./static'],
   typescript: {
@@ -44,11 +41,7 @@ export default {
     }
   },
   framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
+    name: '@storybook/react-vite',
   },
   docs: {},
-}
-
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, "package.json")));
 }

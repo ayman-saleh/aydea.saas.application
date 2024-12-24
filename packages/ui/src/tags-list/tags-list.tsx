@@ -197,7 +197,7 @@ export const AddTag: React.FC<AddTagProps> = (props) => {
               <MenuItem onClick={() => onCreate?.(inputValue)}>
                 Create tag:{' '}
                 <chakra.span color="muted" ms="1">
-                  "{inputValue}"
+                  &quot;{inputValue}&quot;
                 </chakra.span>
               </MenuItem>
             )}

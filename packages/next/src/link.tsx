@@ -18,7 +18,6 @@ const LinkEl = interopDefault(NextLink)
 
 const cx = (...classNames: any[]) => classNames.filter(Boolean).join(' ')
 
-/* eslint @typescript-eslint/ban-types: "off" */
 type Pretty<T> = { [K in keyof T]: T[K] } & {}
 type Merge<P, T> = Pretty<Omit<P, keyof T> & T>
 type LegacyProps = 'as' | 'legacyBehavior' | 'passHref'

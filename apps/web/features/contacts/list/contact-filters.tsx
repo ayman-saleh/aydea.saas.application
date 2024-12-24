@@ -9,7 +9,7 @@ import {
 } from '@saas-ui-pro/react'
 import { useHotkeysShortcut } from '@saas-ui/react'
 import { formatDistanceToNowStrict, startOfDay, subDays } from 'date-fns'
-import { FiCalendar, FiFilter, FiTag } from 'react-icons/fi'
+import { LuCalendar, LuFilter, LuTag } from 'react-icons/lu'
 
 import { StatusBadge } from '@acme/ui/status-badge'
 import { TagColor } from '@acme/ui/tags-list'
@@ -49,7 +49,7 @@ export const useContactFilters = () => {
       {
         id: 'tags',
         label: 'Tags',
-        icon: <FiTag />,
+        icon: <LuTag />,
         type: 'string',
         defaultOperator: 'contains',
         operators: ['contains', 'containsNot'],
@@ -68,7 +68,7 @@ export const useContactFilters = () => {
       {
         id: 'createdAt',
         label: 'Created at',
-        icon: <FiCalendar />,
+        icon: <LuCalendar />,
         type: 'date',
         operators: ['after', 'before'],
         defaultOperator: 'after',
@@ -110,7 +110,7 @@ export const AddFilterButton: React.FC<Omit<FilterMenuProps, 'items'>> = (
   return (
     <FilterMenu
       items={filters}
-      icon={<FiFilter />}
+      icon={<LuFilter />}
       ref={menuRef}
       command={filterCommand}
       buttonProps={{ variant: 'ghost', size: 'xs' }}

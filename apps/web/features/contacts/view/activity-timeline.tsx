@@ -36,8 +36,7 @@ import {
   useSnackbar,
 } from '@saas-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FiPaperclip } from 'react-icons/fi'
-import { LuTag } from 'react-icons/lu'
+import { LuPaperclip, LuTag } from 'react-icons/lu'
 
 import { ActivityLogTypes } from '@acme/api/types'
 import { DateTime, RelativeTime } from '@acme/i18n'
@@ -450,7 +449,7 @@ const ActivityTimelineAddComment: React.FC<ActivityTimelineAddCommentProps> = (
               <Toolbar variant="ghost">
                 <Spacer />
                 <ToolbarButton
-                  icon={<FiPaperclip />}
+                  icon={<LuPaperclip />}
                   color="muted"
                   label="Upload a file"
                 />

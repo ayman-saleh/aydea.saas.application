@@ -18,7 +18,7 @@ import {
 import { Has } from '@saas-ui-pro/feature-flags'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { FiCheck } from 'react-icons/fi'
+import { LuCheck } from 'react-icons/lu'
 
 import { usePath } from '../hooks/use-path'
 import { useWorkspace } from '../hooks/use-workspace'
@@ -101,7 +101,7 @@ export const WorkspacesMenu: React.FC<WorkspacesMenuProps> = (props) => {
                   <HStack>
                     <Text>{label}</Text>
                     <Spacer />
-                    {slug === activeWorkspace?.slug ? <FiCheck /> : null}
+                    {slug === activeWorkspace?.slug ? <LuCheck /> : null}
                   </HStack>
                 </MenuItem>
               )

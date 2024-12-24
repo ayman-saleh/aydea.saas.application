@@ -17,7 +17,7 @@ export const ConfirmPasswordField: React.FC<ConfirmPasswordProps> = (props) => {
       const password = form.getValues(confirmField)
       return confirmPassword === password
     },
-    [confirmField],
+    [form, confirmField],
   )
 
   return (

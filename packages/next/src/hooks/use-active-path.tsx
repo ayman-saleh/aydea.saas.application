@@ -26,6 +26,6 @@ export function useActivePath(
   const pathname = usePathname()
   return !!React.useMemo(
     () => pathname.match(new RegExp(`${path}${end ? '$' : ''}`)),
-    [pathname, path, options],
+    [pathname, path, end],
   )
 }

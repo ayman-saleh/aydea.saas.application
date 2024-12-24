@@ -1,6 +1,7 @@
 import { HStack, Progress, Text } from '@chakra-ui/react'
 import { ColumnDef, DataTable } from '@saas-ui/react'
-import { useIntl } from 'react-intl'
+
+import { FormattedNumber } from '@acme/i18n'
 
 import { MetricsCard } from './metrics-card'
 
@@ -47,16 +48,12 @@ const columns: ColumnDef<Data>[] = [
     id: 'total',
     header: 'Total',
     cell: ({ getValue }) => {
-      const intl = useIntl()
-
       return (
-        <>
-          {intl.formatNumber(getValue<number>(), {
-            currency: 'EUR',
-            style: 'currency',
-            maximumFractionDigits: 0,
-          })}
-        </>
+        <FormattedNumber
+          value={getValue<number>()}
+          currency="EUR"
+          maximumFractionDigits={0}
+        />
       )
     },
     meta: {

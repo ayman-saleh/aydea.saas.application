@@ -28,12 +28,12 @@
     "@acme/db": "workspace:*",
     "@acme/email": "workspace:*",
     "@ngneat/falso": "^7.2.0",
-    "@trpc/server": "^11.0.0-rc.648",
+    "@trpc/server": "^11.0.0-rc.666",
     "date-fns": "^4.1.0",
     "env": "workspace:*",
     "slug": "^10.0.0",
-    "superjson": "2.2.1",
-    "zod": "^3.23.8"
+    "superjson": "2.2.2",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/slug": "^5.0.9",

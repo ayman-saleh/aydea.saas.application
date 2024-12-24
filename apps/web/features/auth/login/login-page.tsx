@@ -48,7 +48,7 @@ export const LoginPage = () => {
         </Container>
 
         <Text color="muted">
-          Don't have an account yet?{' '}
+          Don&apos;t have an account yet?{' '}
           <Link href="/signup" color="chakra-body-text">
             Sign up
           </Link>

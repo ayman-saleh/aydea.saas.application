@@ -24,7 +24,7 @@ export function AuthGuard() {
     } else if (isAuthenticated && searchParams.get('code')) {
       router.refresh() // refresh to get the session
     }
-  }, [isLoading, isLoggingIn, isAuthenticated, searchParams])
+  }, [router, isLoading, isLoggingIn, isAuthenticated, searchParams])
 
   return null
 }

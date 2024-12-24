@@ -19,7 +19,7 @@ import {
   Toolbar,
   ToolbarButton,
 } from '@saas-ui-pro/react'
-import { FiSidebar } from 'react-icons/fi'
+import { LuPanelRightOpen } from 'react-icons/lu'
 
 import { Breadcrumbs } from '@acme/ui/breadcrumbs'
 
@@ -64,6 +64,7 @@ export function ContactsViewPage({
     if (isMobile === true) {
       sidebar.onClose()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [isMobile])
 
   const breadcrumbs = (
@@ -80,7 +81,7 @@ export function ContactsViewPage({
       <Spacer />
       {toolbarItems}
       <ToolbarButton
-        icon={<FiSidebar />}
+        icon={<LuPanelRightOpen />}
         label={sidebar.isOpen ? 'Hide contact details' : 'Show contact details'}
         onClick={sidebar.onToggle}
       />

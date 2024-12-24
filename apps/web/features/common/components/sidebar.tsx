@@ -31,13 +31,13 @@ import {
 import { Route } from 'next'
 import { useRouter } from 'next/navigation'
 import {
-  FiHelpCircle,
-  FiHome,
-  FiInbox,
-  FiPlus,
-  FiSearch,
-  FiUsers,
-} from 'react-icons/fi'
+  LuCircleHelp,
+  LuHouse,
+  LuInbox,
+  LuPlus,
+  LuSearch,
+  LuSquareUser,
+} from 'react-icons/lu'
 
 import { useActivePath } from '@acme/next'
 import { useHelpCenter } from '@acme/ui/help-center'
@@ -101,7 +101,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
           </SidebarSection>
           <Box px={3}>
             {isCompact ? (
-              <IconButton icon={<FiSearch />} aria-label="Search" />
+              <IconButton icon={<LuSearch />} aria-label="Search" />
             ) : (
               <GlobalSearchInput />
             )}
@@ -111,7 +111,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
               <AppSidebarLink
                 href={usePath('/')}
                 label="Dashboard"
-                icon={<FiHome />}
+                icon={<LuHouse />}
                 hotkey="navigation.dashboard"
               />
               <AppSidebarLink
@@ -119,14 +119,14 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
                 isActive={useActivePath('inbox', { end: false })}
                 label="Inbox"
                 badge={2}
-                icon={<FiInbox />}
+                icon={<LuInbox />}
                 hotkey="navigation.inbox"
               />
               <AppSidebarLink
                 href={usePath('contacts')}
                 isActive={useActivePath('contacts', { end: false })}
                 label="Contacts"
-                icon={<FiUsers />}
+                icon={<LuSquareUser />}
                 hotkey="navigation.contacts"
               />
             </NavGroup>
@@ -139,14 +139,14 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
               <NavItem
                 onClick={() => modals.open(InvitePeopleDialog)}
                 color="sidebar-muted"
-                icon={<FiPlus />}
+                icon={<LuPlus />}
               >
                 Invite people
               </NavItem>
               <NavItem
                 onClick={() => help.open()}
                 color="sidebar-muted"
-                icon={<FiHelpCircle />}
+                icon={<LuCircleHelp />}
               >
                 Help &amp; support
               </NavItem>

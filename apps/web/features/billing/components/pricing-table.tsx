@@ -19,7 +19,7 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { BillingInterval, BillingPlan } from '@saas-ui-pro/billing'
-import { FiCheck } from 'react-icons/fi'
+import { LuCheck } from 'react-icons/lu'
 
 import { SegmentedControl } from '@acme/ui/segmented-control'
 
@@ -68,7 +68,7 @@ export const PricingTable: React.FC<PricingTableProps> = (props) => {
 
   const plans = React.useMemo(() => {
     return allPlans.filter((plan) => plan.interval === interval)
-  }, [interval])
+  }, [allPlans, interval])
 
   const currentPlan = allPlans.find((plan) => plan.id === planId)
 
@@ -203,7 +203,7 @@ interface PricingTableFeature {
 const PricingTableFeature: React.FC<PricingTableFeature> = ({ value }) => {
   return (
     <HStack>
-      {value && <Icon as={FiCheck} color="primary.500" />}
+      {value && <Icon as={LuCheck} color="primary.500" />}
       {typeof value !== 'boolean' && <Text color="muted">{value}</Text>}
     </HStack>
   )

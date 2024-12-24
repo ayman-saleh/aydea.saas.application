@@ -44,7 +44,8 @@ export function BillingProvider(props: { children: React.ReactNode }) {
         plan: subscription?.planId,
       })
     }
-  }, [user?.id, workspace?.members, subscription?.planId])
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [user, workspace, subscription?.planId])
 
   return (
     <BillingProviderBase value={billing}>{props.children}</BillingProviderBase>
