@@ -1,7 +1,7 @@
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch'
 
 import { appRouter, createTRPCContext } from '@acme/api'
-import { getSession } from '@acme/auth-authjs'
+import { getSession } from '@acme/better-auth'
 
 import { createAdapters } from '#lib/trpc/adapters'
 

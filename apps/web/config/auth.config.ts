@@ -11,7 +11,7 @@ export const authConfig: AuthConfig = {
   /**
    * The authentication type, magiclink or password
    */
-  authType: 'magiclink',
+  authType: 'password',
 
   // /**
   //  * Available OAuth providers for single sign on.

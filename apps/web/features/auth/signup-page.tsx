@@ -10,7 +10,7 @@ import { Logo } from '@acme/ui/logo'
 
 import { authConfig } from '#config/auth.config'
 
-import { Testimonial } from './testimonial'
+import { Testimonial } from './components/testimonial'
 
 export const SignupPage = () => {
   const snackbar = useSnackbar()

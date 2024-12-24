@@ -12,7 +12,7 @@ const connectionString = process.env.DATABASE_URL
 export default defineConfig({
   dialect: 'postgresql',
   strict: true,
-  schema: ['./src/**/*.sql.ts', '../auth-authjs/src/auth.sql.ts'],
+  schema: ['./src/**/*.sql.ts', '../better-auth/src/auth.sql.ts'],
   out: './drizzle',
   verbose: true,
   dbCredentials: { url: connectionString },

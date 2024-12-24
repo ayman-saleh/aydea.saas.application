@@ -1,58 +1,13 @@
-DO $$ BEGIN
- CREATE TYPE "public"."actor_type" AS ENUM('user', 'system');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."subjectType" AS ENUM('contact');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."billing_plans_interval" AS ENUM('day', 'week', 'month', 'year');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."billing_subscription_status" AS ENUM('incomplete', 'incomplete_expired', 'trialing', 'active', 'past_due', 'canceled', 'unpaid', 'paused');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."contact_status" AS ENUM('new', 'active', 'inactive');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."contact_type" AS ENUM('lead', 'customer');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."subject_type" AS ENUM('contact');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."target_type" AS ENUM('user');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- CREATE TYPE "public"."workspace_member_status" AS ENUM('active', 'suspended', 'invited');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "activity_logs" (
+CREATE TYPE "public"."actor_type" AS ENUM('user', 'system');--> statement-breakpoint
+CREATE TYPE "public"."subjectType" AS ENUM('contact');--> statement-breakpoint
+CREATE TYPE "public"."billing_plans_interval" AS ENUM('day', 'week', 'month', 'year');--> statement-breakpoint
+CREATE TYPE "public"."billing_subscription_status" AS ENUM('incomplete', 'incomplete_expired', 'trialing', 'active', 'past_due', 'canceled', 'unpaid', 'paused');--> statement-breakpoint
+CREATE TYPE "public"."contact_status" AS ENUM('new', 'active', 'inactive');--> statement-breakpoint
+CREATE TYPE "public"."contact_type" AS ENUM('lead', 'customer');--> statement-breakpoint
+CREATE TYPE "public"."subject_type" AS ENUM('contact');--> statement-breakpoint
+CREATE TYPE "public"."target_type" AS ENUM('user');--> statement-breakpoint
+CREATE TYPE "public"."workspace_member_status" AS ENUM('active', 'suspended', 'invited');--> statement-breakpoint
+CREATE TABLE "activity_logs" (
 	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"actor_id" char(24),
@@ -65,7 +20,7 @@ CREATE TABLE IF NOT EXISTS "activity_logs" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "billing_accounts" (
+CREATE TABLE "billing_accounts" (
 	"id" char(24) PRIMARY KEY NOT NULL,
 	"customer_id" varchar(255),
 	"email" varchar(255),
@@ -74,7 +29,7 @@ CREATE TABLE IF NOT EXISTS "billing_accounts" (
 	CONSTRAINT "billing_accounts_customer_id_unique" UNIQUE("customer_id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "billing_entitlements" (
+CREATE TABLE "billing_entitlements" (
 	"id" char(24) PRIMARY KEY NOT NULL,
 	"account_id" varchar(255) NOT NULL,
 	"feature" text NOT NULL,
@@ -82,7 +37,7 @@ CREATE TABLE IF NOT EXISTS "billing_entitlements" (
 	"limit" real
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "billing_plans" (
+CREATE TABLE "billing_plans" (
 	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"name" varchar(64) NOT NULL,
 	"description" varchar(255),
@@ -97,7 +52,7 @@ CREATE TABLE IF NOT EXISTS "billing_plans" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "billing_subscriptions" (
+CREATE TABLE "billing_subscriptions" (
 	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"account_id" varchar(255) NOT NULL,
 	"plan_id" varchar(255) NOT NULL,
@@ -116,7 +71,7 @@ CREATE TABLE IF NOT EXISTS "billing_subscriptions" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "contacts" (
+CREATE TABLE "contacts" (
 	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"email" varchar(255) NOT NULL,
@@ -133,7 +88,7 @@ CREATE TABLE IF NOT EXISTS "contacts" (
 	CONSTRAINT "contacts_workspace_id_email_unique" UNIQUE("workspace_id","email")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "notification" (
+CREATE TABLE "notification" (
 	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"type" varchar(255),
@@ -150,7 +105,7 @@ CREATE TABLE IF NOT EXISTS "notification" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "tags" (
+CREATE TABLE "tags" (
 	"id" varchar(40) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"name" varchar(255) NOT NULL,
@@ -160,7 +115,7 @@ CREATE TABLE IF NOT EXISTS "tags" (
 	CONSTRAINT "tags_workspace_id_id_pk" PRIMARY KEY("workspace_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "users" (
+CREATE TABLE "users" (
 	"id" varchar(36) PRIMARY KEY NOT NULL,
 	"avatar" varchar(255),
 	"email" varchar(255),
@@ -173,7 +128,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	CONSTRAINT "users_email_unique" UNIQUE NULLS NOT DISTINCT("email")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "workspace_invitations" (
+CREATE TABLE "workspace_invitations" (
 	"id" char(24) NOT NULL,
 	"workspace_id" char(24) NOT NULL,
 	"user_id" varchar(36),
@@ -186,7 +141,7 @@ CREATE TABLE IF NOT EXISTS "workspace_invitations" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "workspace_member_settings" (
+CREATE TABLE "workspace_member_settings" (
 	"user_id" varchar(255) NOT NULL,
 	"workspace_id" varchar(255) NOT NULL,
 	"notification_channels" jsonb,
@@ -197,7 +152,7 @@ CREATE TABLE IF NOT EXISTS "workspace_member_settings" (
 	CONSTRAINT "workspace_member_settings_pk" PRIMARY KEY("user_id","workspace_id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "workspace_members" (
+CREATE TABLE "workspace_members" (
 	"user_id" varchar(255) NOT NULL,
 	"workspace_id" varchar(255) NOT NULL,
 	"role" varchar(20) NOT NULL,
@@ -208,7 +163,7 @@ CREATE TABLE IF NOT EXISTS "workspace_members" (
 	CONSTRAINT "workspace_members_pk" PRIMARY KEY("user_id","workspace_id")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "workspaces" (
+CREATE TABLE "workspaces" (
 	"id" char(24) PRIMARY KEY NOT NULL,
 	"owner_id" varchar(255),
 	"slug" varchar(255) NOT NULL,
@@ -218,7 +173,7 @@ CREATE TABLE IF NOT EXISTS "workspaces" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "auth_account" (
+CREATE TABLE "auth_account" (
 	"userId" text NOT NULL,
 	"type" text NOT NULL,
 	"provider" text NOT NULL,
@@ -233,7 +188,7 @@ CREATE TABLE IF NOT EXISTS "auth_account" (
 	CONSTRAINT "auth_account_provider_providerAccountId_pk" PRIMARY KEY("provider","providerAccountId")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "auth_authenticator" (
+CREATE TABLE "auth_authenticator" (
 	"credentialID" text NOT NULL,
 	"userId" text NOT NULL,
 	"providerAccountId" text NOT NULL,
@@ -246,13 +201,13 @@ CREATE TABLE IF NOT EXISTS "auth_authenticator" (
 	CONSTRAINT "auth_authenticator_credentialID_unique" UNIQUE("credentialID")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "auth_session" (
+CREATE TABLE "auth_session" (
 	"sessionToken" text PRIMARY KEY NOT NULL,
 	"userId" text NOT NULL,
 	"expires" timestamp NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "auth_user" (
+CREATE TABLE "auth_user" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text,
 	"email" text,
@@ -261,88 +216,28 @@ CREATE TABLE IF NOT EXISTS "auth_user" (
 	CONSTRAINT "auth_user_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "auth_verificationToken" (
+CREATE TABLE "auth_verificationToken" (
 	"identifier" text NOT NULL,
 	"token" text NOT NULL,
 	"expires" timestamp NOT NULL,
 	CONSTRAINT "auth_verificationToken_identifier_token_pk" PRIMARY KEY("identifier","token")
 );
 --> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "billing_entitlements" ADD CONSTRAINT "billing_entitlements_account_id_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."billing_accounts"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "billing_subscriptions" ADD CONSTRAINT "billing_subscriptions_account_id_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."billing_accounts"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "tags" ADD CONSTRAINT "tags_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "workspace_invitations" ADD CONSTRAINT "workspace_invitations_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "workspace_invitations" ADD CONSTRAINT "workspace_invitations_invited_by_users_id_fk" FOREIGN KEY ("invited_by") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_settings_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_settings_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "auth_account" ADD CONSTRAINT "auth_account_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "auth_authenticator" ADD CONSTRAINT "auth_authenticator_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "auth_session" ADD CONSTRAINT "auth_session_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "activity_logs_workspace_id_id_index" ON "activity_logs" USING btree ("workspace_id","id");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "billing_entitlements_idx" ON "billing_entitlements" USING btree ("account_id","feature");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "contacts_workspace_id_id_index" ON "contacts" USING btree ("workspace_id","id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "notification_workspace_id_id_index" ON "notification" USING btree ("workspace_id","id");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "workspace_invitations_workspace_id_email_index" ON "workspace_invitations" USING btree ("workspace_id","email");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "slug_idx" ON "workspaces" USING btree ("slug");
+ALTER TABLE "billing_entitlements" ADD CONSTRAINT "billing_entitlements_account_id_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."billing_accounts"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "billing_subscriptions" ADD CONSTRAINT "billing_subscriptions_account_id_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."billing_accounts"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "tags" ADD CONSTRAINT "tags_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "workspace_invitations" ADD CONSTRAINT "workspace_invitations_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "workspace_invitations" ADD CONSTRAINT "workspace_invitations_invited_by_users_id_fk" FOREIGN KEY ("invited_by") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_settings_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_settings_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "auth_account" ADD CONSTRAINT "auth_account_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "auth_authenticator" ADD CONSTRAINT "auth_authenticator_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "auth_session" ADD CONSTRAINT "auth_session_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+CREATE INDEX "activity_logs_workspace_id_id_index" ON "activity_logs" USING btree ("workspace_id","id");--> statement-breakpoint
+CREATE UNIQUE INDEX "billing_entitlements_idx" ON "billing_entitlements" USING btree ("account_id","feature");--> statement-breakpoint
+CREATE INDEX "contacts_workspace_id_id_index" ON "contacts" USING btree ("workspace_id","id");--> statement-breakpoint
+CREATE INDEX "notification_workspace_id_id_index" ON "notification" USING btree ("workspace_id","id");--> statement-breakpoint
+CREATE UNIQUE INDEX "workspace_invitations_workspace_id_email_index" ON "workspace_invitations" USING btree ("workspace_id","email");--> statement-breakpoint
+CREATE UNIQUE INDEX "slug_idx" ON "workspaces" USING btree ("slug");

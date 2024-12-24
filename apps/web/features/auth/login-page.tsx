@@ -42,7 +42,7 @@ export const LoginPage = () => {
             }}
           >
             {authConfig.authType === 'password' ? (
-              <Link href="/forgot_password">Forgot your password?</Link>
+              <Link href="/forgot-password">Forgot your password?</Link>
             ) : null}
           </LoginView>
         </Container>
