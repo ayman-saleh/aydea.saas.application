@@ -24,7 +24,7 @@ export interface EditorProps
 }
 
 export const Editor = React.forwardRef<TipTapEditor, EditorProps>(
-  (props, ref) => {
+  function Editor(props, ref) {
     const { defaultValue, onChange, value, placeholder, minHeight, ...rest } =
       props
 

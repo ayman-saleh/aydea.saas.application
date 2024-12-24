@@ -1,4 +1,4 @@
-export default {
+const galaxy = {
   grayTint: '#242038',
   tokens: {
     'app-background': {
@@ -9,3 +9,5 @@ export default {
     'sidebar-text': '#CFCAE7',
   },
 }
+
+export default galaxy

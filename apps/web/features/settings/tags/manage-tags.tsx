@@ -394,7 +394,7 @@ export const ManageTags = (props: ManageTagsProps) => {
   const noResults = searchTerm && filteredItems.length === 0 && (
     <StructuredListItem>
       <StructuredListCell py="2" px="4" textAlign="center">
-        No results for "{searchTerm}"
+        No results for &quot;{searchTerm}&quot;
       </StructuredListCell>
     </StructuredListItem>
   )

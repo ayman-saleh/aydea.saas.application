@@ -68,7 +68,7 @@ export const PricingTable: React.FC<PricingTableProps> = (props) => {
 
   const plans = React.useMemo(() => {
     return allPlans.filter((plan) => plan.interval === interval)
-  }, [interval])
+  }, [allPlans, interval])
 
   const currentPlan = allPlans.find((plan) => plan.id === planId)
 

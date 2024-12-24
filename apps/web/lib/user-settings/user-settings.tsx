@@ -1,7 +1,7 @@
 import { getUserSettings } from './get-user-settings'
 
-export function UserSettings() {
-  const userSettings = getUserSettings()
+export async function UserSettings() {
+  const userSettings = await getUserSettings()
 
   // set user settings globally so our `useUserSettings` hook
   // can access it during SSR.

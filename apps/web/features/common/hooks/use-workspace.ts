@@ -23,7 +23,7 @@ export const useWorkspace = () => {
     if (workspace && workspace !== activeWorkspace.value) {
       activeWorkspace.set(workspace)
     }
-  }, [workspace, activeWorkspace.value])
+  }, [workspace, activeWorkspace])
 
   return activeWorkspace.value ?? workspace
 }

@@ -21,7 +21,7 @@ export const RelativeTime: React.FC<RelativeTimeProps> = (props) => {
 
   const diff = React.useMemo(
     () => differenceInSeconds(new Date(date), new Date()),
-    [props.date],
+    [date],
   )
 
   if (diff < 0 && diff > -60) {

@@ -19,7 +19,7 @@ export default function AuthLayout({
     if (isAuthenticated) {
       router.push('/')
     }
-  }, [isAuthenticated])
+  }, [router, isAuthenticated])
 
   return <BaseAuthLayout>{children}</BaseAuthLayout>
 }

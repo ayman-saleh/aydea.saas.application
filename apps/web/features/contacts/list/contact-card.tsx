@@ -29,7 +29,7 @@ export const ContactCard = ({ contact }: { contact: ContactDTO }) => {
       }
       return null
     },
-    [columns],
+    [columns, groupBy],
   )
 
   const tags = typeof contact.tags === 'string' ? [contact.tags] : contact.tags

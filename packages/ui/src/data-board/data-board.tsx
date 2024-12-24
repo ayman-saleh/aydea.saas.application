@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import {
   HTMLChakraProps,
@@ -87,35 +87,38 @@ export const DataBoard = forwardRef(
     } = props
 
     const [grouping, setGrouping] = useControllableState<GroupingState>({
-      defaultValue: defaultGroupBy ? [defaultGroupBy] : [],
-      value: groupBy ? [groupBy] : [],
+      defaultValue: useMemo(
+        () => (defaultGroupBy ? [defaultGroupBy] : []),
+        [defaultGroupBy],
+      ),
+      value: useMemo(() => (groupBy ? [groupBy] : []), [groupBy]),
       onChange: (grouping) => {
         onGroupChange?.(grouping[0])
       },
     })
 
     const instance = useReactTable({
-      data: React.useMemo(() => data, []),
-      columns: React.useMemo(() => columns, []),
+      data: React.useMemo(() => data, [data]),
+      columns: React.useMemo(() => columns, [columns]),
       groupedColumnMode: false,
       onGroupingChange: setGrouping,
       getGroupedRowModel: getGroupedRowModel(),
       getCoreRowModel: getCoreRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       getRowId,
-      initialState: React.useMemo(() => initialStateProp, []),
+      initialState: React.useMemo(() => initialStateProp, [initialStateProp]),
       state: React.useMemo(
         () => ({
           ...stateProp,
           grouping,
         }),
-        [stateProp],
+        [stateProp, grouping],
       ),
       ...rest,
     })
 
     // This exposes the useReactTable api through the instanceRef
-    React.useImperativeHandle(instanceRef, () => instance, [instanceRef])
+    React.useImperativeHandle(instanceRef, () => instance, [instance])
 
     const state = instance.getState()
 

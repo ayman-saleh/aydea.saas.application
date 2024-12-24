@@ -64,6 +64,7 @@ export function ContactsViewPage({
     if (isMobile === true) {
       sidebar.onClose()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [isMobile])
 
   const breadcrumbs = (

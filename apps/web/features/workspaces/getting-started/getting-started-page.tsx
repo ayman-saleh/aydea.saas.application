@@ -54,7 +54,7 @@ const OnboardingCompleted = () => {
 
   React.useEffect(() => {
     router.push(`/${workspace.value}`)
-  }, [])
+  }, [router, workspace.value])
 
   return (
     <LoadingOverlay

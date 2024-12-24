@@ -26,6 +26,7 @@
     "format:check": "prettier --check apps/** --check packages/**",
     "format:write": "prettier --write apps/** --check packages/**",
     "lint": "eslint .",
+    "lint:web": "eslint apps/web",
     "lint:fix": "eslint . --cache --cache-location=node_modules/.cache/.eslintcache --fix",
     "lint:staged": "lint-staged --allow-empty --config lint-staged.config.cjs"
   },
@@ -43,9 +44,8 @@
     "@turbo/gen": "^2.3.3",
     "@types/node": "^20.17.10",
     "eslint": "^9.17.0",
+    "eslint-config-next": "^15.1.2",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-typescript": "^3.7.0",
-    "eslint-plugin-import": "^2.31.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
     "pkg-types": "^1.2.1",
@@ -59,7 +59,9 @@
     "yargs": "^17.7.2"
   },
   "resolutions": {
+    "@types/react": "^18.3.18",
     "@types/node": "^20.14.8",
+    "prettier": "^3.4.2",
     "react-is": "rc"
   },
   "packageManager": "yarn@4.5.0",

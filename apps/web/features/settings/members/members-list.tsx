@@ -222,7 +222,7 @@ export function MembersList<M extends Member = Member>({
         ),
       })
     },
-    [roles],
+    [modals, isMultiRoles, onUpdateRoles],
   )
 
   return (

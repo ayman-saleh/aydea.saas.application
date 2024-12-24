@@ -21,7 +21,7 @@ type UserSettings = z.infer<typeof settingsSchema>
 const defaultSettings: UserSettings = {
   sidebarWidth: 280,
   inboxListWidth: 280,
-  contactsView: 'board',
+  contactsView: 'list',
   contactsColumns: ['name', 'email', 'createdAt', 'type', 'status'],
   contactsGroupBy: 'status',
 }

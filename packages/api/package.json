@@ -28,7 +28,7 @@
     "@acme/db": "workspace:*",
     "@acme/email": "workspace:*",
     "@ngneat/falso": "^7.2.0",
-    "@trpc/server": "^11.0.0-rc.648",
+    "@trpc/server": "^11.0.0-rc.666",
     "date-fns": "^4.1.0",
     "env": "workspace:*",
     "slug": "^10.0.0",

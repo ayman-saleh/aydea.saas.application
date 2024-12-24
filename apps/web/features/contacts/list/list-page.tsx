@@ -235,8 +235,10 @@ export function ContactsListPage({
             status: 'new',
           })
           modals.closeAll()
-        } catch (e) {
-          snackbar.error('Could not create contact')
+        } catch {
+          snackbar.error({
+            title: 'Could not create contact',
+          })
         }
       },
     })
@@ -347,7 +349,7 @@ export function ContactsListPage({
           <LuGrid2X2 />
         </ToggleButton>
       </ToggleButtonGroup>
-      <Menu>
+      <Menu isLazy>
         <MenuButton
           as={ToolbarButton}
           leftIcon={<LuSlidersHorizontal />}

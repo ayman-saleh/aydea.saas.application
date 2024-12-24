@@ -104,10 +104,13 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
 
   const [selections, setSelections] = React.useState<string[]>([])
 
-  const _onSelectedRowsChange = React.useCallback((rows: string[]) => {
-    onSelectedRowsChange?.(rows)
-    setSelections(rows)
-  }, [])
+  const _onSelectedRowsChange = React.useCallback(
+    (rows: string[]) => {
+      onSelectedRowsChange?.(rows)
+      setSelections(rows)
+    },
+    [onSelectedRowsChange],
+  )
 
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -140,7 +143,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
 
   React.useEffect(() => {
     onSearch(searchQuery || '')
-  }, [searchQuery])
+  }, [searchQuery, onSearch])
 
   const modals = useModals()
 
@@ -170,7 +173,7 @@ export const ListPage = <D extends object>(props: ListPageProps<D>) => {
         resolve(activeFilter)
       })
     },
-    [],
+    [modals],
   )
 
   const columnVisibility = useColumnVisibility({
@@ -330,6 +333,7 @@ const TrackDefaultFilters: React.FC<{ defaultFilters?: Filter[] }> = ({
       const key = activeFilters?.find(({ id }) => id === filter.id)?.key
       enableFilter(key ? { key, ...filter } : filter)
     })
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [defaultFilters])
 
   return null

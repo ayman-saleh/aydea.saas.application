@@ -4,7 +4,6 @@ import * as React from 'react'
 
 import {
   Box,
-  Button,
   Divider,
   IconButton,
   Menu,
@@ -110,7 +109,7 @@ export function InboxListPage({ params }: WorkspacePageProps<{ id?: string }>) {
         })
       }
     }
-  }, [router, data, isLoading, isMobile])
+  }, [router, data, isLoading, isMobile, params])
 
   React.useEffect(() => {
     if (params.id) {
@@ -118,7 +117,7 @@ export function InboxListPage({ params }: WorkspacePageProps<{ id?: string }>) {
     }
     // the isMobile dep is needed so that the SplitPage
     // will open again when the screen size changes to lg
-  }, [params.id, isMobile])
+  }, [params, isMobile, onOpen])
 
   const [visibleProps, setVisibleProps] = React.useState<string[]>([])
 
