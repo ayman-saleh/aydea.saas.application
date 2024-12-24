@@ -17,15 +17,15 @@
     "#emails/*": "./emails/*"
   },
   "dependencies": {
-    "@react-email/components": "^0.0.29",
+    "@react-email/components": "^0.0.31",
     "env": "workspace:*",
     "react": "^18.3.1",
-    "react-email": "^3.0.3",
+    "react-email": "^3.0.4",
     "resend": "^4.0.1",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.13",
+    "@types/react": "^18.3.18",
     "typescript": "^5.7.2"
   }
 }

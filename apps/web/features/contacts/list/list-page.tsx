@@ -38,13 +38,17 @@ import {
   useSnackbar,
 } from '@saas-ui/react'
 import { format } from 'date-fns'
-import { FiGrid, FiList, FiSliders, FiUser } from 'react-icons/fi'
+import {
+  LuGrid2X2,
+  LuList,
+  LuSlidersHorizontal,
+  LuSquareUser,
+} from 'react-icons/lu'
 import { z } from 'zod'
 
 import { ContactDTO } from '@acme/api/types'
 import { InlineSearch } from '@acme/ui/inline-search'
-import { ListPage } from '@acme/ui/list-page'
-import { ListPageProps } from '@acme/ui/list-page'
+import { ListPage, ListPageProps } from '@acme/ui/list-page'
 import { OverflowMenu } from '@acme/ui/menu'
 import { useModals } from '@acme/ui/modals'
 
@@ -337,16 +341,16 @@ export function ContactsListPage({
         width="auto"
       >
         <ToggleButton value="list">
-          <FiList />
+          <LuList />
         </ToggleButton>
         <ToggleButton value="board">
-          <FiGrid />
+          <LuGrid2X2 />
         </ToggleButton>
       </ToggleButtonGroup>
       <Menu>
         <MenuButton
           as={ToolbarButton}
-          leftIcon={<FiSliders />}
+          leftIcon={<LuSlidersHorizontal />}
           label="Display"
           size="xs"
           variant="secondary"
@@ -380,7 +384,7 @@ export function ContactsListPage({
       title="No people added yet"
       description="Add a person or import data to get started."
       colorScheme="primary"
-      icon={FiUser}
+      icon={LuSquareUser}
       actions={
         <>
           <Button colorScheme="primary" variant="solid" onClick={addPerson}>

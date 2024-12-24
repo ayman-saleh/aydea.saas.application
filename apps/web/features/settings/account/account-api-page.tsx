@@ -13,7 +13,7 @@ import {
   StructuredListCell,
   StructuredListItem,
 } from '@saas-ui/react'
-import { FiCheck, FiCopy, FiX } from 'react-icons/fi'
+import { LuCheck, LuCopy, LuX } from 'react-icons/lu'
 
 import { LinkButton } from '@acme/ui/button'
 import { SettingsPage } from '@acme/ui/settings-page'
@@ -33,11 +33,11 @@ function AccessToken({ token, onRemove }: any) {
         <Text size="sm">{value}</Text>
       </StructuredListCell>
       <StructuredListCell px="4">
-        {hasCopied ? <FiCheck /> : <FiCopy />}
+        {hasCopied ? <LuCheck /> : <LuCopy />}
       </StructuredListCell>
       <StructuredListCell>
         <IconButton
-          icon={<FiX />}
+          icon={<LuX />}
           aria-label="Remove access token"
           variant="ghost"
           onClick={handleRemove}

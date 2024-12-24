@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { Aside, AsideHeader, AsideProps } from '@saas-ui-pro/react'
 import { Persona, Property, PropertyList } from '@saas-ui/react'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { LuChevronDown, LuChevronUp } from 'react-icons/lu'
 
 import { ContactDTO } from '@acme/api/types'
 import { OverflowMenu } from '@acme/ui/menu'
@@ -80,7 +80,7 @@ const ContactDetails: React.FC<{ contact: ContactDTO }> = ({ contact }) => {
         size="xs"
         fontSize="sm"
         onClick={onToggle}
-        rightIcon={isOpen ? <FiChevronDown /> : <FiChevronUp />}
+        rightIcon={isOpen ? <LuChevronDown /> : <LuChevronUp />}
         color="muted"
         fontWeight="medium"
         ms="-2"

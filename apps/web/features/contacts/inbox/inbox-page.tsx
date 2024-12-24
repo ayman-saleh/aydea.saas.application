@@ -4,13 +4,16 @@ import * as React from 'react'
 
 import {
   Box,
+  Button,
   Divider,
+  IconButton,
   Menu,
   MenuButton,
   MenuList,
   Portal,
   Spacer,
   Switch,
+  Tooltip,
   useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -30,12 +33,12 @@ import {
 import { EmptyState, useLocalStorage } from '@saas-ui/react'
 import { useRouter } from 'next/navigation'
 import {
-  FiChevronLeft,
-  FiClock,
-  FiInbox,
-  FiSliders,
-  FiTrash,
-} from 'react-icons/fi'
+  LuChevronLeft,
+  LuClock,
+  LuInbox,
+  LuSlidersHorizontal,
+  LuTrash,
+} from 'react-icons/lu'
 
 import { NotificationDTO } from '@acme/api/types'
 
@@ -64,12 +67,12 @@ function InboxViewPage(props: {
         display={{ base: 'inline-flex', lg: 'none' }}
         label="All notifications"
         onClick={props.onBack}
-        icon={<FiChevronLeft size="1.2em" />}
+        icon={<LuChevronLeft size="1.2em" />}
         variant="ghost"
       />
       <Spacer />
-      <ToolbarButton leftIcon={<FiTrash />} label="Delete notification" />
-      <ToolbarButton leftIcon={<FiClock />} label="Snooze" />
+      <ToolbarButton leftIcon={<LuTrash />} label="Delete notification" />
+      <ToolbarButton leftIcon={<LuClock />} label="Snooze" />
     </>
   )
   return <ContactsViewPage params={props.params} toolbarItems={toolbar} />
@@ -151,13 +154,15 @@ export function InboxListPage({ params }: WorkspacePageProps<{ id?: string }>) {
   const toolbar = (
     <Toolbar>
       <Menu>
-        <MenuButton
-          as={ToolbarButton}
-          icon={<FiSliders />}
-          label="Display settings"
-          variant="tertiary"
-          size="sm"
-        />
+        <Tooltip label="Display settings">
+          <MenuButton
+            as={IconButton}
+            icon={<LuSlidersHorizontal />}
+            aria-label="Display settings"
+            variant="tertiary"
+            size="xs"
+          />
+        </Tooltip>
         <Portal>
           <MenuList maxW="260px">
             <MenuProperty
@@ -179,7 +184,7 @@ export function InboxListPage({ params }: WorkspacePageProps<{ id?: string }>) {
 
   const emptyState = (
     <EmptyState
-      icon={FiInbox}
+      icon={LuInbox}
       title="Inbox zero"
       description="Nothing to do here"
       variant="centered"
@@ -218,6 +223,7 @@ export function InboxListPage({ params }: WorkspacePageProps<{ id?: string }>) {
         isResizable={!isMobile}
       >
         <Page
+          as="div"
           borderRightWidth={{ base: 0, lg: '1px' }}
           minWidth="280px"
           maxW={{ base: '100%', lg: '640px' }}

@@ -8,7 +8,7 @@ import {
   StructuredListItem,
   useSnackbar,
 } from '@saas-ui/react'
-import { FiChevronRight } from 'react-icons/fi'
+import { LuChevronRight } from 'react-icons/lu'
 
 import { useModals } from '@acme/ui/modals'
 import { SettingsPage } from '@acme/ui/settings-page'
@@ -25,7 +25,7 @@ function TwoFactorAuthItem() {
         Not enabled
       </StructuredListCell>
       <StructuredListCell>
-        <FiChevronRight />
+        <LuChevronRight />
       </StructuredListCell>
     </StructuredListItem>
   )
@@ -53,7 +53,7 @@ function PasswordListItem() {
         Last changed January 1st 2022
       </StructuredListCell>
       <StructuredListCell>
-        <FiChevronRight />
+        <LuChevronRight />
       </StructuredListCell>
     </StructuredListItem>
   )
