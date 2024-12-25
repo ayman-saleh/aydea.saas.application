@@ -107,6 +107,7 @@ function WorkspaceDetails(props: { workspace: WorkspaceDTO }) {
         defaultValues={{
           name: workspace.name,
           logo: workspace.logo ?? '',
+          slug: workspace.slug,
         }}
         onSubmit={(data) => {
           return mutateAsync({

@@ -65,8 +65,8 @@ export const LoginPage = () => {
           >
             {({ Field }) => (
               <FormLayout>
-                <Field name="email" label="Email" />
-                <Field name="password" label="Password" />
+                <Field name="email" label="Email" type="email" />
+                <Field name="password" type="password" label="Password" />
 
                 <Link href="/forgot-password">Forgot your password?</Link>
 

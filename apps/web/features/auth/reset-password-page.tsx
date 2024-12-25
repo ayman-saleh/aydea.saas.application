@@ -13,13 +13,13 @@ import { Logo } from '@acme/ui/logo'
 
 const schema = z
   .object({
-    password: z.string().min(8, 'Password must be at least 8 characters'),
+    newPassword: z.string().min(8, 'Password must be at least 8 characters'),
     confirmPassword: z
       .string()
       .min(8, 'Password must be at least 8 characters'),
   })
   .superRefine((data, ctx) => {
-    if (data.password !== data.confirmPassword) {
+    if (data.newPassword !== data.confirmPassword) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: 'Passwords do not match',
@@ -38,9 +38,9 @@ export const ResetPasswordPage = () => {
   const search = useSearchParams()
 
   const mutation = useMutation({
-    mutationFn: (values: { password: string }) => {
+    mutationFn: (values: { newPassword: string }) => {
       return auth.updatePassword({
-        password: values.password,
+        password: values.newPassword,
         token: search.get('token') ?? '',
       })
     },
@@ -82,14 +82,18 @@ export const ResetPasswordPage = () => {
             schema={schema}
             onSubmit={async (values) => {
               await mutation.mutateAsync({
-                password: values.password,
+                newPassword: values.newPassword,
               })
             }}
           >
             {({ Field }) => (
               <FormLayout>
-                <Field name="password" label="Password" />
-                <Field name="confirmPassword" label="Confirm Password" />
+                <Field name="newPassword" type="password" label="Password" />
+                <Field
+                  name="confirmPassword"
+                  type="password"
+                  label="Confirm Password"
+                />
 
                 <SubmitButton />
               </FormLayout>
