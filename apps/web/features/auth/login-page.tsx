@@ -1,6 +1,14 @@
 'use client'
 
-import { Container, Heading, Stack, Text } from '@chakra-ui/react'
+import {
+  Container,
+  Divider,
+  HStack,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
+import { useLocalStorageValue } from '@react-hookz/web'
 import { useAuth } from '@saas-ui/auth-provider'
 import { FormLayout, SubmitButton, useSnackbar } from '@saas-ui/react'
 import { useMutation } from '@tanstack/react-query'
@@ -10,6 +18,9 @@ import { z } from 'zod'
 import { Link } from '@acme/next'
 import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
+
+import { LastUsedProvider } from './last-used'
+import { Providers } from './providers'
 
 const schema = z.object({
   email: z.string().email(),
@@ -25,9 +36,13 @@ export const LoginPage = () => {
 
   const redirectTo = searchParams.get('redirectTo')
 
+  const lastUsed = useLocalStorageValue('lastUsedProvider')
+
   const mutation = useMutation({
     mutationFn: (params: z.infer<typeof schema>) => auth.logIn(params),
     onSuccess: () => {
+      lastUsed.set('credentials')
+
       router.push(redirectTo ?? '/')
     },
     onError: (error) => {
@@ -54,6 +69,16 @@ export const LoginPage = () => {
             Log in
           </Heading>
 
+          <Providers />
+
+          <HStack my="4">
+            <Divider />
+            <Text flexShrink={0} color="muted">
+              Or continue with
+            </Text>
+            <Divider />
+          </HStack>
+
           <Form
             schema={schema}
             onSubmit={async (values) => {
@@ -65,7 +90,9 @@ export const LoginPage = () => {
           >
             {({ Field }) => (
               <FormLayout>
-                <Field name="email" label="Email" type="email" />
+                <LastUsedProvider value="credentials">
+                  <Field name="email" label="Email" type="email" />
+                </LastUsedProvider>
                 <Field name="password" type="password" label="Password" />
 
                 <Link href="/forgot-password">Forgot your password?</Link>
