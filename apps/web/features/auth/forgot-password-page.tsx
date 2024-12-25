@@ -1,14 +1,32 @@
 'use client'
 
-import { Container, Stack } from '@chakra-ui/react'
-import { ForgotPasswordView } from '@saas-ui/auth'
-import { useSnackbar } from '@saas-ui/react'
+import { Container, Heading, Stack } from '@chakra-ui/react'
+import { useAuth } from '@saas-ui/auth-provider'
+import { Form, FormLayout, SubmitButton, useSnackbar } from '@saas-ui/react'
+import { useMutation } from '@tanstack/react-query'
+import { z } from 'zod'
 
 import { Link } from '@acme/next'
 import { Logo } from '@acme/ui/logo'
 
+const schema = z.object({
+  email: z.string().email(),
+})
+
 export const ForgotPasswordPage = () => {
   const snackbar = useSnackbar()
+
+  const auth = useAuth()
+
+  const mutation = useMutation({
+    mutationFn: (params: z.infer<typeof schema>) => auth.resetPassword(params),
+    onSuccess: () => {
+      snackbar.success('Password reset email sent')
+    },
+    onError: (error) => {
+      snackbar.error(error.message)
+    },
+  })
 
   return (
     <Stack flex="1" direction="row">
@@ -21,16 +39,26 @@ export const ForgotPasswordPage = () => {
       >
         <Container maxW="container.sm" py="8">
           <Logo margin="0 auto" mb="12" />
-          <ForgotPasswordView
-            title="Reset your password"
-            onError={(error) => {
-              snackbar.error({
-                title: error.message ?? 'Could not reset your password',
-                description:
-                  'Please try again or contact us if the problem persists.',
+
+          <Heading as="h2" size="md" mb="4">
+            Reset your password
+          </Heading>
+
+          <Form
+            schema={schema}
+            onSubmit={async (values) => {
+              await mutation.mutateAsync({
+                email: values.email,
               })
             }}
-          />
+          >
+            {({ Field }) => (
+              <FormLayout>
+                <Field name="email" label="Email" />
+                <SubmitButton>Reset password</SubmitButton>
+              </FormLayout>
+            )}
+          </Form>
         </Container>
 
         <Link href="/login" color="chakra-body-text">

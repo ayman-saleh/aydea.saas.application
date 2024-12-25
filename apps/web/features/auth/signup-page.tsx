@@ -1,23 +1,44 @@
 'use client'
 
-import { Center, Container, Stack, Text } from '@chakra-ui/react'
-import { SignupView } from '@saas-ui/auth'
-import { useSnackbar } from '@saas-ui/react'
-import { useSearchParams } from 'next/navigation'
+import { Center, Container, Heading, Stack, Text } from '@chakra-ui/react'
+import { useAuth } from '@saas-ui/auth-provider'
+import { FormLayout, SubmitButton, useSnackbar } from '@saas-ui/react'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { z } from 'zod'
 
 import { Link } from '@acme/next'
+import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
-
-import { authConfig } from '#config/auth.config'
 
 import { Testimonial } from './components/testimonial'
 
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+})
+
 export const SignupPage = () => {
   const snackbar = useSnackbar()
+  const router = useRouter()
+  const auth = useAuth()
 
   const searchParams = useSearchParams()
 
   const redirectTo = searchParams.get('redirectTo')
+
+  const mutation = useMutation({
+    mutationFn: (params: z.infer<typeof schema>) => auth.signUp(params),
+    onSuccess: () => {
+      router.push(redirectTo ?? '/')
+    },
+    onError: (error) => {
+      snackbar.error({
+        title: error.message ?? 'Could not sign you up',
+        description: 'Please try again or contact us if the problem persists.',
+      })
+    },
+  })
 
   return (
     <Stack flex="1" direction="row" height="$100vh">
@@ -30,24 +51,31 @@ export const SignupPage = () => {
       >
         <Container maxW="container.sm" py="8">
           <Logo margin="0 auto" mb="12" />
-          <SignupView
-            title="Sign up"
-            type={authConfig.authType}
-            providers={authConfig.authProviders}
-            redirectUrl={redirectTo ?? undefined}
-            onError={(error) => {
-              snackbar.error({
-                title: error.message ?? 'Could not sign you up',
-                description:
-                  'Please try again or contact us if the problem persists.',
+
+          <Heading as="h2" size="md" mb="4">
+            Sign up
+          </Heading>
+
+          <Form
+            schema={schema}
+            onSubmit={async (values) => {
+              await mutation.mutateAsync({
+                email: values.email,
+                password: values.password,
               })
             }}
-            fields={{
-              submit: {
-                children: 'Sign up',
-              },
-            }}
-          />
+          >
+            {({ Field }) => (
+              <FormLayout>
+                <Field name="email" label="Email" />
+                <Field name="password" label="Password" />
+
+                <Link href="/forgot-password">Forgot your password?</Link>
+
+                <SubmitButton>Sign up</SubmitButton>
+              </FormLayout>
+            )}
+          </Form>
         </Container>
 
         <Text color="muted">

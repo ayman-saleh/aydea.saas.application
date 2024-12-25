@@ -1,4 +1,4 @@
-import { useAuth } from '@saas-ui/auth'
+import { useAuth } from '@saas-ui/auth-provider'
 import { LoadingOverlay, LoadingSpinner, useSnackbar } from '@saas-ui/react'
 
 import { ContactDTO } from '@acme/api/types'

@@ -1,21 +1,42 @@
 'use client'
 
-import { Container, Stack, Text } from '@chakra-ui/react'
-import { LoginView } from '@saas-ui/auth'
-import { useSnackbar } from '@saas-ui/react'
-import { useSearchParams } from 'next/navigation'
+import { Container, Heading, Stack, Text } from '@chakra-ui/react'
+import { useAuth } from '@saas-ui/auth-provider'
+import { FormLayout, SubmitButton, useSnackbar } from '@saas-ui/react'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { z } from 'zod'
 
 import { Link } from '@acme/next'
+import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
 
-import { authConfig } from '#config/auth.config'
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+})
 
 export const LoginPage = () => {
   const snackbar = useSnackbar()
+  const router = useRouter()
+  const auth = useAuth()
 
   const searchParams = useSearchParams()
 
   const redirectTo = searchParams.get('redirectTo')
+
+  const mutation = useMutation({
+    mutationFn: (params: z.infer<typeof schema>) => auth.logIn(params),
+    onSuccess: () => {
+      router.push(redirectTo ?? '/')
+    },
+    onError: (error) => {
+      snackbar.error({
+        title: error.message ?? 'Could not log you in',
+        description: 'Please try again or contact us if the problem persists.',
+      })
+    },
+  })
 
   return (
     <Stack flex="1" direction="row">
@@ -28,23 +49,31 @@ export const LoginPage = () => {
       >
         <Container maxW="container.sm" py="8">
           <Logo margin="0 auto" mb="12" />
-          <LoginView
-            title="Log in"
-            type={authConfig.authType}
-            providers={authConfig.authProviders}
-            redirectUrl={redirectTo ?? undefined}
-            onError={(error) => {
-              snackbar.error({
-                title: error.message ?? 'Could not log you in',
-                description:
-                  'Please try again or contact us if the problem persists.',
+
+          <Heading as="h2" size="md" mb="4">
+            Log in
+          </Heading>
+
+          <Form
+            schema={schema}
+            onSubmit={async (values) => {
+              await mutation.mutateAsync({
+                email: values.email,
+                password: values.password,
               })
             }}
           >
-            {authConfig.authType === 'password' ? (
-              <Link href="/forgot-password">Forgot your password?</Link>
-            ) : null}
-          </LoginView>
+            {({ Field }) => (
+              <FormLayout>
+                <Field name="email" label="Email" />
+                <Field name="password" label="Password" />
+
+                <Link href="/forgot-password">Forgot your password?</Link>
+
+                <SubmitButton>Log in</SubmitButton>
+              </FormLayout>
+            )}
+          </Form>
         </Container>
 
         <Text color="muted">

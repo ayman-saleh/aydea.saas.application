@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { useAuth } from '@saas-ui/auth'
+import { useAuth } from '@saas-ui/auth-provider'
 import { useRouter } from 'next/navigation'
 
 import { AuthLayout as BaseAuthLayout } from '#features/common/layouts/auth-layout'

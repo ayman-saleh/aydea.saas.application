@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { useUpdatePassword } from '@saas-ui/auth'
+import { useUpdatePassword } from '@saas-ui/auth-provider'
 import { Field, FormDialog, FormDialogProps, FormLayout } from '@saas-ui/react'
 
 import { ConfirmPasswordField } from '@acme/ui/confirm-password-field'

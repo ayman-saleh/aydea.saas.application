@@ -1,1 +1,2 @@
-export { auth, handlers, getSession } from './auth'
+export { auth } from './auth'
+export { handlers, getSession } from './server'

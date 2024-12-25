@@ -32,7 +32,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@acme/auth-authjs@workspace:*, @acme/auth-authjs@workspace:packages/auth-authjs":
+"@acme/auth-authjs@workspace:packages/auth-authjs":
   version: 0.0.0-use.local
   resolution: "@acme/auth-authjs@workspace:packages/auth-authjs"
   dependencies:
@@ -54,12 +54,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@acme/auth-supabase@workspace:*, @acme/auth-supabase@workspace:packages/auth-supabase":
+"@acme/auth-supabase@workspace:packages/auth-supabase":
   version: 0.0.0-use.local
   resolution: "@acme/auth-supabase@workspace:packages/auth-supabase"
   dependencies:
     "@acme/api": "workspace:*"
-    "@saas-ui/supabase": "npm:^2.4.0"
+    "@saas-ui/supabase": "npm:^2.4.2"
     "@supabase/ssr": "npm:^0.5.2"
     "@supabase/supabase-js": "npm:^2.47.10"
     env: "workspace:*"
@@ -75,7 +75,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@acme/better-auth@workspace:packages/better-auth":
+"@acme/better-auth@workspace:*, @acme/better-auth@workspace:packages/better-auth":
   version: 0.0.0-use.local
   resolution: "@acme/better-auth@workspace:packages/better-auth"
   dependencies:
@@ -124,8 +124,8 @@ __metadata:
     "@paralleldrive/cuid2": "npm:^2.2.2"
     dotenv-cli: "npm:^8.0.0"
     drizzle-kit: "npm:^0.30.1"
-    drizzle-orm: "npm:^0.38.2"
-    drizzle-zod: "npm:^0.6.0"
+    drizzle-orm: "npm:^0.38.3"
+    drizzle-zod: "npm:^0.6.1"
     pg: "npm:^8.13.1"
     postgres: "npm:3.4.5"
     slug: "npm:^10.0.0"
@@ -6343,33 +6343,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui/auth-provider@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@saas-ui/auth-provider@npm:1.1.0"
+"@saas-ui/auth-provider@npm:1.2.1, @saas-ui/auth-provider@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@saas-ui/auth-provider@npm:1.2.1"
   peerDependencies:
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
-  checksum: 10/f5b84651a5bf1c72e81a4a7a2231ed1ea05d8287b2aad16b2189537a10596a038b1e5a8e1feb97ea9805546deaf0afa966473cc6f84775e7a556d3189e45ecbd
-  languageName: node
-  linkType: hard
-
-"@saas-ui/auth@npm:3.6.1":
-  version: 3.6.1
-  resolution: "@saas-ui/auth@npm:3.6.1"
-  dependencies:
-    "@chakra-ui/utils": "npm:^2.2.3"
-    "@saas-ui/auth-provider": "npm:1.1.0"
-    "@saas-ui/core": "npm:2.8.1"
-    "@saas-ui/forms": "npm:2.9.1"
-    "@saas-ui/hooks": "npm:2.3.0"
-  peerDependencies:
-    "@chakra-ui/react": ">=2.9.0 <3"
-    "@emotion/react": ">=11.0.0"
-    "@emotion/styled": ">=11.0.0"
-    framer-motion: ">=6.0.0"
-    react: ">=18.0.0"
-    react-dom: ">=18.0.0"
-  checksum: 10/fb37ab4f3f21eb707665ea79992fe3a0d86d93aa99cfd6b4e71e0cf08500498c23b8110032b8a17df6c6bb6a714a2cda6afbce650fa1ddec89f37af604cd4122
+  checksum: 10/546e642238d33292bbed3d8a43a0acaff780e3432ab9dce44ca3367fcdcccad3a76e53145e806cd5cb7ee8099ee96fb6eb297739bd1a04e72a7d5dedcc2d0081
   languageName: node
   linkType: hard
 
@@ -6659,16 +6639,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@saas-ui/supabase@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@saas-ui/supabase@npm:2.4.0"
+"@saas-ui/supabase@npm:^2.4.2":
+  version: 2.4.2
+  resolution: "@saas-ui/supabase@npm:2.4.2"
   dependencies:
-    "@saas-ui/auth-provider": "npm:1.1.0"
+    "@saas-ui/auth-provider": "npm:1.2.1"
   peerDependencies:
     "@supabase/supabase-js": ^2.45.4
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
-  checksum: 10/09d565627a1a9fc489744457a6f1e613ba534f9180f5fb24422348e48d3e4a46ded53f656786676f7881327d9b3f2b8b8eefb52231d2f2226c46bf10fa026a6f
+  checksum: 10/9077c30913ec10cf811275ffbda3681d085c4363813a7bd83e1e199c49432f3cbc63104897e415ac5e3efa39cc272bf4f1e9ff587a31d629c67ef37267ba3c10
   languageName: node
   linkType: hard
 
@@ -7649,26 +7629,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:^5.62.9":
-  version: 5.62.9
-  resolution: "@tanstack/react-query-devtools@npm:5.62.9"
+"@tanstack/react-query-devtools@npm:^5.62.10":
+  version: 5.62.10
+  resolution: "@tanstack/react-query-devtools@npm:5.62.10"
   dependencies:
     "@tanstack/query-devtools": "npm:5.62.9"
   peerDependencies:
-    "@tanstack/react-query": ^5.62.9
+    "@tanstack/react-query": ^5.62.10
     react: ^18 || ^19
-  checksum: 10/0e91a2b2e92fa8597448afdc25485de25ca24d33dee80e1bb46c164aed87093ffef42c3bc160db929b308f4622af9d4812e3f3d0df6ec52ed33b25d6ba488532
+  checksum: 10/b0d88f844ce19913b7e4e7a38333c8d30249bbdd1e3b528f6d9ec9a0369cbb7ee4d8e363ae08ac4a8b5da47ffe0ebee8bfe492357449e5957ca9e027d8b500e4
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.62.9":
-  version: 5.62.9
-  resolution: "@tanstack/react-query@npm:5.62.9"
+"@tanstack/react-query@npm:^5.62.10":
+  version: 5.62.10
+  resolution: "@tanstack/react-query@npm:5.62.10"
   dependencies:
     "@tanstack/query-core": "npm:5.62.9"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10/4ce588a4268389b162b40fe25a3d8753dba1957252d82457210daebd774bf9e79523117149f3a67597a3d619c93ee4492ec685f7f7eb708285f829805afcdd70
+  checksum: 10/22ddcb9ecdfefdc908e1662a7bad26be023d887ab201e406a44a9c68d7117953f8cf648293b1afd0ac4675a0617e0f3c09148c6a9e36bc32c5718662285e1542
   languageName: node
   linkType: hard
 
@@ -11440,9 +11420,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"drizzle-orm@npm:^0.38.2":
-  version: 0.38.2
-  resolution: "drizzle-orm@npm:0.38.2"
+"drizzle-orm@npm:^0.38.3":
+  version: 0.38.3
+  resolution: "drizzle-orm@npm:0.38.3"
   peerDependencies:
     "@aws-sdk/client-rds-data": ">=3"
     "@cloudflare/workers-types": ">=4"
@@ -11531,17 +11511,17 @@ __metadata:
       optional: true
     sqlite3:
       optional: true
-  checksum: 10/1a5f3ddf914bc39ba7380be340762755aa0431f581e7282be9f72f7d96f0009518b1cc8fb04722aa223b896d735eede9c8f15ba943bdb1c89547d00c2b8b2204
+  checksum: 10/58bf6326eb8a55e463ebc7883effe29516e918f6400cf98e88fe92c87a8b682bf5ab4383f625b931d8c5b1ef5856ce445d84f037402ef8cb47081fdcbeeed250
   languageName: node
   linkType: hard
 
-"drizzle-zod@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "drizzle-zod@npm:0.6.0"
+"drizzle-zod@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "drizzle-zod@npm:0.6.1"
   peerDependencies:
     drizzle-orm: ">=0.36.0"
     zod: ">=3.0.0"
-  checksum: 10/4deaca0ee9af56c6219440c772ee797d1b5bf6214af4673c1321ab5afbea99c416fbbab695e2662f613fe0a4653ff54898d947d3382b6eba6d7198cec0a05d92
+  checksum: 10/2be7959ffc765ddc6de4ab36fd8de703df970c50a1f31c607649e954ddd85af1cf40b248dce65393e57f821be07bf00adf150d9c5fa9da8ce83e8eb5bc9af729
   languageName: node
   linkType: hard
 
@@ -20984,8 +20964,7 @@ __metadata:
   resolution: "web@workspace:apps/web"
   dependencies:
     "@acme/api": "workspace:*"
-    "@acme/auth-authjs": "workspace:*"
-    "@acme/auth-supabase": "workspace:*"
+    "@acme/better-auth": "workspace:*"
     "@acme/billing-stripe": "workspace:*"
     "@acme/config": "workspace:*"
     "@acme/i18n": "workspace:*"
@@ -21003,14 +20982,14 @@ __metadata:
     "@saas-ui-pro/feature-flags": "npm:^0.17.0"
     "@saas-ui-pro/onboarding": "npm:^0.15.1"
     "@saas-ui-pro/react": "npm:^0.40.2"
-    "@saas-ui/auth": "npm:3.6.1"
+    "@saas-ui/auth-provider": "npm:^1.2.1"
     "@saas-ui/charts": "npm:^0.14.1"
     "@saas-ui/date-picker": "npm:^0.15.2"
     "@saas-ui/next-workspaces": "npm:^0.3.0"
     "@saas-ui/react": "npm:^2.11.2"
     "@svgr/webpack": "npm:^8.1.0"
-    "@tanstack/react-query": "npm:^5.62.9"
-    "@tanstack/react-query-devtools": "npm:^5.62.9"
+    "@tanstack/react-query": "npm:^5.62.10"
+    "@tanstack/react-query-devtools": "npm:^5.62.10"
     "@trpc/client": "npm:^11.0.0-rc.666"
     "@trpc/react-query": "npm:^11.0.0-rc.666"
     "@trpc/server": "npm:^11.0.0-rc.666"

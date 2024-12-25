@@ -6,6 +6,8 @@ import {
   primaryKey,
   text,
   timestamp,
+  timestamps,
+  unique,
 } from '@acme/db/utils'
 
 export const users = pgTable('auth_users', {
@@ -14,52 +16,72 @@ export const users = pgTable('auth_users', {
     .$defaultFn(() => createId()),
   name: text('name'),
   email: text('email').unique(),
-  emailVerified: timestamp('email_verified', { mode: 'date' }),
+  emailVerified: boolean('email_verified'),
   image: text('image'),
+  ...timestamps,
 })
 
 export const accounts = pgTable(
   'auth_accounts',
   {
+    id: text('id')
+      .primaryKey()
+      .$defaultFn(() => createId()),
     userId: text('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
-    provider: text('provider').notNull(),
+    providerId: text('provider_id').notNull(),
     accountId: text('account_id').notNull(),
     refreshToken: text('refresh_token'),
     accessToken: text('access_token'),
-    expiresAt: integer('expires_at'),
+    accessTokenExpiresAt: timestamp('access_token_expires_at', {
+      withTimezone: true,
+    }),
+    refreshTokenExpiresAt: timestamp('refresh_token_expires_at', {
+      withTimezone: true,
+    }),
     scope: text('scope'),
     idToken: text('id_token'),
     password: text('password'),
+    ...timestamps,
   },
-  (account) => ({
-    compoundKey: primaryKey({
-      columns: [account.provider, account.accountId],
-    }),
-  }),
+  (account) => [unique().on(account.providerId, account.accountId)],
 )
 
 export const sessions = pgTable('auth_sessions', {
-  sessionToken: text('session_token').primaryKey(),
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  token: text('token').unique(),
   userId: text('user_id')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  expiresAt: timestamp('expires_at', { mode: 'date' }).notNull(),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
+  expiresAt: timestamp('expires_at', {
+    withTimezone: true,
+  }).notNull(),
+  ...timestamps,
 })
 
 export const verifications = pgTable(
   'auth_verifications',
   {
-    id: text('id').notNull(),
-    token: text('token').notNull(),
-    expiresAt: timestamp('expires_at', { mode: 'date' }).notNull(),
+    id: text('id')
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    identifier: text('identifier').notNull(),
+    value: text('value').notNull(),
+    expiresAt: timestamp('expires_at', {
+      withTimezone: true,
+    }).notNull(),
+    ...timestamps,
   },
-  (verificationToken) => ({
-    compositePk: primaryKey({
-      columns: [verificationToken.id, verificationToken.token],
-    }),
-  }),
+  (verificationToken) => [
+    {
+      token: unique().on(verificationToken.identifier, verificationToken.value),
+    },
+  ],
 )
 
 export const authenticators = pgTable(
@@ -76,9 +98,11 @@ export const authenticators = pgTable(
     credentialBackedUp: boolean('credential_backed_up').notNull(),
     transports: text('transports'),
   },
-  (authenticator) => ({
-    compositePK: primaryKey({
-      columns: [authenticator.userId, authenticator.credentialId],
-    }),
-  }),
+  (authenticator) => [
+    {
+      compositePK: primaryKey({
+        columns: [authenticator.userId, authenticator.credentialId],
+      }),
+    },
+  ],
 )

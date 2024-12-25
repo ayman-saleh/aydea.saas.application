@@ -85,14 +85,38 @@ export function createAuthService() {
 
       throw new Error('Invalid parameters')
     },
-    onResetPassword: async (params: { email: string }) => {
-      console.log('onForgotPassword', params)
+    onResetPassword: async (
+      params: { email: string },
+      options?: {
+        redirectTo?: string
+      },
+    ) => {
       const { data, error } = await authClient.forgetPassword({
         email: params.email,
+        redirectTo: options?.redirectTo,
       })
 
       if (error) {
         throw new Error('Could not send reset email', {
+          cause: error,
+        })
+      }
+
+      return data
+    },
+    onUpdatePassword: async (params: { password: string; token: string }) => {
+      const { data, error } = await authClient.resetPassword({
+        newPassword: params.password,
+        token: params.token,
+      })
+
+      if (error) {
+        const message =
+          error.code === 'INVALID_TOKEN'
+            ? 'Token is invalid or expired'
+            : 'Could not reset password'
+
+        throw new Error(message, {
           cause: error,
         })
       }

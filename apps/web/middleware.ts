@@ -2,7 +2,12 @@ import { NextResponse } from 'next/server'
 
 import { auth } from '@acme/better-auth/middleware'
 
-const publicRoutes = ['/login', '/signup', '/forgot-password']
+const publicRoutes = [
+  '/login',
+  '/signup',
+  '/forgot-password',
+  '/reset-password',
+]
 
 export default auth((req) => {
   if (!req.auth && !publicRoutes.includes(req.nextUrl.pathname)) {
