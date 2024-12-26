@@ -20,5 +20,7 @@ export const env = createEnv(
 
     RESEND_API_KEY: z.string().optional(),
     EMAIL_FROM: z.string(),
+
+    AUTH_SECRET: z.string(),
   }),
 )

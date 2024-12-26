@@ -1,5 +1,7 @@
 'use client'
 
+import { useCallback } from 'react'
+
 import {
   Container,
   Divider,
@@ -36,7 +38,9 @@ export const LoginPage = () => {
 
   const redirectTo = searchParams.get('redirectTo')
 
-  const lastUsed = useLocalStorageValue('lastUsedProvider')
+  const lastUsed = useLocalStorageValue('lastUsedProvider', {
+    initializeWithValue: false,
+  })
 
   const mutation = useMutation({
     mutationFn: (params: z.infer<typeof schema>) => auth.logIn(params),
@@ -53,6 +57,15 @@ export const LoginPage = () => {
     },
   })
 
+  const emailRef = useCallback(
+    (el: HTMLInputElement | null) => {
+      if (lastUsed.value === 'credentials') {
+        el?.focus()
+      }
+    },
+    [lastUsed.value],
+  )
+
   return (
     <Stack flex="1" direction="row">
       <Stack
@@ -63,7 +76,7 @@ export const LoginPage = () => {
         spacing="8"
       >
         <Container maxW="container.sm" py="8">
-          <Logo margin="0 auto" mb="12" />
+          <Logo mb="12" width="120px" />
 
           <Heading as="h2" size="md" mb="4">
             Log in
@@ -80,6 +93,7 @@ export const LoginPage = () => {
           </HStack>
 
           <Form
+            mode="onSubmit"
             schema={schema}
             onSubmit={async (values) => {
               await mutation.mutateAsync({
@@ -90,9 +104,18 @@ export const LoginPage = () => {
           >
             {({ Field }) => (
               <FormLayout>
-                <LastUsedProvider value="credentials">
-                  <Field name="email" label="Email" type="email" />
-                </LastUsedProvider>
+                <Field
+                  name="email"
+                  label="Email"
+                  type="email"
+                  ref={emailRef}
+                  rightAddon={
+                    <LastUsedProvider value="credentials">
+                      <div />
+                    </LastUsedProvider>
+                  }
+                />
+
                 <Field name="password" type="password" label="Password" />
 
                 <Link href="/forgot-password">Forgot your password?</Link>

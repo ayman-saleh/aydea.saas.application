@@ -72,13 +72,14 @@ export const ResetPasswordPage = () => {
         spacing="8"
       >
         <Container maxW="container.sm" py="8">
-          <Logo margin="0 auto" mb="12" />
+          <Logo mb="12" width="120px" />
 
           <Heading as="h2" size="md" mb="4">
             Choose a new password
           </Heading>
 
           <Form
+            mode="onBlur"
             schema={schema}
             onSubmit={async (values) => {
               await mutation.mutateAsync({
@@ -88,7 +89,12 @@ export const ResetPasswordPage = () => {
           >
             {({ Field }) => (
               <FormLayout>
-                <Field name="newPassword" type="password" label="Password" />
+                <Field
+                  name="newPassword"
+                  type="password"
+                  label="Password"
+                  help="Should be at least 8 characters"
+                />
                 <Field
                   name="confirmPassword"
                   type="password"

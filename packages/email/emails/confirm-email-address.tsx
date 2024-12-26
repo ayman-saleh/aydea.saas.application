@@ -10,8 +10,6 @@ import {
   Text,
 } from '@react-email/components'
 
-import { config } from '#config'
-
 import { Logo } from '../components/logo'
 import {
   body,
@@ -22,34 +20,27 @@ import {
   paragraph,
 } from '../styles'
 
-export function WorkspaceInviteEmail(props: {
+export function ConfirmEmailAddressEmail(props: {
   token: string
   confirmUrl: string
-  workspace?: string
-  invitedBy?: string
 }) {
   return (
     <Html>
       <Head />
-      <Preview>
-        You have been invited to join a workspace on {config.appName}
-      </Preview>
+      <Preview>Confirm your email address</Preview>
       <Body style={body}>
         <Container style={container}>
           <Logo width="30" height="30" />
 
-          <Heading style={heading}>You have been invited</Heading>
+          <Heading style={heading}>Confirm your email address</Heading>
 
           <Text style={paragraph}>
-            {props.invitedBy
-              ? `${props.invitedBy} invited you`
-              : "You've been invited"}{' '}
-            to join {props.workspace ?? 'a workspace'} on {config.appName}.
+            Please confirm your email address by clicking the button below.
           </Text>
 
           <Section style={buttonContainer}>
             <Button href={props.confirmUrl} style={button}>
-              Accept invitation
+              Confirm email address
             </Button>
           </Section>
         </Container>
@@ -58,11 +49,13 @@ export function WorkspaceInviteEmail(props: {
   )
 }
 
-WorkspaceInviteEmail.PreviewProps = {
+ConfirmEmailAddressEmail.PreviewProps = {
   confirmUrl: '#',
   token: '1234567890',
-  workspace: 'Acme',
-  invitedBy: 'John Doe',
+  user: {
+    email: 'john@doe.com',
+    name: 'John Doe',
+  },
 }
 
-export default WorkspaceInviteEmail
+export default ConfirmEmailAddressEmail

@@ -3,5 +3,5 @@
   "compilerOptions": {
     "jsx": "react-jsx"
   },
-  "include": ["index.ts", "emails"]
+  "include": ["index.ts", "config.ts", "styles.ts", "components", "emails"]
 }

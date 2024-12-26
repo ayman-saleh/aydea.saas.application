@@ -49,7 +49,7 @@ export const ForgotPasswordPage = () => {
         spacing="8"
       >
         <Container maxW="container.sm" py="8">
-          <Logo margin="0 auto" mb="12" />
+          <Logo mb="12" width="120px" />
 
           <Heading as="h2" size="md" mb="4">
             Forgot your password?
@@ -69,6 +69,7 @@ export const ForgotPasswordPage = () => {
             </Alert>
           ) : (
             <Form
+              mode="onSubmit"
               schema={schema}
               onSubmit={async (values) => {
                 await mutation.mutateAsync({
