@@ -67,7 +67,7 @@ export function createAuthService() {
         })
         return null
       } else if (params.email && params.password) {
-        const { data, error } = await authClient.signUp.email({
+        const { error } = await authClient.signUp.email({
           email: params.email,
           name: params.name ?? '',
           password: params.password,
@@ -80,7 +80,10 @@ export function createAuthService() {
           })
         }
 
-        return data.token
+        // If there is no error, we can assume the user is signed up
+        // auto login is enabled by default, so the user will be redirected
+        // to the dashboard.
+        return
       }
 
       throw new Error('Invalid parameters')
@@ -104,8 +107,8 @@ export function createAuthService() {
 
       return data
     },
-    onUpdatePassword: async (params: { password: string; token: string }) => {
-      const { data, error } = await authClient.resetPassword({
+    onUpdatePassword: async (params) => {
+      const { error } = await authClient.resetPassword({
         newPassword: params.password,
         token: params.token,
       })
@@ -120,8 +123,6 @@ export function createAuthService() {
           cause: error,
         })
       }
-
-      return data
     },
     onLogout: async () => {
       return await authClient.signOut()
