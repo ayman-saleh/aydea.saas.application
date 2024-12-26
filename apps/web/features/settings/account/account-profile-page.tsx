@@ -45,6 +45,16 @@ function ProfileDetails({ user }: { user: UserDTO }) {
     onSettled: () => {
       utils.auth.me.invalidate()
     },
+    onSuccess: () => {
+      snackbar.success({
+        title: 'Profile updated',
+      })
+    },
+    onError: () => {
+      snackbar.error({
+        title: 'Failed to update profile',
+      })
+    },
   })
 
   return (
@@ -61,12 +71,8 @@ function ProfileDetails({ user }: { user: UserDTO }) {
               name: user?.name ?? '',
               email: user?.email ?? '',
             }}
-            onSubmit={(data) => {
-              mutateAsync(data).then(() =>
-                snackbar.success({
-                  description: 'Profile updated',
-                }),
-              )
+            onSubmit={async (data) => {
+              await mutateAsync(data)
             }}
           >
             {({ Field }) => (
