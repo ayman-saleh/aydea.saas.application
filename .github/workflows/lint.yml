@@ -20,7 +20,7 @@ jobs:
           cache: 'yarn'
 
       - name: Setup registry
-        run: yarn config set 'npmRegistries["//npm.saas-ui.dev"].npmAuthIdent' $SAAS_UI_TOKEN
+        run: yarn config set 'npmRegistries["//npm.saas-ui.dev"].npmAuthIdent' ${{secrets.SAAS_UI_TOKEN}}
 
       - name: Install dependencies
         run: yarn install
