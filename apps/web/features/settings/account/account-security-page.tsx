@@ -1,6 +1,6 @@
 'use client'
 
-import { Card } from '@chakra-ui/react'
+import { Button, Card } from '@chakra-ui/react'
 import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
 import {
   StructuredList,
@@ -8,7 +8,6 @@ import {
   StructuredListItem,
   useSnackbar,
 } from '@saas-ui/react'
-import { LuChevronRight } from 'react-icons/lu'
 
 import { useModals } from '@acme/ui/modals'
 import { SettingsPage } from '@acme/ui/settings-page'
@@ -17,15 +16,14 @@ import { UpdatePasswordDialog } from './update-password-dialog'
 
 function TwoFactorAuthItem() {
   return (
-    <StructuredListItem onClick={() => null}>
+    <StructuredListItem>
       <StructuredListCell flex="1">
         Two-factor authentication
       </StructuredListCell>
-      <StructuredListCell color="muted" px="4">
-        Not enabled
-      </StructuredListCell>
-      <StructuredListCell>
-        <LuChevronRight />
+      <StructuredListCell px="4">
+        <Button variant="secondary" size="sm">
+          Enable
+        </Button>
       </StructuredListCell>
     </StructuredListItem>
   )
@@ -36,24 +34,32 @@ function PasswordListItem() {
   const snackbar = useSnackbar()
 
   return (
-    <StructuredListItem
-      onClick={() => {
-        const id = modals.open({
-          title: 'Update your password',
-          component: UpdatePasswordDialog,
-          onSuccess() {
-            snackbar.success('Your password has been updated.')
-            modals.close(id)
-          },
-        })
-      }}
-    >
+    <StructuredListItem>
       <StructuredListCell flex="1">Password</StructuredListCell>
-      <StructuredListCell color="muted" px="4">
-        Last changed January 1st 2022
-      </StructuredListCell>
-      <StructuredListCell>
-        <LuChevronRight />
+      <StructuredListCell px="4">
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => {
+            const id = modals.open({
+              title: 'Update your password',
+              component: UpdatePasswordDialog,
+              onSuccess() {
+                snackbar.success({
+                  title: 'Your password has been updated',
+                })
+                modals.close(id)
+              },
+              onError() {
+                snackbar.error({
+                  title: 'Failed to update password',
+                })
+              },
+            })
+          }}
+        >
+          Change password
+        </Button>
       </StructuredListCell>
     </StructuredListItem>
   )

@@ -1,7 +1,6 @@
 import { TRPCError, createTRPCRouter, protectedProcedure } from '#trpc'
 
 import { userService } from '../users'
-import { UpdatePasswordSchema } from './auth.schema'
 
 export const authRouter = createTRPCRouter({
   me: protectedProcedure.query(async ({ ctx }) => {
@@ -26,9 +25,4 @@ export const authRouter = createTRPCRouter({
 
     return me
   }),
-  updatePassword: protectedProcedure
-    .input(UpdatePasswordSchema)
-    .mutation(() => {
-      // @todo not implemented
-    }),
 })

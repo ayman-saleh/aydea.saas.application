@@ -50,8 +50,8 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
         },
       }}
       onError={onValidationError}
-      onSubmit={({ newPassword }) => {
-        return submit({ password: newPassword }).then(onSuccess).catch(onError)
+      onSubmit={({ password, newPassword }) => {
+        return submit({ password, newPassword }).then(onSuccess).catch(onError)
       }}
       defaultValues={{ password: '', newPassword: '', confirmPassword: '' }}
       {...formProps}

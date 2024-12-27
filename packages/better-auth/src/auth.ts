@@ -48,6 +48,7 @@ export const auth = betterAuth({
     },
   },
   emailVerification: {
+    sendOnSignUp: true,
     sendVerificationEmail: async (props) => {
       const html = await render(
         ConfirmEmailAddressEmail({

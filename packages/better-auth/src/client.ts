@@ -5,7 +5,7 @@ import type { User } from 'better-auth'
 import { createAuthClient } from 'better-auth/react'
 import type { SocialProvider } from 'better-auth/social-providers'
 
-export const authClient = createAuthClient({
+export const client = createAuthClient({
   baseURL: process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000',
 })
 
@@ -24,13 +24,13 @@ export function createAuthService() {
       const redirectTo = options?.redirectTo ?? '/'
 
       if (params.provider) {
-        await authClient.signIn.social({
+        await client.signIn.social({
           provider: params.provider as SocialProvider,
           callbackURL: redirectTo,
         })
         return null
       } else if (params.email && params.password) {
-        const { data, error } = await authClient.signIn.email({
+        const { data, error } = await client.signIn.email({
           email: params.email,
           password: params.password,
           callbackURL: redirectTo,
@@ -61,13 +61,13 @@ export function createAuthService() {
       const redirectTo = options?.redirectTo ?? '/'
 
       if (params.provider) {
-        await authClient.signIn.social({
+        await client.signIn.social({
           provider: params.provider as SocialProvider,
           callbackURL: redirectTo,
         })
         return null
       } else if (params.email && params.password) {
-        const { error } = await authClient.signUp.email({
+        const { error } = await client.signUp.email({
           email: params.email,
           name: params.name ?? '',
           password: params.password,
@@ -94,7 +94,7 @@ export function createAuthService() {
         redirectTo?: string
       },
     ) => {
-      const { data, error } = await authClient.forgetPassword({
+      const { data, error } = await client.forgetPassword({
         email: params.email,
         redirectTo: options?.redirectTo,
       })
@@ -108,27 +108,40 @@ export function createAuthService() {
       return data
     },
     onUpdatePassword: async (params) => {
-      const { error } = await authClient.resetPassword({
-        newPassword: params.password,
-        token: params.token,
-      })
-
-      if (error) {
-        const message =
-          error.code === 'INVALID_TOKEN'
-            ? 'Token is invalid or expired'
-            : 'Could not reset password'
-
-        throw new Error(message, {
-          cause: error,
+      if (params.token) {
+        const { error } = await client.resetPassword({
+          newPassword: params.password,
+          token: params.token,
         })
+
+        if (error) {
+          const message =
+            error.code === 'INVALID_TOKEN'
+              ? 'Token is invalid or expired'
+              : 'Could not reset password'
+
+          throw new Error(message, {
+            cause: error,
+          })
+        }
+      } else {
+        const { error } = await client.changePassword({
+          currentPassword: params.password,
+          newPassword: params.newPassword,
+        })
+
+        if (error) {
+          throw new Error('Could not update password', {
+            cause: error,
+          })
+        }
       }
     },
     onLogout: async () => {
-      return await authClient.signOut()
+      return await client.signOut()
     },
     onLoadUser: async () => {
-      const session = await authClient.getSession()
+      const session = await client.getSession()
 
       return session?.data?.user ?? null
     },
