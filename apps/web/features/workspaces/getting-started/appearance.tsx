@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import {
   AspectRatio,
   Flex,
@@ -8,7 +10,6 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { useStepperContext } from '@saas-ui/react'
-import { useCallback } from 'react'
 
 import { OnboardingStep } from './onboarding-step'
 import { schema } from './schema/appearance'
@@ -33,7 +34,12 @@ const themeStyles = {
   },
 } as const
 
-function ThemeOption({ mode, isSelected, onSelect, ...stackProps }: ThemeOptionProps) {
+function ThemeOption({
+  mode,
+  isSelected,
+  onSelect,
+  ...stackProps
+}: ThemeOptionProps) {
   return (
     <Stack
       flex="1"
@@ -74,15 +80,14 @@ export function AppearanceStep() {
   const { colorMode, setColorMode } = useColorMode()
 
   const handleSubmit = useCallback(async () => {
-    localStorage.setItem('chakra-ui-color-mode', colorMode)
     stepper.nextStep()
-  }, [colorMode, stepper])
+  }, [stepper])
 
   return (
     <OnboardingStep
       schema={schema}
       title="Choose your style"
-      description="You can change the colour mode at any time in your profile settings."
+      description="You can change the color mode at any time in your profile settings."
       defaultValues={{}}
       onSubmit={handleSubmit}
       submitLabel="Continue"

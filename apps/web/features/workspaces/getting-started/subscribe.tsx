@@ -6,7 +6,7 @@ import { LinkButton } from '@acme/ui/button'
 import { api } from '#lib/trpc/react'
 
 import { OnboardingStep } from './onboarding-step'
-import { schema, SubscribeFormInput } from './schema/subscribe'
+import { SubscribeFormInput, schema } from './schema/subscribe'
 
 interface SocialLink {
   title: string
@@ -35,10 +35,10 @@ export const SubscribeStep = () => {
   const snackbar = useSnackbar()
 
   const { mutateAsync, isPending } = api.users.subscribeToNewsletter.useMutation({
-    onError: () => {
-      snackbar.error('Could not subscribe you to our newsletter.')
-    },
-  })
+      onError: () => {
+        snackbar.error('Could not subscribe you to our newsletter.')
+      },
+    })
 
   return (
     <OnboardingStep<SubscribeFormInput>
@@ -47,9 +47,14 @@ export const SubscribeStep = () => {
       description="Saas UI is updated regularly. These are the best ways to stay up to date."
       defaultValues={{ newsletter: false }}
       onSubmit={async (data) => {
-        if (data.newsletter) {
-          await mutateAsync({ newsletter: data.newsletter })
+        try {
+          await mutateAsync({
+            newsletter: data.newsletter,
+          })
+        } catch {
+          snackbar.error('Could not subscribe you to our newsletter.')
         }
+
         stepper.nextStep()
       }}
       submitLabel="Continue"
@@ -58,13 +63,13 @@ export const SubscribeStep = () => {
         <Flex borderBottomWidth="1px" p="6" display="flex" alignItems="center">
           <Stack flex="1" alignItems="flex-start" spacing="0.5">
             <Heading size="sm">Subscribe to our monthly newsletter</Heading>
-            <Text color="muted">
+            <Text id="newsletter-description" color="muted">
               Receive monthly updates in your email inbox.
             </Text>
           </Stack>
           <Switch
             name="newsletter"
-            aria-label="Subscribe to newsletter"
+            aria-labelledby="newsletter-description"
             isDisabled={isPending}
           />
         </Flex>

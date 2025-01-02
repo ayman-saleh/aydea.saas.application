@@ -28,11 +28,6 @@ export const SignupPage = () => {
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: (params: z.infer<typeof schema>) => auth.signUp(params),
     onSuccess: () => {
-      snackbar.success({
-        title: 'Account created successfully',
-        description: 'Welcome! You are now signed up.',
-      })
-
       void router.push(redirectTo ?? '/')
     },
     onError: (error) => {
@@ -51,7 +46,7 @@ export const SignupPage = () => {
   }
 
   return (
-    <Stack flex="1" direction="row" height="$100vh" position="relative">
+    <Stack flex="1" direction="row" height="$100vh">
       <Stack
         flex="1"
         alignItems="center"
@@ -77,9 +72,8 @@ export const SignupPage = () => {
                   name="email"
                   label="Email"
                   autoComplete="email"
+                  type="email"
                   placeholder="Enter your email"
-                  isRequired
-                  isLoading={isPending}
                 />
 
                 <Field
@@ -88,22 +82,18 @@ export const SignupPage = () => {
                   type="password"
                   autoComplete="new-password"
                   placeholder="Create a password"
-                  isRequired
-                  isLoading={isPending}
                 />
 
                 <Link
                   href="/forgot-password"
-                  onClick={e => (isPending || isSuccess) && e.preventDefault()}
+                  onClick={(e) =>
+                    (isPending || isSuccess) && e.preventDefault()
+                  }
                 >
                   Forgot your password?
                 </Link>
 
-                <SubmitButton
-                  isLoading={isPending || isSuccess}
-                  disabled={isPending || isSuccess}
-                  loadingText="Creating account..."
-                >
+                <SubmitButton loadingText="Creating account...">
                   Sign up
                 </SubmitButton>
               </FormLayout>

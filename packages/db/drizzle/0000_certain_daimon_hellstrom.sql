@@ -173,54 +173,65 @@ CREATE TABLE "workspaces" (
 	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "auth_account" (
-	"userId" text NOT NULL,
-	"type" text NOT NULL,
-	"provider" text NOT NULL,
-	"providerAccountId" text NOT NULL,
+CREATE TABLE "auth_accounts" (
+	"id" text PRIMARY KEY NOT NULL,
+	"user_id" text NOT NULL,
+	"provider_id" text NOT NULL,
+	"account_id" text NOT NULL,
 	"refresh_token" text,
 	"access_token" text,
-	"expires_at" integer,
-	"token_type" text,
+	"access_token_expires_at" timestamp with time zone,
+	"refresh_token_expires_at" timestamp with time zone,
 	"scope" text,
 	"id_token" text,
-	"session_state" text,
-	CONSTRAINT "auth_account_provider_providerAccountId_pk" PRIMARY KEY("provider","providerAccountId")
+	"password" text,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now(),
+	CONSTRAINT "auth_accounts_provider_id_account_id_unique" UNIQUE("provider_id","account_id")
 );
 --> statement-breakpoint
-CREATE TABLE "auth_authenticator" (
-	"credentialID" text NOT NULL,
+CREATE TABLE "auth_authenticators" (
+	"credential_id" text NOT NULL,
 	"userId" text NOT NULL,
-	"providerAccountId" text NOT NULL,
-	"credentialPublicKey" text NOT NULL,
+	"provider_account_id" text NOT NULL,
+	"credential_public_key" text NOT NULL,
 	"counter" integer NOT NULL,
-	"credentialDeviceType" text NOT NULL,
-	"credentialBackedUp" boolean NOT NULL,
+	"credential_device_type" text NOT NULL,
+	"credential_backed_up" boolean NOT NULL,
 	"transports" text,
-	CONSTRAINT "auth_authenticator_userId_credentialID_pk" PRIMARY KEY("userId","credentialID"),
-	CONSTRAINT "auth_authenticator_credentialID_unique" UNIQUE("credentialID")
+	CONSTRAINT "auth_authenticators_credential_id_unique" UNIQUE("credential_id")
 );
 --> statement-breakpoint
-CREATE TABLE "auth_session" (
-	"sessionToken" text PRIMARY KEY NOT NULL,
-	"userId" text NOT NULL,
-	"expires" timestamp NOT NULL
+CREATE TABLE "auth_sessions" (
+	"id" text PRIMARY KEY NOT NULL,
+	"token" text,
+	"user_id" text NOT NULL,
+	"ip_address" text,
+	"user_agent" text,
+	"expires_at" timestamp with time zone NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now(),
+	CONSTRAINT "auth_sessions_token_unique" UNIQUE("token")
 );
 --> statement-breakpoint
-CREATE TABLE "auth_user" (
+CREATE TABLE "auth_users" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text,
 	"email" text,
-	"emailVerified" timestamp,
+	"email_verified" boolean,
 	"image" text,
-	CONSTRAINT "auth_user_email_unique" UNIQUE("email")
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now(),
+	CONSTRAINT "auth_users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-CREATE TABLE "auth_verificationToken" (
+CREATE TABLE "auth_verifications" (
+	"id" text PRIMARY KEY NOT NULL,
 	"identifier" text NOT NULL,
-	"token" text NOT NULL,
-	"expires" timestamp NOT NULL,
-	CONSTRAINT "auth_verificationToken_identifier_token_pk" PRIMARY KEY("identifier","token")
+	"value" text NOT NULL,
+	"expires_at" timestamp with time zone NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
 ALTER TABLE "billing_entitlements" ADD CONSTRAINT "billing_entitlements_account_id_billing_accounts_id_fk" FOREIGN KEY ("account_id") REFERENCES "public"."billing_accounts"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
@@ -232,9 +243,9 @@ ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_setting
 ALTER TABLE "workspace_member_settings" ADD CONSTRAINT "workspace_member_settings_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_workspace_id_workspaces_id_fk" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "auth_account" ADD CONSTRAINT "auth_account_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "auth_authenticator" ADD CONSTRAINT "auth_authenticator_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "auth_session" ADD CONSTRAINT "auth_session_userId_auth_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "auth_accounts" ADD CONSTRAINT "auth_accounts_user_id_auth_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."auth_users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "auth_authenticators" ADD CONSTRAINT "auth_authenticators_userId_auth_users_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."auth_users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "auth_sessions" ADD CONSTRAINT "auth_sessions_user_id_auth_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."auth_users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 CREATE INDEX "activity_logs_workspace_id_id_index" ON "activity_logs" USING btree ("workspace_id","id");--> statement-breakpoint
 CREATE UNIQUE INDEX "billing_entitlements_idx" ON "billing_entitlements" USING btree ("account_id","feature");--> statement-breakpoint
 CREATE INDEX "contacts_workspace_id_id_index" ON "contacts" USING btree ("workspace_id","id");--> statement-breakpoint

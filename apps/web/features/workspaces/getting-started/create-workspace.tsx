@@ -1,3 +1,5 @@
+import { FormEvent, useRef } from 'react'
+
 import {
   Icon,
   InputLeftElement,
@@ -13,14 +15,14 @@ import {
   useSnackbar,
   useStepperContext,
 } from '@saas-ui/react'
-import { FormEvent, useRef } from 'react'
 import { LuCheck, LuCircleX } from 'react-icons/lu'
 import slug from 'slug'
 
 import { getBaseUrl } from '#features/common/util/get-base-url'
 import { api } from '#lib/trpc/react'
+
 import { OnboardingStep } from './onboarding-step'
-import { schema, WorkspaceFormInput } from './schema/workspace'
+import { WorkspaceFormInput, schema } from './schema/workspace'
 
 interface SlugValidationState {
   isValidSlug: boolean
@@ -28,7 +30,11 @@ interface SlugValidationState {
   isAvailable?: boolean
 }
 
-function SlugStatusIndicator({ isValidSlug, isPending, isAvailable }: SlugValidationState) {
+function SlugStatusIndicator({
+  isValidSlug,
+  isPending,
+  isAvailable,
+}: SlugValidationState) {
   if (!isValidSlug || isAvailable === false) {
     return <Icon as={LuCircleX} color="red.500" strokeWidth="3" />
   }
@@ -45,11 +51,9 @@ function SlugStatusIndicator({ isValidSlug, isPending, isAvailable }: SlugValida
 }
 
 function WorkspaceUrlField({
-  formRef,
   slugValidation,
-  onSlugChange
+  onSlugChange,
 }: {
-  formRef: React.RefObject<UseFormReturn<WorkspaceFormInput>>
   slugValidation: SlugValidationState
   onSlugChange: (value: string) => void
 }) {
@@ -60,7 +64,12 @@ function WorkspaceUrlField({
       label="Workspace URL"
       paddingLeft={getBaseUrl().length * 7 + 8}
       leftAddon={
-        <InputLeftElement bg="transparent" width="auto" ps="3" pointerEvents="none">
+        <InputLeftElement
+          bg="transparent"
+          width="auto"
+          ps="3"
+          pointerEvents="none"
+        >
           <Text color="muted">{getBaseUrl()}/</Text>
         </InputLeftElement>
       }
@@ -128,7 +137,8 @@ export function CreateWorkspaceStep() {
   }
 
   const slugValidationState: SlugValidationState = {
-    isValidSlug: schema.shape.slug.safeParse(formRef.current?.getValues('slug')).success,
+    isValidSlug: schema.shape.slug.safeParse(formRef.current?.getValues('slug'))
+      .success,
     isPending: slugAvailable.isPending,
     isAvailable: slugAvailable.data?.available,
   }
@@ -157,7 +167,6 @@ export function CreateWorkspaceStep() {
           }}
         />
         <WorkspaceUrlField
-          formRef={formRef}
           slugValidation={slugValidationState}
           onSlugChange={handleSlugChange}
         />
