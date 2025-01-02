@@ -1,4 +1,3 @@
-import * as z from 'zod'
 import { Button } from '@chakra-ui/react'
 import { useSessionStorageValue } from '@react-hookz/web'
 import {
@@ -11,10 +10,7 @@ import {
 import { api } from '#lib/trpc/react'
 
 import { OnboardingStep } from './onboarding-step'
-
-const schema = z.object({
-  emails: z.string(),
-})
+import { parseEmails, schema } from './schema/invite-team'
 
 export const InviteTeamMembersStep = () => {
   const workspace = useSessionStorageValue<string>('getting-started.workspace')
@@ -35,7 +31,7 @@ export const InviteTeamMembersStep = () => {
           try {
             await invite({
               workspaceId: workspace.value,
-              emails: data.emails.split(/,\s?/),
+              emails: parseEmails(data.emails),
             })
           } catch {
             snackbar.error({
@@ -53,7 +49,7 @@ export const InviteTeamMembersStep = () => {
       <FormLayout>
         <Field
           name="emails"
-          label="Email addresses"
+          label="Email address(es)"
           placeholder="member@acme.co, member2@acme.co"
           type="textarea"
           autoFocus
