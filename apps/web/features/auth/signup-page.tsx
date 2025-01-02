@@ -22,15 +22,18 @@ export const SignupPage = () => {
   const snackbar = useSnackbar()
   const router = useRouter()
   const auth = useAuth()
-
   const searchParams = useSearchParams()
-
   const redirectTo = searchParams.get('redirectTo')
 
-  const mutation = useMutation({
+  const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: (params: z.infer<typeof schema>) => auth.signUp(params),
     onSuccess: () => {
-      router.push(redirectTo ?? '/')
+      snackbar.success({
+        title: 'Account created successfully',
+        description: 'Welcome! You are now signed up.',
+      })
+
+      void router.push(redirectTo ?? '/')
     },
     onError: (error) => {
       snackbar.error({
@@ -40,8 +43,15 @@ export const SignupPage = () => {
     },
   })
 
+  const handleSubmit = async (values: z.infer<typeof schema>) => {
+    await mutateAsync({
+      email: values.email,
+      password: values.password,
+    })
+  }
+
   return (
-    <Stack flex="1" direction="row" height="$100vh">
+    <Stack flex="1" direction="row" height="$100vh" position="relative">
       <Stack
         flex="1"
         alignItems="center"
@@ -58,21 +68,44 @@ export const SignupPage = () => {
 
           <Form
             schema={schema}
-            onSubmit={async (values) => {
-              await mutation.mutateAsync({
-                email: values.email,
-                password: values.password,
-              })
-            }}
+            onSubmit={handleSubmit}
+            disabled={isPending || isSuccess}
           >
             {({ Field }) => (
               <FormLayout>
-                <Field name="email" label="Email" />
-                <Field name="password" label="Password" />
+                <Field
+                  name="email"
+                  label="Email"
+                  autoComplete="email"
+                  placeholder="Enter your email"
+                  isRequired
+                  isLoading={isPending}
+                />
 
-                <Link href="/forgot-password">Forgot your password?</Link>
+                <Field
+                  name="password"
+                  label="Password"
+                  type="password"
+                  autoComplete="new-password"
+                  placeholder="Create a password"
+                  isRequired
+                  isLoading={isPending}
+                />
 
-                <SubmitButton>Sign up</SubmitButton>
+                <Link
+                  href="/forgot-password"
+                  onClick={e => (isPending || isSuccess) && e.preventDefault()}
+                >
+                  Forgot your password?
+                </Link>
+
+                <SubmitButton
+                  isLoading={isPending || isSuccess}
+                  disabled={isPending || isSuccess}
+                  loadingText="Creating account..."
+                >
+                  Sign up
+                </SubmitButton>
               </FormLayout>
             )}
           </Form>
