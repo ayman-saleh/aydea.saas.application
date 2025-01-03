@@ -80,7 +80,7 @@ export const SignupPage = () => {
                   name="password"
                   label="Password"
                   type="password"
-                  autoComplete="new-password"
+                  autoComplete="password"
                   placeholder="Create a password"
                 />
 
