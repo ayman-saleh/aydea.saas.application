@@ -131,7 +131,13 @@ export function createAuthService() {
         })
 
         if (error) {
-          throw new Error('Could not update password', {
+          if (error.code === 'INVALID_PASSWORD') {
+            throw new Error('Invalid current password', {
+              cause: error,
+            })
+          }
+
+          throw new Error(error.message, {
             cause: error,
           })
         }

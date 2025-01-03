@@ -1,6 +1,6 @@
+import { authService } from '#modules/auth/index'
+import { userService } from '#modules/users/index'
 import { TRPCError, createTRPCRouter, protectedProcedure } from '#trpc'
-
-import { userService } from '../users'
 
 export const authRouter = createTRPCRouter({
   me: protectedProcedure.query(async ({ ctx }) => {
@@ -23,6 +23,22 @@ export const authRouter = createTRPCRouter({
       })
     }
 
-    return me
+    const authAccount = await authService.accountById(ctx.session.user.id)
+
+    // This should never happen
+    if (!authAccount) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Auth account not found',
+      })
+    }
+
+    return {
+      authAccount: {
+        provider: authAccount?.providerId,
+        updatedAt: authAccount?.updatedAt || authAccount?.createdAt,
+      },
+      ...me,
+    }
   }),
 })
