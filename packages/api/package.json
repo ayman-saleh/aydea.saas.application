@@ -27,7 +27,7 @@
     "@acme/config": "workspace:*",
     "@acme/db": "workspace:*",
     "@acme/email": "workspace:*",
-    "@ngneat/falso": "^7.2.0",
+    "@ngneat/falso": "^7.3.0",
     "@trpc/server": "^11.0.0-rc.666",
     "date-fns": "^4.1.0",
     "env": "workspace:*",
@@ -38,6 +38,6 @@
   "devDependencies": {
     "@types/slug": "^5.0.9",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   }
 }
