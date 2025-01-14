@@ -1,21 +1,87 @@
-import * as z from 'zod'
+import { useCallback } from 'react'
+
 import {
   AspectRatio,
   Flex,
   Img,
   Stack,
+  StackProps,
   Text,
   useColorMode,
 } from '@chakra-ui/react'
 import { useStepperContext } from '@saas-ui/react'
 
 import { OnboardingStep } from './onboarding-step'
+import { schema } from './schema/appearance'
 
-const schema = z.object({})
+// Define theme mode type to avoid repetition
+type ThemeMode = 'light' | 'dark'
 
-export const AppearanceStep = () => {
+interface ThemeOptionProps extends Omit<StackProps, 'onSelect'> {
+  mode: ThemeMode
+  isSelected: boolean
+  onSelect: (mode: ThemeMode) => void
+}
+
+const themeStyles = {
+  light: {
+    bg: 'gray.50',
+    hoverBg: 'blackAlpha.50',
+  },
+  dark: {
+    bg: 'gray.800',
+    hoverBg: 'whiteAlpha.50',
+  },
+} as const
+
+function ThemeOption({
+  mode,
+  isSelected,
+  onSelect,
+  ...stackProps
+}: ThemeOptionProps) {
+  return (
+    <Stack
+      flex="1"
+      p="8"
+      role="radio"
+      aria-checked={isSelected}
+      cursor="pointer"
+      _hover={{ bg: themeStyles[mode].hoverBg }}
+      onClick={() => onSelect(mode)}
+      {...stackProps}
+    >
+      <AspectRatio
+        ratio={16 / 9}
+        height="100px"
+        borderRadius="md"
+        overflow="hidden"
+        borderWidth="1px"
+        bg={themeStyles[mode].bg}
+        data-selected={isSelected ? '' : undefined}
+        _selected={{
+          borderColor: 'primary.500',
+          shadow: 'outline',
+        }}
+      >
+        <Img
+          src={`/img/onboarding/${mode}.svg`}
+          alt={`${mode} theme preview`}
+          loading="lazy"
+        />
+      </AspectRatio>
+      <Text textTransform="capitalize">{mode}</Text>
+    </Stack>
+  )
+}
+
+export function AppearanceStep() {
   const stepper = useStepperContext()
-  const colorMode = useColorMode()
+  const { colorMode, setColorMode } = useColorMode()
+
+  const handleSubmit = useCallback(async () => {
+    stepper.nextStep()
+  }, [stepper])
 
   return (
     <OnboardingStep
@@ -23,66 +89,20 @@ export const AppearanceStep = () => {
       title="Choose your style"
       description="You can change the color mode at any time in your profile settings."
       defaultValues={{}}
-      onSubmit={async () => {
-        stepper.nextStep()
-      }}
+      onSubmit={handleSubmit}
       submitLabel="Continue"
     >
-      <Flex m="-6">
-        <Stack
-          flex="1"
-          p="8"
-          role="button"
-          aria-label="Enable light mode"
-          cursor="pointer"
-          _hover={{ bg: 'blackAlpha.50' }}
-          _dark={{ _hover: { bg: 'whiteAlpha.50' } }}
-          onClick={() => colorMode.setColorMode('light')}
-        >
-          <AspectRatio
-            ratio={16 / 9}
-            height="100px"
-            borderRadius="md"
-            overflow="hidden"
-            borderWidth="1px"
-            bg="gray.50"
-            data-selected={colorMode.colorMode === 'light' ? '' : undefined}
-            _selected={{
-              borderColor: 'primary.500',
-              shadow: 'outline',
-            }}
-          >
-            <Img src="/img/onboarding/light.svg" alt="Light dashboard" />
-          </AspectRatio>
-          <Text>Light</Text>
-        </Stack>
-        <Stack
-          flex="1"
-          p="8"
-          role="button"
-          aria-label="Enable dark mode"
-          cursor="pointer"
-          _hover={{ bg: 'blackAlpha.50' }}
-          _dark={{ _hover: { bg: 'whiteAlpha.50' } }}
-          onClick={() => colorMode.setColorMode('dark')}
-        >
-          <AspectRatio
-            ratio={16 / 9}
-            height="100px"
-            borderRadius="md"
-            overflow="hidden"
-            borderWidth="1px"
-            bg="gray.800"
-            data-selected={colorMode.colorMode === 'dark' ? '' : undefined}
-            _selected={{
-              borderColor: 'primary.500',
-              shadow: 'outline',
-            }}
-          >
-            <Img src="/img/onboarding/dark.svg" alt="Dark dashboard" />
-          </AspectRatio>
-          <Text>Dark</Text>
-        </Stack>
+      <Flex m="-6" role="radiogroup" aria-label="Select colour theme">
+        <ThemeOption
+          mode="light"
+          isSelected={colorMode === 'light'}
+          onSelect={setColorMode}
+        />
+        <ThemeOption
+          mode="dark"
+          isSelected={colorMode === 'dark'}
+          onSelect={setColorMode}
+        />
       </Flex>
     </OnboardingStep>
   )

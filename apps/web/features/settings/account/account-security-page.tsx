@@ -8,9 +8,12 @@ import {
   StructuredListItem,
   useSnackbar,
 } from '@saas-ui/react'
+import { LuChevronRight } from 'react-icons/lu'
 
 import { useModals } from '@acme/ui/modals'
 import { SettingsPage } from '@acme/ui/settings-page'
+
+import { api } from '#lib/trpc/react'
 
 import { UpdatePasswordDialog } from './update-password-dialog'
 
@@ -29,43 +32,45 @@ function TwoFactorAuthItem() {
   )
 }
 
-function PasswordListItem() {
+function PasswordListItem({ lastChanged }: { lastChanged: Date }) {
   const modals = useModals()
   const snackbar = useSnackbar()
 
   return (
-    <StructuredListItem>
-      <StructuredListCell flex="1">Password</StructuredListCell>
-      <StructuredListCell px="4">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => {
-            const id = modals.open({
-              title: 'Update your password',
-              component: UpdatePasswordDialog,
-              onSuccess() {
-                snackbar.success({
-                  title: 'Your password has been updated',
-                })
-                modals.close(id)
-              },
-              onError() {
-                snackbar.error({
-                  title: 'Failed to update password',
-                })
-              },
+    <StructuredListItem
+      onClick={() => {
+        const id = modals.open({
+          title: 'Update your password',
+          component: UpdatePasswordDialog,
+          isCentered: true,
+          onSuccess() {
+            snackbar.success({
+              title: 'Your password has been updated',
             })
-          }}
-        >
-          Change password
-        </Button>
+            modals.close(id)
+          },
+          onError(error: any) {
+            snackbar.error({
+              title: error.message,
+            })
+          },
+        })
+      }}
+    >
+      <StructuredListCell flex="1">Password</StructuredListCell>
+      <StructuredListCell color="muted" px="4">
+        Last changed {lastChanged.toLocaleDateString()}
+      </StructuredListCell>
+      <StructuredListCell>
+        <LuChevronRight />
       </StructuredListCell>
     </StructuredListItem>
   )
 }
 
 function AccountSignIn() {
+  const { data } = api.auth.me.useQuery()
+
   return (
     <Section variant="annotated">
       <SectionHeader
@@ -75,7 +80,10 @@ function AccountSignIn() {
       <SectionBody>
         <Card>
           <StructuredList variant="settings">
-            <PasswordListItem />
+            {data?.authAccount?.provider === 'credential' && (
+              <PasswordListItem lastChanged={data.authAccount.updatedAt} />
+            )}
+
             <TwoFactorAuthItem />
           </StructuredList>
         </Card>

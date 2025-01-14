@@ -15,19 +15,15 @@ import { useAuth } from '@saas-ui/auth-provider'
 import { FormLayout, SubmitButton, useSnackbar } from '@saas-ui/react'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { z } from 'zod'
 
 import { Link } from '@acme/next'
 import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
 
+import { LoginFormInput, schema } from '#features/settings/account/schema/login'
+
 import { LastUsedProvider } from './last-used'
 import { Providers } from './providers'
-
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-})
 
 export const LoginPage = () => {
   const snackbar = useSnackbar()
@@ -43,7 +39,7 @@ export const LoginPage = () => {
   })
 
   const mutation = useMutation({
-    mutationFn: (params: z.infer<typeof schema>) => auth.logIn(params),
+    mutationFn: (params: LoginFormInput) => auth.logIn(params),
     onSuccess: () => {
       lastUsed.set('credentials')
 
@@ -65,6 +61,10 @@ export const LoginPage = () => {
     },
     [lastUsed.value],
   )
+
+  const onSubmit = async (values: LoginFormInput) => {
+    await mutation.mutateAsync(values)
+  }
 
   return (
     <Stack flex="1" direction="row">
@@ -92,22 +92,14 @@ export const LoginPage = () => {
             <Divider />
           </HStack>
 
-          <Form
-            mode="onSubmit"
-            schema={schema}
-            onSubmit={async (values) => {
-              await mutation.mutateAsync({
-                email: values.email,
-                password: values.password,
-              })
-            }}
-          >
+          <Form mode="onSubmit" schema={schema} onSubmit={onSubmit}>
             {({ Field }) => (
               <FormLayout>
                 <Field
                   name="email"
                   label="Email"
                   type="email"
+                  autoComplete="email"
                   ref={emailRef}
                   rightAddon={
                     <LastUsedProvider value="credentials">
@@ -116,7 +108,12 @@ export const LoginPage = () => {
                   }
                 />
 
-                <Field name="password" type="password" label="Password" />
+                <Field
+                  name="password"
+                  type="password"
+                  label="Password"
+                  autoComplete="password"
+                />
 
                 <Link href="/forgot-password">Forgot your password?</Link>
 

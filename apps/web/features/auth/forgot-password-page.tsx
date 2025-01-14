@@ -11,15 +11,15 @@ import {
 import { useAuth } from '@saas-ui/auth-provider'
 import { FormLayout, SubmitButton, useSnackbar } from '@saas-ui/react'
 import { useMutation } from '@tanstack/react-query'
-import { z } from 'zod'
 
 import { Link } from '@acme/next'
 import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
 
-const schema = z.object({
-  email: z.string().email(),
-})
+import {
+  ForgotPasswordFormInput,
+  schema,
+} from '#features/settings/account/schema/forgot-password.ts'
 
 export const ForgotPasswordPage = () => {
   const snackbar = useSnackbar()
@@ -27,7 +27,7 @@ export const ForgotPasswordPage = () => {
   const auth = useAuth()
 
   const mutation = useMutation({
-    mutationFn: (params: z.infer<typeof schema>) =>
+    mutationFn: (params: ForgotPasswordFormInput) =>
       auth.resetPassword(params, {
         redirectTo: '/reset-password',
       }),
@@ -38,6 +38,10 @@ export const ForgotPasswordPage = () => {
       })
     },
   })
+
+  const onSubmit = async (values: ForgotPasswordFormInput) => {
+    await mutation.mutateAsync(values)
+  }
 
   return (
     <Stack flex="1" direction="row">
@@ -68,15 +72,7 @@ export const ForgotPasswordPage = () => {
               </AlertDescription>
             </Alert>
           ) : (
-            <Form
-              mode="onSubmit"
-              schema={schema}
-              onSubmit={async (values) => {
-                await mutation.mutateAsync({
-                  email: values.email,
-                })
-              }}
-            >
+            <Form mode="onSubmit" schema={schema} onSubmit={onSubmit}>
               {({ Field }) => (
                 <FormLayout>
                   <Field

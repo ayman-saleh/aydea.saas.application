@@ -1,79 +1,84 @@
 import * as React from 'react'
 
 import { useUpdatePassword } from '@saas-ui/auth-provider'
-import { Field, FormDialog, FormDialogProps, FormLayout } from '@saas-ui/react'
+import { FormDialog } from '@saas-ui/modals/zod'
+import { FormDialogProps, FormLayout } from '@saas-ui/react'
 
-import { ConfirmPasswordField } from '@acme/ui/confirm-password-field'
-
-interface SubmitParams {
-  password: string
-  newPassword: string
-  confirmPassword: string
-}
+import { UpdatePasswordFormInput, schema } from './schema/update-password'
 
 export interface UpdatePasswordFormProps
   extends Omit<
-    FormDialogProps<SubmitParams>,
+    FormDialogProps<UpdatePasswordFormInput>,
     'onSubmit' | 'title' | 'scrollBehavior' | 'children'
   > {
-  title?: string
-  label?: string
-  confirmLabel?: string
-  helpText?: string
   onSuccess?: (data: any) => void
   onError?: (error: any) => void
   onValidationError?: (error: any) => void
-  newLabel?: string
-  submitLabel?: string
 }
 
 export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
   onSuccess = () => null,
   onError = () => null,
-  onValidationError,
-  title = 'Update your password',
-  submitLabel = 'Update your password',
-  label = 'Current password',
-  newLabel = 'New password',
-  confirmLabel = 'Confirm password',
-  helpText,
+  onValidationError = () => null,
   ...formProps
 }) => {
   const [, submit] = useUpdatePassword()
 
+  const handleSubmit = async (values: UpdatePasswordFormInput) => {
+    try {
+      const data = await submit({
+        password: values.password,
+        newPassword: values.newPassword,
+      })
+      onSuccess(data)
+    } catch (error) {
+      onError(error)
+    }
+  }
+
   return (
     <FormDialog
-      title={title}
+      title={'Update your password'}
       fields={{
-        submit: {
-          children: submitLabel,
+        cancel: {
+          children: 'Cancel',
         },
       }}
+      schema={schema}
       onError={onValidationError}
-      onSubmit={({ password, newPassword }) => {
-        return submit({ password, newPassword }).then(onSuccess).catch(onError)
+      onSubmit={handleSubmit}
+      defaultValues={{
+        password: '',
+        newPassword: '',
+        confirmPassword: '',
       }}
-      defaultValues={{ password: '', newPassword: '', confirmPassword: '' }}
       {...formProps}
     >
-      <FormLayout>
-        <Field
-          name="password"
-          label={label}
-          type="password"
-          rules={{ required: true }}
-          help={helpText}
-        />
+      {({ Field }) => (
+        <FormLayout>
+          <Field
+            name="password"
+            label="Current Password"
+            type="password"
+            autoComplete="current-password"
+            placeholder="Enter your current password"
+          />
 
-        <Field
-          name="newPassword"
-          label={newLabel}
-          type="password"
-          rules={{ required: true }}
-        />
+          <Field
+            name="newPassword"
+            label="New Password"
+            type="password"
+            placeholder="Enter a new password"
+          />
 
-        <ConfirmPasswordField label={confirmLabel} confirmField="newPassword" />
-      </FormLayout>
+          <Field
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            placeholder="Confirm your new password"
+          />
+        </FormLayout>
+      )}
     </FormDialog>
   )
 }

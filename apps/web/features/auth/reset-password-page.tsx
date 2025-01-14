@@ -5,40 +5,24 @@ import { useAuth } from '@saas-ui/auth-provider'
 import { FormLayout, SubmitButton, useSnackbar } from '@saas-ui/react'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { z } from 'zod'
 
 import { Link } from '@acme/next'
 import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
 
-const schema = z
-  .object({
-    newPassword: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z
-      .string()
-      .min(8, 'Password must be at least 8 characters'),
-  })
-  .superRefine((data, ctx) => {
-    if (data.newPassword !== data.confirmPassword) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Passwords do not match',
-        path: ['confirmPassword'],
-      })
-    }
-  })
+import {
+  UpdatePasswordFormInput,
+  schema,
+} from '#features/settings/account/schema/reset-password'
 
 export const ResetPasswordPage = () => {
   const router = useRouter()
-
   const snackbar = useSnackbar()
-
   const auth = useAuth()
-
   const search = useSearchParams()
 
   const mutation = useMutation({
-    mutationFn: (values: { newPassword: string }) => {
+    mutationFn: (values: UpdatePasswordFormInput) => {
       return auth.updatePassword({
         password: values.newPassword,
         token: search.get('token') ?? '',
@@ -62,6 +46,10 @@ export const ResetPasswordPage = () => {
     },
   })
 
+  const onSubmit = async (values: UpdatePasswordFormInput) => {
+    await mutation.mutateAsync(values)
+  }
+
   return (
     <Stack flex="1" direction="row">
       <Stack
@@ -78,23 +66,11 @@ export const ResetPasswordPage = () => {
             Choose a new password
           </Heading>
 
-          <Form
-            mode="onBlur"
-            schema={schema}
-            onSubmit={async (values) => {
-              await mutation.mutateAsync({
-                newPassword: values.newPassword,
-              })
-            }}
-          >
+          <Form mode="onBlur" schema={schema} onSubmit={onSubmit}>
             {({ Field }) => (
               <FormLayout>
-                <Field
-                  name="newPassword"
-                  type="password"
-                  label="Password"
-                  help="Should be at least 8 characters"
-                />
+                <Field name="newPassword" type="password" label="Password" />
+
                 <Field
                   name="confirmPassword"
                   type="password"
