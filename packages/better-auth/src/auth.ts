@@ -1,7 +1,6 @@
-import { env } from 'env'
-
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
+import type { SocialProviders } from 'better-auth/social-providers'
 
 import { db } from '@acme/db'
 import { mailer, render } from '@acme/email'
@@ -9,6 +8,16 @@ import ConfirmEmailAddressEmail from '@acme/email/confirm-email-address'
 import ResetPasswordEmail from '@acme/email/reset-password'
 
 import * as schema from './schema/auth.sql'
+import { env } from './env.ts'
+
+const socialProviders: SocialProviders = {}
+
+if (env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET) {
+  socialProviders.github = {
+    clientId: env.GITHUB_CLIENT_ID,
+    clientSecret: env.GITHUB_CLIENT_SECRET,
+  }
+}
 
 export const auth = betterAuth({
   secret: env.AUTH_SECRET,
@@ -17,6 +26,7 @@ export const auth = betterAuth({
     schema,
     usePlural: true,
   }),
+  socialProviders,
   emailAndPassword: {
     enabled: true,
     // Auto sign in after sign up

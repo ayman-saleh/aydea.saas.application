@@ -25,6 +25,7 @@ export function auth(middleware: BetterAuthMiddleware) {
 
 async function getSession(request: NextRequest) {
   const baseURL = request.nextUrl.origin
+
   const data = await fetch(`${baseURL}/api/auth/get-session`, {
     headers: {
       //get the cookie from the request
