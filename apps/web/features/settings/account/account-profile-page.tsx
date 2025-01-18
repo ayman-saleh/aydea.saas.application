@@ -23,7 +23,7 @@ import { SettingsPage } from '@acme/ui/settings-page'
 import { useCurrentUser } from '#features/common/hooks/use-current-user'
 import { api } from '#lib/trpc/react'
 
-import { schema } from './schema/profile.schema'
+import { profileSchema } from './schema/profile.schema'
 
 function ProfileDetails({ user }: { user: UserDTO }) {
   const snackbar = useSnackbar()
@@ -59,7 +59,7 @@ function ProfileDetails({ user }: { user: UserDTO }) {
       <SectionBody>
         <Card>
           <Form
-            schema={schema}
+            schema={profileSchema}
             defaultValues={{
               name: user?.name ?? '',
               email: user?.email ?? '',

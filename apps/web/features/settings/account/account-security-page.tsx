@@ -32,7 +32,7 @@ function TwoFactorAuthItem() {
   )
 }
 
-function PasswordListItem({ lastChanged }: { lastChanged: Date }) {
+function PasswordListItem({ lastChanged }: { lastChanged: Date | null }) {
   const modals = useModals()
   const snackbar = useSnackbar()
 
@@ -58,9 +58,11 @@ function PasswordListItem({ lastChanged }: { lastChanged: Date }) {
       }}
     >
       <StructuredListCell flex="1">Password</StructuredListCell>
-      <StructuredListCell color="muted" px="4">
-        Last changed {lastChanged.toLocaleDateString()}
-      </StructuredListCell>
+      {lastChanged && (
+        <StructuredListCell color="muted" px="4">
+          Last changed {lastChanged.toLocaleDateString()}
+        </StructuredListCell>
+      )}
       <StructuredListCell>
         <LuChevronRight />
       </StructuredListCell>
@@ -69,7 +71,11 @@ function PasswordListItem({ lastChanged }: { lastChanged: Date }) {
 }
 
 function AccountSignIn() {
-  const { data } = api.auth.me.useQuery()
+  const { data } = api.auth.listAccounts.useQuery()
+
+  const authAccount = data?.find(
+    (account) => account.providerId === 'credential',
+  )
 
   return (
     <Section variant="annotated">
@@ -80,8 +86,8 @@ function AccountSignIn() {
       <SectionBody>
         <Card>
           <StructuredList variant="settings">
-            {data?.authAccount?.provider === 'credential' && (
-              <PasswordListItem lastChanged={data.authAccount.updatedAt} />
+            {authAccount && (
+              <PasswordListItem lastChanged={authAccount.updatedAt} />
             )}
 
             <TwoFactorAuthItem />

@@ -22,7 +22,7 @@ import { getBaseUrl } from '#features/common/util/get-base-url'
 import { api } from '#lib/trpc/react'
 
 import { OnboardingStep } from './onboarding-step'
-import { WorkspaceFormInput, schema } from './schema/workspace.schema'
+import { WorkspaceFormInput, workspaceSchema } from './schema/workspace.schema'
 
 interface SlugValidationState {
   isValidSlug: boolean
@@ -113,7 +113,7 @@ export function CreateWorkspaceStep() {
     const slugValue = slug(value)
     formRef.current?.setValue('slug', slugValue)
 
-    if (!schema.shape.slug.safeParse(slugValue).success) {
+    if (!workspaceSchema.shape.slug.safeParse(slugValue).success) {
       slugAvailable.reset()
       return
     }
@@ -137,15 +137,16 @@ export function CreateWorkspaceStep() {
   }
 
   const slugValidationState: SlugValidationState = {
-    isValidSlug: schema.shape.slug.safeParse(formRef.current?.getValues('slug'))
-      .success,
+    isValidSlug: workspaceSchema.shape.slug.safeParse(
+      formRef.current?.getValues('slug'),
+    ).success,
     isPending: slugAvailable.isPending,
     isAvailable: slugAvailable.data?.available,
   }
 
   return (
     <OnboardingStep
-      schema={schema}
+      schema={workspaceSchema}
       formRef={formRef}
       title="Create a new workspace"
       description="Saas UI is multi-tenant and supports workspaces with multiple teams."

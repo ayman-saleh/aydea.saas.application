@@ -24,7 +24,8 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
   onSuccess = () => null,
   onError = () => null,
   onValidationError = () => null,
-  ...formProps
+  isOpen,
+  onClose,
 }) => {
   const [, submit] = useUpdatePassword()
 
@@ -45,6 +46,8 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
   return (
     <FormDialog
       title="Update your password"
+      isOpen={isOpen}
+      onClose={onClose}
       fields={{
         cancel: {
           children: 'Cancel',
@@ -58,7 +61,6 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
         newPassword: '',
         confirmPassword: '',
       }}
-      {...formProps}
     >
       {({ Field }) => (
         <FormLayout>
