@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { SignupPage } from '#features/auth/signup/signup-page'
+import { SignupPage } from '#features/auth/signup-page'
 
 export const metadata: Metadata = {
   title: 'Sign up',

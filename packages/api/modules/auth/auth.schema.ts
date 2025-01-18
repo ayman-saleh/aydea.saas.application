@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
-export const UpdatePasswordSchema = z.object({
-  oldPassword: z.string(),
-  newPassword: z.string(),
-})
+import { accounts } from '@acme/better-auth'
+import { createSelectSchema } from '@acme/db'
+
+export const AuthAccounts = createSelectSchema(accounts)
+
+export type AuthAccountsDTO = z.infer<typeof AuthAccounts>

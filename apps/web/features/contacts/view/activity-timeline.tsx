@@ -17,7 +17,7 @@ import {
   useClipboard,
 } from '@chakra-ui/react'
 import { Command, Toolbar, ToolbarButton } from '@saas-ui-pro/react'
-import { User } from '@saas-ui/auth'
+import { User } from '@saas-ui/auth-provider'
 import {
   FormLayout,
   Link,

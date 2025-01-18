@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 
-import { getSession } from '@acme/auth-authjs'
+import { getSession } from '@acme/better-auth'
 import { AppLoader } from '@acme/ui/app-loader'
 
 import { HydrateClient, api } from '#lib/trpc/rsc'

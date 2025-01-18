@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react'
 import { Section, SectionBody, SectionHeader } from '@saas-ui-pro/react'
 import { FormLayout, useSnackbar } from '@saas-ui/react'
-import { z } from 'zod'
 
 import { UserDTO } from '@acme/api/types'
 import { Form } from '@acme/ui/form'
@@ -24,17 +23,7 @@ import { SettingsPage } from '@acme/ui/settings-page'
 import { useCurrentUser } from '#features/common/hooks/use-current-user'
 import { api } from '#lib/trpc/react'
 
-const schema = z.object({
-  name: z
-    .string()
-    .min(2, 'Please enter your name')
-    .max(40, 'Too long')
-    .describe('Name'),
-  email: z
-    .string()
-    .email({ message: 'Please enter your email address' })
-    .describe('Email'),
-})
+import { schema } from './schema/profile.schema'
 
 function ProfileDetails({ user }: { user: UserDTO }) {
   const snackbar = useSnackbar()
@@ -45,7 +34,21 @@ function ProfileDetails({ user }: { user: UserDTO }) {
     onSettled: () => {
       utils.auth.me.invalidate()
     },
+    onSuccess: () => {
+      snackbar.success({
+        title: 'Profile updated',
+      })
+    },
+    onError: () => {
+      snackbar.error({
+        title: 'Failed to update profile',
+      })
+    },
   })
+
+  const onSubmit = async (values: UserDTO) => {
+    await mutateAsync(values)
+  }
 
   return (
     <Section variant="annotated">
@@ -61,13 +64,7 @@ function ProfileDetails({ user }: { user: UserDTO }) {
               name: user?.name ?? '',
               email: user?.email ?? '',
             }}
-            onSubmit={(data) => {
-              mutateAsync(data).then(() =>
-                snackbar.success({
-                  description: 'Profile updated',
-                }),
-              )
-            }}
+            onSubmit={onSubmit}
           >
             {({ Field }) => (
               <CardBody>

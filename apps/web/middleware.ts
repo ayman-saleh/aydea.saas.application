@@ -1,14 +1,23 @@
-import { auth } from '@acme/auth-authjs/middleware'
+import { NextResponse } from 'next/server'
 
-const publicRoutes = ['/login', '/signup']
+import { auth } from '@acme/better-auth/middleware'
+
+const publicRoutes = [
+  '/login',
+  '/signup',
+  '/forgot-password',
+  '/reset-password',
+]
 
 export default auth((req) => {
   if (!req.auth && !publicRoutes.includes(req.nextUrl.pathname)) {
     const redirectTo = new URL(req.nextUrl.pathname, req.nextUrl.origin)
     const newUrl = new URL('/login', req.nextUrl.origin)
     newUrl.searchParams.set('redirectTo', redirectTo.toString())
-    return Response.redirect(newUrl)
+    return NextResponse.redirect(newUrl)
   }
+
+  return NextResponse.next()
 })
 
 export const config = {

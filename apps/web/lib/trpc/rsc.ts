@@ -4,7 +4,7 @@ import { createHydrationHelpers } from '@trpc/react-query/rsc'
 
 import { createCaller, createTRPCContext } from '@acme/api'
 import type { AppRouter } from '@acme/api/types'
-import { getSession } from '@acme/auth-authjs'
+import { getSession } from '@acme/better-auth'
 
 import { getQueryClient } from '#lib/react-query/get-query-client'
 

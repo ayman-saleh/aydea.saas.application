@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { AuthProvider as BaseAuthProvider } from '@saas-ui/auth'
+import { AuthProvider as BaseAuthProvider } from '@saas-ui/auth-provider'
 
 import { authService } from './auth-service'
 

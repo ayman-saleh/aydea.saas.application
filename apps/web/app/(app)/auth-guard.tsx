@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { useAuth } from '@saas-ui/auth'
+import { useAuth } from '@saas-ui/auth-provider'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 /**

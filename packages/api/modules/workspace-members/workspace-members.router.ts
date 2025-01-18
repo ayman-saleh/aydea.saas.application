@@ -3,7 +3,7 @@ import { env } from 'env'
 import { z } from 'zod'
 
 import { SendParams, mailer, render } from '@acme/email'
-import { WorkspaceInvite } from '@acme/email/workspace-invite'
+import { WorkspaceInviteEmail } from '@acme/email/workspace-invite'
 
 import { getAccount, getFeatureCounts } from '#modules/billing/billing.service'
 import {
@@ -86,7 +86,7 @@ export const workspaceMembersRouter = createTRPCRouter({
           to: invitation.email,
           subject,
           html: await render(
-            WorkspaceInvite({
+            WorkspaceInviteEmail({
               token: invitation.id,
               confirmUrl: `${env.APP_URL}/accept-invite/${invitation.id}`,
               workspace: ctx.workspace?.name,

@@ -12,7 +12,7 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { Has } from '@saas-ui-pro/feature-flags'
-import { useAuth } from '@saas-ui/auth'
+import { useAuth } from '@saas-ui/auth-provider'
 import { PersonaAvatar, useHotkeysShortcut } from '@saas-ui/react'
 import { useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'

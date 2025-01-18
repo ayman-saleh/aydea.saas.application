@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export function createEnv<Schema extends z.AnyZodObject>(
   schema: Schema,
-  clientEnv?: Record<string, string>,
+  clientEnv?: Partial<z.infer<Schema>>,
 ): z.infer<Schema> {
   const env = {
     ...process.env,
