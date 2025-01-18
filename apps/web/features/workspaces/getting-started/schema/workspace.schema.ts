@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-export const schema = z.object({
+export const workspaceSchema = z.object({
   name: z
     .string()
     .min(1, 'Please enter your workspace name.')
@@ -18,4 +18,4 @@ export const schema = z.object({
     ),
 })
 
-export type WorkspaceFormInput = z.infer<typeof schema>
+export type WorkspaceFormInput = z.infer<typeof workspaceSchema>

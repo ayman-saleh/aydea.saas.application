@@ -6,7 +6,7 @@ import { LinkButton } from '@acme/ui/button'
 import { api } from '#lib/trpc/react'
 
 import { OnboardingStep } from './onboarding-step'
-import { SubscribeFormInput, schema } from './schema/subscribe'
+import { SubscribeFormInput, subscribeSchema } from './schema/subscribe.schema'
 
 interface SocialLink {
   title: string
@@ -34,7 +34,8 @@ export const SubscribeStep = () => {
   const stepper = useStepperContext()
   const snackbar = useSnackbar()
 
-  const { mutateAsync, isPending } = api.users.subscribeToNewsletter.useMutation({
+  const { mutateAsync, isPending } =
+    api.users.subscribeToNewsletter.useMutation({
       onError: () => {
         snackbar.error('Could not subscribe you to our newsletter.')
       },
@@ -42,7 +43,7 @@ export const SubscribeStep = () => {
 
   return (
     <OnboardingStep<SubscribeFormInput>
-      schema={schema}
+      schema={subscribeSchema}
       title="Subscribe to updates"
       description="Saas UI is updated regularly. These are the best ways to stay up to date."
       defaultValues={{ newsletter: false }}

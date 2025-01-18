@@ -1,25 +1,28 @@
 import * as z from 'zod'
 
 export function parseEmails(value: string): string[] {
-  return value
-    // Split by commas, spaces, or newlines and filter out empty strings
-    .split(/[,\s\n]+/)
-    .map((email) => email.trim())
-    .filter(Boolean)
+  return (
+    value
+      // Split by commas, spaces, or newlines and filter out empty strings
+      .split(/[,\s\n]+/)
+      .map((email) => email.trim())
+      .filter(Boolean)
+  )
 }
 
-export const schema = z.object({
+export const inviteTeamSchema = z.object({
   emails: z
     .string()
     .refine(
-      (value) => parseEmails(value).every((email) =>
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-      ),
+      (value) =>
+        parseEmails(value).every((email) =>
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+        ),
       {
         message:
           'Please enter valid email addresses separated by commas, spaces, or new lines',
-      }
+      },
     ),
 })
 
-export type InviteTeamFormInput = z.infer<typeof schema>
+export type InviteTeamFormInput = z.infer<typeof inviteTeamSchema>

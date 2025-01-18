@@ -1,4 +1,4 @@
 import * as z from 'zod'
 
-export const schema = z.object({})
-export type AppearanceFormInput = z.infer<typeof schema>
+export const appearanceSchema = z.object({})
+export type AppearanceFormInput = z.infer<typeof appearanceSchema>

@@ -12,7 +12,7 @@ import {
 import { useStepperContext } from '@saas-ui/react'
 
 import { OnboardingStep } from './onboarding-step'
-import { schema } from './schema/appearance'
+import { appearanceSchema } from './schema/appearance.schema'
 
 // Define theme mode type to avoid repetition
 type ThemeMode = 'light' | 'dark'
@@ -85,7 +85,7 @@ export function AppearanceStep() {
 
   return (
     <OnboardingStep
-      schema={schema}
+      schema={appearanceSchema}
       title="Choose your style"
       description="You can change the color mode at any time in your profile settings."
       defaultValues={{}}

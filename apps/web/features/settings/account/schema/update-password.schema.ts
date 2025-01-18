@@ -16,8 +16,6 @@ export const updatePasswordSchema = z
         path: ['confirmPassword'],
       })
     }
-  })
-  .superRefine((data, ctx) => {
     if (data.password === data.newPassword) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

@@ -10,7 +10,7 @@ import {
 import { api } from '#lib/trpc/react'
 
 import { OnboardingStep } from './onboarding-step'
-import { parseEmails, schema } from './schema/invite-team'
+import { inviteTeamSchema, parseEmails } from './schema/invite-team.schema'
 
 export const InviteTeamMembersStep = () => {
   const workspace = useSessionStorageValue<string>('getting-started.workspace')
@@ -22,7 +22,7 @@ export const InviteTeamMembersStep = () => {
 
   return (
     <OnboardingStep
-      schema={schema}
+      schema={inviteTeamSchema}
       title="Invite your team"
       description="Saas UI works better with your team."
       defaultValues={{ emails: '' }}

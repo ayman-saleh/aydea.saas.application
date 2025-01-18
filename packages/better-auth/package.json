@@ -18,7 +18,7 @@
   "dependencies": {
     "@acme/db": "workspace:*",
     "@acme/email": "workspace:*",
-    "better-auth": "^1.1.13",
+    "better-auth": "^1.1.14",
     "env": "workspace:*",
     "zod": "^3.24.1"
   },
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "eslint": "^9.18.0",
-    "next": "^15.1.4",
+    "next": "^15.1.5",
     "prettier": "^3.4.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",

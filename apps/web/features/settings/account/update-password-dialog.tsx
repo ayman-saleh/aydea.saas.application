@@ -1,10 +1,14 @@
 import * as React from 'react'
 
 import { useUpdatePassword } from '@saas-ui/auth-provider'
-import { FormDialog } from '@saas-ui/modals/zod'
-import { FormDialogProps, FormLayout } from '@saas-ui/react'
+import { FormDialogProps, FormLayout, type SubmitHandler } from '@saas-ui/react'
 
-import { UpdatePasswordFormInput, schema } from './schema/update-password'
+import { FormDialog } from '@acme/ui/form'
+
+import {
+  UpdatePasswordFormInput,
+  updatePasswordSchema,
+} from './schema/update-password.schema.ts'
 
 export interface UpdatePasswordFormProps
   extends Omit<
@@ -24,7 +28,9 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
 }) => {
   const [, submit] = useUpdatePassword()
 
-  const handleSubmit = async (values: UpdatePasswordFormInput) => {
+  const handleSubmit: SubmitHandler<UpdatePasswordFormInput> = async (
+    values,
+  ) => {
     try {
       const data = await submit({
         password: values.password,
@@ -38,13 +44,13 @@ export const UpdatePasswordDialog: React.FC<UpdatePasswordFormProps> = ({
 
   return (
     <FormDialog
-      title={'Update your password'}
+      title="Update your password"
       fields={{
         cancel: {
           children: 'Cancel',
         },
       }}
-      schema={schema}
+      schema={updatePasswordSchema}
       onError={onValidationError}
       onSubmit={handleSubmit}
       defaultValues={{

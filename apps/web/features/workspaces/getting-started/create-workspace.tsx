@@ -22,7 +22,7 @@ import { getBaseUrl } from '#features/common/util/get-base-url'
 import { api } from '#lib/trpc/react'
 
 import { OnboardingStep } from './onboarding-step'
-import { WorkspaceFormInput, schema } from './schema/workspace'
+import { WorkspaceFormInput, schema } from './schema/workspace.schema'
 
 interface SlugValidationState {
   isValidSlug: boolean
