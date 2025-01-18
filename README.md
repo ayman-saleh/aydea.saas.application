@@ -4,12 +4,12 @@
 
 To get started you can follow the instructions below.
 
-For more information and detailed guides please visit [the official documentation](https://beta.saas-ui.dev/docs/nextjs-starter-kit).
+For more information and detailed guides please visit [the official documentation](https://saas-ui.dev/docs/nextjs-starter-kit).
 
 ## Branches
 
-- `main` is the latest version with Auth.js (NextAuth)
-- `supabase` is the version with Supabase
+- `main` is the latest version with Better Auth
+- `supabase` is the version with Supabase Auth
 
 ## Installation
 
@@ -21,7 +21,7 @@ Clone this repository to get started.
 git clone --single-branch --branch=main git@github.com:saas-js/saas-ui-pro-nextjs-starter-kit.git my-project
 ```
 
-[Read full instructions to clone this repository](https://beta.saas-ui.dev/docs/nextjs-starter-kit/installation/clone-repository).
+[Read full instructions to clone this repository](https://saas-ui.dev/docs/nextjs-starter-kit/installation/clone-repository).
 
 After cloning the repository, log in to the private NPM registry with your license key.
 

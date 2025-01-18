@@ -12,12 +12,12 @@ import {
   LuShield,
 } from 'react-icons/lu'
 
+import { FormattedDate } from '@acme/i18n'
 import { LinkButton } from '@acme/ui/button'
 import { SettingsPage } from '@acme/ui/settings-page'
 
 import { usePath } from '#features/common/hooks/use-path'
 
-import { FormattedDate } from '../../../../../packages/i18n/src'
 import { SettingsCard } from '../common/settings-card'
 import { SupportCard } from '../common/support-card'
 

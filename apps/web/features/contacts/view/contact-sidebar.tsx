@@ -13,9 +13,9 @@ import { Persona, Property, PropertyList } from '@saas-ui/react'
 import { LuChevronDown, LuChevronUp } from 'react-icons/lu'
 
 import { ContactDTO } from '@acme/api/types'
+import { DateTime } from '@acme/i18n'
 import { OverflowMenu } from '@acme/ui/menu'
 
-import { DateTime } from '../../../../../packages/i18n/src'
 import { ContactStatus } from '../common/contact-status'
 import { ContactType } from '../common/contact-type'
 import { ContactTags } from './contact-tags'
