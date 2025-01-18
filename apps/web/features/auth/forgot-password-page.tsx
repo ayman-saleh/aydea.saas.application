@@ -18,8 +18,8 @@ import { Logo } from '@acme/ui/logo'
 
 import {
   ForgotPasswordFormInput,
-  schema,
-} from '#features/settings/account/schema/forgot-password.ts'
+  forgotPasswordSchema,
+} from './schema/forgot-password.schema.ts'
 
 export const ForgotPasswordPage = () => {
   const snackbar = useSnackbar()
@@ -72,7 +72,11 @@ export const ForgotPasswordPage = () => {
               </AlertDescription>
             </Alert>
           ) : (
-            <Form mode="onSubmit" schema={schema} onSubmit={onSubmit}>
+            <Form
+              mode="onSubmit"
+              schema={forgotPasswordSchema}
+              onSubmit={onSubmit}
+            >
               {({ Field }) => (
                 <FormLayout>
                   <Field

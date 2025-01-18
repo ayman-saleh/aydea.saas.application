@@ -1,8 +1,8 @@
 import * as z from 'zod'
 
-import { schema as passwordSchema } from './password'
+import { passwordSchema } from './password.schema'
 
-export const schema = z
+export const resetPasswordSchema = z
   .object({
     newPassword: passwordSchema.shape.password.describe('New password'),
     confirmPassword: passwordSchema.shape.password.describe('Confirm password'),
@@ -17,4 +17,4 @@ export const schema = z
     }
   })
 
-export type UpdatePasswordFormInput = z.infer<typeof schema>
+export type ResetPasswordFormInput = z.infer<typeof resetPasswordSchema>

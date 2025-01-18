@@ -11,9 +11,9 @@ import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
 
 import {
-  UpdatePasswordFormInput,
-  schema,
-} from '#features/settings/account/schema/reset-password'
+  ResetPasswordFormInput,
+  resetPasswordSchema,
+} from './schema/reset-password.schema'
 
 export const ResetPasswordPage = () => {
   const router = useRouter()
@@ -22,7 +22,7 @@ export const ResetPasswordPage = () => {
   const search = useSearchParams()
 
   const mutation = useMutation({
-    mutationFn: (values: UpdatePasswordFormInput) => {
+    mutationFn: (values: ResetPasswordFormInput) => {
       return auth.updatePassword({
         password: values.newPassword,
         token: search.get('token') ?? '',
@@ -46,7 +46,7 @@ export const ResetPasswordPage = () => {
     },
   })
 
-  const onSubmit = async (values: UpdatePasswordFormInput) => {
+  const onSubmit = async (values: ResetPasswordFormInput) => {
     await mutation.mutateAsync(values)
   }
 
@@ -66,7 +66,7 @@ export const ResetPasswordPage = () => {
             Choose a new password
           </Heading>
 
-          <Form mode="onBlur" schema={schema} onSubmit={onSubmit}>
+          <Form mode="onBlur" schema={resetPasswordSchema} onSubmit={onSubmit}>
             {({ Field }) => (
               <FormLayout>
                 <Field name="newPassword" type="password" label="Password" />

@@ -20,10 +20,9 @@ import { Link } from '@acme/next'
 import { Form } from '@acme/ui/form'
 import { Logo } from '@acme/ui/logo'
 
-import { LoginFormInput, schema } from '#features/settings/account/schema/login'
-
 import { LastUsedProvider } from './last-used'
 import { Providers } from './providers'
+import { LoginFormInput, loginSchema } from './schema/login.schema'
 
 export const LoginPage = () => {
   const snackbar = useSnackbar()
@@ -92,7 +91,7 @@ export const LoginPage = () => {
             <Divider />
           </HStack>
 
-          <Form mode="onSubmit" schema={schema} onSubmit={onSubmit}>
+          <Form mode="onSubmit" schema={loginSchema} onSubmit={onSubmit}>
             {({ Field }) => (
               <FormLayout>
                 <Field
