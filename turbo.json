@@ -1,5 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
+  "ui": "tui",
   "tasks": {
     "clean": {
       "outputs": []
@@ -31,11 +32,13 @@
     },
     "db:migrate": {
       "dependsOn": ["db:generate"],
-      "inputs": ["drizzle/**"]
+      "inputs": ["drizzle/**"],
+      "persistent": true
     },
     "db:generate": {
       "inputs": ["src/**", "drizzle.config.ts"],
-      "outputs": ["drizzle/**"]
+      "outputs": ["drizzle/**"],
+      "persistent": true
     },
     "db:studio": {
       "cache": false,
