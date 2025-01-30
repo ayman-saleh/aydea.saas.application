@@ -1,3 +1,3 @@
 export { auth } from './auth'
-export * from './schema/auth.sql'
+export * from './auth.sql'
 export { getSession, handlers } from './server'

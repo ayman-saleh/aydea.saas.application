@@ -7,7 +7,7 @@ import { mailer, render } from '@acme/email'
 import ConfirmEmailAddressEmail from '@acme/email/confirm-email-address'
 import ResetPasswordEmail from '@acme/email/reset-password'
 
-import * as schema from './schema/auth.sql'
+import * as schema from './auth.sql.ts'
 import { env } from './env.ts'
 
 const socialProviders: SocialProviders = {}
