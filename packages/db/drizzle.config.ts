@@ -15,8 +15,8 @@ export default defineConfig({
   strict: true,
   schema: [
     './src/**/*.sql.ts',
-    // We need to use path.resolve here otherwise
-    // it's not resolved correctly running drizzle through turbo.
+    // We need to use path.resolve here, otherwise it's not
+    // resolved correctly running drizzle through turbo.
     path.resolve(__dirname, '../better-auth/src/auth.sql.ts'),
   ],
   out: './drizzle',
