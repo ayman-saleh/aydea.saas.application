@@ -21,8 +21,8 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         type: 'list',
         name: 'auth',
         message: 'What auth provider do you want to use?',
-        choices: ['Auth.js', 'Supabase'],
-        default: 'Auth.js',
+        choices: ['Better Auth', 'Supabase'],
+        default: 'Better Auth',
       },
       {
         type: 'input',

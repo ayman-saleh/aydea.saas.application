@@ -9,6 +9,7 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
+    "init:env": "turbo run gen env",
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",
     "storybook": "turbo run storybook",
