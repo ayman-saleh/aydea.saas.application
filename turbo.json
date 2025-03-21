@@ -30,15 +30,17 @@
     "billing:sync": {
       "cache": false
     },
-    "db:migrate": {
-      "dependsOn": ["db:generate"],
-      "inputs": ["drizzle/**"],
-      "persistent": true
-    },
     "db:generate": {
       "inputs": ["src/**", "drizzle.config.ts"],
       "outputs": ["drizzle/**"],
-      "persistent": true
+      "env": ["DATABASE_URL", "DIRECT_URL"],
+      "interactive": true,
+      "cache": false
+    },
+    "db:migrate": {
+      "inputs": ["drizzle/**"],
+      "env": ["DATABASE_URL", "DIRECT_URL"],
+      "cache": false
     },
     "db:studio": {
       "cache": false,

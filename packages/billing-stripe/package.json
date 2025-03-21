@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@acme/api": "workspace:*",
-    "stripe": "^17.5.0"
+    "stripe": "^17.7.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   }
 }

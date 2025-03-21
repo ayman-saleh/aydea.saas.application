@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 
 import { QueryClientProvider } from '@tanstack/react-query'
-import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client'
+import { httpBatchStreamLink, loggerLink } from '@trpc/client'
 import SuperJSON from 'superjson'
 
 import { getBaseUrl } from '#features/common/util/get-base-url.ts'
@@ -27,7 +27,7 @@ export const TRPCProvider: React.FC<{ children: React.ReactNode }> = (
             process.env.NODE_ENV === 'development' ||
             (op.direction === 'down' && op.result instanceof Error),
         }),
-        unstable_httpBatchStreamLink({
+        httpBatchStreamLink({
           transformer: SuperJSON,
           url: baseUrl + '/api/trpc',
           async headers() {

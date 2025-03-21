@@ -11,10 +11,10 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.5.10",
-    "@formatjs/ts-transformer": "^3.13.27",
+    "@formatjs/intl-localematcher": "^0.6.0",
+    "@formatjs/ts-transformer": "^3.13.32",
     "date-fns": "^4.1.0",
-    "intl-messageformat": "^10.7.12",
+    "intl-messageformat": "^10.7.15",
     "negotiator": "^1.0.0",
     "react-intl": "^6.8.9",
     "server-only": "^0.0.1"
@@ -23,7 +23,7 @@
     "react": ">=18"
   },
   "devDependencies": {
-    "@formatjs/cli": "^6.3.15",
+    "@formatjs/cli": "^6.6.1",
     "react": "^18.3.1"
   }
 }
