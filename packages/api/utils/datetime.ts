@@ -14,7 +14,3 @@ export const dateRanges = {
     end: endOfDay(new Date()),
   }),
 }
-
-export const formatDate = (date: Date, format: string = 'yyyy-MM-dd') => {
-  // Implement date formatting
-}

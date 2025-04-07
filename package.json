@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "init:env": "turbo run gen env",
+    "init:env": "turbo gen env",
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",
     "storybook": "turbo run storybook",
@@ -61,7 +61,7 @@
   },
   "resolutions": {
     "@types/react": "^18.3.18",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.13.11",
     "prettier": "^3.4.2",
     "react-is": "rc"
   },

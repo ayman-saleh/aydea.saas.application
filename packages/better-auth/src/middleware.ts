@@ -29,11 +29,17 @@ async function getSession(request: NextRequest) {
   const data = await fetch(`${baseURL}/api/auth/get-session`, {
     headers: {
       //get the cookie from the request
-      cookie: request.headers.get('cookie') || '',
+      cookie: request.headers.get('cookie') || ''
     },
-  }).then((res) => res.json() as Promise<Session>)
-
-  return data
+  })
+    .then((res) => {
+      if (res.status !== 200) {
+        return null
+      }
+      return res.json()
+    })
+    .catch(() => null)
+  return data as Session
 }
 
 interface BetterAuthRequest extends NextRequest {

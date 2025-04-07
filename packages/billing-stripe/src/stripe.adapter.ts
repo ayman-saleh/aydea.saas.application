@@ -11,7 +11,7 @@ export class StripeAdapter implements BillingAdapter {
 
   constructor() {
     this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
-      apiVersion: '2024-12-18.acacia',
+      apiVersion: '2025-02-24.acacia',
       appInfo: {
         name: pkg.name,
         version: pkg.version,

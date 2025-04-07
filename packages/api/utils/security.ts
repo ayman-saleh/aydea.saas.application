@@ -28,6 +28,12 @@ export const checkRateLimit = async (
 ) => {
   // Implement rate limiting logic here if needed
   // Could use Redis or similar for distributed rate limiting
+  return {
+    isRateLimited: false,
+    remaining: Infinity,
+    resetTime: new Date(Date.now() + windowMs),
+    success: true,
+  };
 }
 
 /**

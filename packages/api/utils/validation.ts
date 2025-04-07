@@ -6,7 +6,7 @@ export const createValidationSchema = <T extends z.ZodType>(
     stripUnknown?: boolean
   },
 ) => {
-  return schema.transform((data, ctx) => {
+  return schema.transform((data) => {
     if (options?.stripUnknown) {
       // Remove unknown fields
       const known = schema.parse(data)
