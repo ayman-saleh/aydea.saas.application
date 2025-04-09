@@ -26,20 +26,18 @@ export function auth(middleware: BetterAuthMiddleware) {
 async function getSession(request: NextRequest) {
   const baseURL = request.nextUrl.origin
 
-  const data = await fetch(`${baseURL}/api/auth/get-session`, {
+  const response = await fetch(`${baseURL}/api/auth/get-session`, {
     headers: {
-      //get the cookie from the request
       cookie: request.headers.get('cookie') || ''
     },
-  })
-    .then((res) => {
-      if (res.status !== 200) {
-        return null
-      }
-      return res.json()
-    })
-    .catch(() => null)
-  return data as Session
+  });
+  try {
+    const data = await response.json();
+    return data; // Return the parsed JSON
+  } catch (e) {
+    console.error('Error parsing session data:', e);
+    return null;
+  }
 }
 
 interface BetterAuthRequest extends NextRequest {
