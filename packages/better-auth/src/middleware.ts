@@ -5,6 +5,7 @@ import {
 } from 'next/server'
 
 import { auth as authConfig } from './auth'
+import { env } from './env'
 
 type Session = typeof authConfig.$Infer.Session
 
@@ -23,21 +24,33 @@ export function auth(middleware: BetterAuthMiddleware) {
   }
 }
 
-async function getSession(request: NextRequest) {
+async function getSession(request: NextRequest): Promise<Session | null> {
   const baseURL = request.nextUrl.origin
 
-  const data = await fetch(`${baseURL}/api/auth/get-session`, {
+  const response = await fetch(`${baseURL}/api/auth/get-session`, {
     headers: {
-      //get the cookie from the request
       cookie: request.headers.get('cookie') || '',
     },
-  }).then((res) => res.json() as Promise<Session>)
+  })
 
-  return data
+  try {
+    const data = await response.text()
+
+    if (data.length === 0) {
+      return null
+    }
+
+    return await JSON.parse(data)
+  } catch (error) {
+    if (env.AUTH_DEBUG) {
+      console.error(error)
+    }
+    return null
+  }
 }
 
 interface BetterAuthRequest extends NextRequest {
-  auth: Session
+  auth: Session | null
 }
 
 type BetterAuthMiddleware = (
