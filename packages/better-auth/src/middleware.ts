@@ -29,17 +29,6 @@ async function getSession(request: NextRequest): Promise<Session | null> {
 
   const response = await fetch(`${baseURL}/api/auth/get-session`, {
     headers: {
-<<<<<<< HEAD
-      cookie: request.headers.get('cookie') || ''
-    },
-  });
-  try {
-    const data = await response.json();
-    return data; // Return the parsed JSON
-  } catch (e) {
-    console.error('Error parsing session data:', e);
-    return null;
-=======
       cookie: request.headers.get('cookie') || '',
     },
   })
@@ -57,7 +46,6 @@ async function getSession(request: NextRequest): Promise<Session | null> {
       console.error(error)
     }
     return null
->>>>>>> main
   }
 }
 
