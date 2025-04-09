@@ -6,7 +6,7 @@ export const logActivity = async (params: {
   actorId: string
   actorType: 'user' | 'system'
   subjectId: string
-  subjectType: string
+  subjectType: 'contact'
   type: ActivityLogTypes
   metadata?: Record<string, unknown>
 }) => {
