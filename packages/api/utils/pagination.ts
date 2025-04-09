@@ -29,7 +29,7 @@ export interface PaginatedResponse<T> {
   }
 }
 
-export const createPaginatedResponse = <T>(
+export const createPaginatedResponse = <T extends { id: string }>(
   items: T[],
   params: PaginationParams,
   total?: number,

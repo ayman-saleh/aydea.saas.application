@@ -16337,7 +16337,7 @@ __metadata:
     "@ngneat/falso": "npm:^7.3.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
     "@turbo/gen": "npm:^2.4.4"
-    "@types/node": "npm:^22.13.11"
+    "@types/node": "npm:^22.14.0"
     eslint: "npm:^9.22.0"
     eslint-config-next: "npm:^15.2.3"
     eslint-config-prettier: "npm:^10.1.1"

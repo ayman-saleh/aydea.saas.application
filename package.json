@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "init:env": "turbo run gen env",
+    "init:env": "turbo gen env",
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",
     "storybook": "turbo run storybook",
@@ -43,7 +43,7 @@
     "@ngneat/falso": "^7.3.0",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@turbo/gen": "^2.4.4",
-    "@types/node": "^22.13.11",
+    "@types/node": "^22.14.0",
     "eslint": "^9.22.0",
     "eslint-config-next": "^15.2.3",
     "eslint-config-prettier": "^10.1.1",
