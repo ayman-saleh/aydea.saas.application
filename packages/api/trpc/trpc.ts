@@ -187,8 +187,7 @@ const scopedProcedure = protectedProcedure
  *
  * @input workspaceId - The ID or slug of the workspace to scope the procedure to.
  */
-export const workspaceProcedure =
-  protectedProcedure.unstable_concat(scopedProcedure)
+export const workspaceProcedure = protectedProcedure.concat(scopedProcedure)
 
 /**
  * Admin procedure
@@ -197,8 +196,6 @@ export const workspaceProcedure =
  *
  * @input workspaceId - The ID or slug of the workspace to scope the procedure to.
  */
-export const adminProcedure = protectedProcedure
-  .unstable_concat(scopedProcedure)
-  .meta({
-    roles: ['admin'],
-  })
+export const adminProcedure = protectedProcedure.concat(scopedProcedure).meta({
+  roles: ['admin'],
+})
