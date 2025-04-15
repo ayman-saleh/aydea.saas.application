@@ -199,7 +199,7 @@ __metadata:
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
     "@hookform/resolvers": "npm:^3.10.0"
-    "@internationalized/date": "npm:^3.7.0"
+    "@internationalized/date": "npm:3.6.0"
     "@react-hookz/web": "npm:^25.1.0"
     "@saas-ui-pro/kanban": "npm:^0.8.0"
     "@saas-ui-pro/react": "npm:^0.42.0"
@@ -3590,16 +3590,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@internationalized/date@npm:3.5.6":
-  version: 3.5.6
-  resolution: "@internationalized/date@npm:3.5.6"
-  dependencies:
-    "@swc/helpers": "npm:^0.5.0"
-  checksum: 10c0/25d3150247175892705aeaf8e1a78295717d420c37cb3065a766c4058a1aed460a69dc5362f7073425c95095c27036c7ed65f0ce5fbb32b20f917132e8dc543f
-  languageName: node
-  linkType: hard
-
-"@internationalized/date@npm:^3.5.6, @internationalized/date@npm:^3.7.0":
+"@internationalized/date@npm:3.7.0":
   version: 3.7.0
   resolution: "@internationalized/date@npm:3.7.0"
   dependencies:

@@ -63,7 +63,8 @@
     "@types/react": "^18.3.18",
     "@types/node": "^22.14.0",
     "prettier": "^3.4.2",
-    "react-is": "rc"
+    "react-is": "rc",
+    "@internationalized/date": "3.7.0"
   },
   "packageManager": "yarn@4.7.0",
   "engines": {
