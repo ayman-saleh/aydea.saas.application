@@ -23,15 +23,6 @@ git clone --single-branch --branch=main git@github.com:saas-js/saas-ui-pro-nextj
 
 [Read full instructions to clone this repository](https://saas-ui.dev/docs/nextjs-starter-kit/installation/clone-repository).
 
-After cloning the repository, log in to the private NPM registry with your license key.
-
-- The `username` is the Github username you used to activate the license.
-- The `password` is your license key that you received from Lemonsqueezy or Gumroad.
-
-```bash
-yarn npm login --scope saas-ui-pro --always-auth
-```
-
 Install the dependencies.
 
 ```bash
