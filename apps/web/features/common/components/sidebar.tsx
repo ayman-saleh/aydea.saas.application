@@ -8,26 +8,16 @@ import {
   Flex,
   IconButton,
   Spacer,
-  Stack,
+  HStack,
   useBreakpointValue,
 } from '@chakra-ui/react'
 import {
   Command,
-  ResizeHandle,
-  ResizeHandler,
-  Resizer,
-} from '@saas-ui-pro/react'
+  useHotkeysShortcut,
+} from '@saas-ui/react'
 import {
-  NavGroup,
   NavItem,
   NavItemProps,
-  Sidebar,
-  SidebarOverlay,
-  SidebarProps,
-  SidebarSection,
-  SidebarToggleButton,
-  useHotkeysShortcut,
-  useSidebarContext,
 } from '@saas-ui/react'
 import { Route } from 'next'
 import { useRouter } from 'next/navigation'
@@ -54,118 +44,127 @@ import { AppSidebarTags } from './sidebar-tags'
 import { UserMenu } from './user-menu'
 import { WorkspacesMenu } from './workspaces-menu'
 
-import { Logo } from '@acme/ui/logo'
-export interface AppSidebarProps extends SidebarProps {}
+import { LogoIcon, LogoText } from '@acme/ui/logo'
+
+export interface AppSidebarProps {
+  variant?: 'default' | 'compact'
+  colorScheme?: string
+}
 
 export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
   const modals = useModals()
   const help = useHelpCenter()
 
-  const [{ sidebarWidth }, setUserSettings] = useUserSettings()
+  const [{ sidebarVariant }, setUserSettings] = useUserSettings()
 
-  const { variant, colorScheme } = props
+  const { variant = sidebarVariant || 'default', colorScheme } = props
   const isCompact = variant === 'compact'
 
-  const onResize: ResizeHandler = ({ width }) => {
-    setUserSettings('sidebarWidth', width)
-  }
+  const isMobile = useBreakpointValue({ base: true, md: false })
 
   return (
-    <Resizer
-      defaultWidth={isCompact ? 60 : sidebarWidth}
-      onResize={onResize}
-      isResizable={useBreakpointValue(
-        { base: false, lg: true },
-        { fallback: 'lg' },
-      )}
+    <Box
+      position="fixed"
+      bottom={0}
+      left={0}
+      right={0}
+      zIndex={100}
+      bg="sidebar.bg"
+      borderTopWidth="1px"
+      borderTopColor="sidebar.border"
+      h={isCompact ? "60px" : "80px"}
     >
-      <Sidebar
-        {...props}
-        variant={variant}
-        colorScheme={colorScheme}
-        suppressHydrationWarning
+      <HStack
+        h="full"
+        spacing={4}
+        px={4}
+        py={isCompact ? 2 : 3}
+        align="center"
+        overflowX="auto"
       >
-        <Stack flex="1" spacing="4">
-          <SidebarToggleButton />
-          <SidebarSection>
-            <Flex align="left" justify="left">
-              <Logo w="150px"/>
-            </Flex>
-          </SidebarSection>
-          <SidebarSection direction="row">
-          
+        {/* Logo Section */}
+        <Flex align="center" justify="center" minW="fit-content">
+          <LogoIcon h="30px" />
+          <LogoText h="30px" />
+        </Flex>
+
+        {/* Workspaces and User Menu */}
+        <HStack spacing={2} minW="fit-content">
+          <React.Suspense>
+            <WorkspacesMenu compact={isCompact} />
+          </React.Suspense>
+          {!isCompact && (
             <React.Suspense>
-              <WorkspacesMenu compact={isCompact} />
+              <UserMenu />
             </React.Suspense>
+          )}
+        </HStack>
 
-            {!isCompact && (
-              <>
-                <Spacer />
-                <React.Suspense>
-                  <UserMenu />
-                </React.Suspense>
-              </>
-            )}
-          </SidebarSection>
-          <Box px={3}>
-            {isCompact ? (
-              <IconButton icon={<LuSearch />} aria-label="Search" />
-            ) : (
-              <GlobalSearchInput />
-            )}
-          </Box>
-          <SidebarSection overflowY="auto" flex="1">
-            <NavGroup>
-              <AppSidebarLink
-                href={usePath('/')}
-                label="Home"
-                icon={<LuHouse />}
-                hotkey="navigation.dashboard"
-              />
-              <AppSidebarLink
-                href={usePath('deployments')}
-                isActive={useActivePath('deployments', { end: false })}
-                label="Deployments"
-                badge={2}
-                icon={<LuRocket />}
-                hotkey="navigation.inbox"
-              />
-            </NavGroup>
+        {/* Search */}
+        <Box minW={isCompact ? "auto" : "200px"}>
+          {isCompact ? (
+            <IconButton icon={<LuSearch />} aria-label="Search" size="sm" />
+          ) : (
+            <GlobalSearchInput size="sm" />
+          )}
+        </Box>
 
-            {!isCompact && <AppSidebarTags />}
+        {/* Navigation Items */}
+        <HStack spacing={2} flex="1" justify="center">
+          <AppSidebarLink
+            href={usePath('/')}
+            label="Home"
+            icon={<LuHouse />}
+            hotkey="navigation.dashboard"
+            isCompact={isCompact}
+          />
+          <AppSidebarLink
+            href={usePath('deployments')}
+            isActive={useActivePath('deployments', { end: false })}
+            label="Deployments"
+            badge={2}
+            icon={<LuRocket />}
+            hotkey="navigation.inbox"
+            isCompact={isCompact}
+          />
+        </HStack>
 
-            <Spacer />
+        <Spacer />
 
-            <NavGroup>
-              <NavItem
-                onClick={() => modals.open(InvitePeopleDialog)}
-                color="sidebar-muted"
-                icon={<LuPlus />}
-              >
-                Invite people
-              </NavItem>
-              <NavItem
-                onClick={() => help.open()}
-                color="sidebar-muted"
-                icon={<LuCircleHelp />}
-              >
-                Help &amp; support
-              </NavItem>
-            </NavGroup>
-          </SidebarSection>
+        {/* Right Section */}
+        <HStack spacing={2} minW="fit-content">
+          {!isCompact && <AppSidebarTags />}
+          
+          <NavItem
+            onClick={() => modals.open(InvitePeopleDialog)}
+            color="sidebar-muted"
+            icon={<LuPlus />}
+            aria-label="Invite people"
+            size="sm"
+            variant="ghost"
+          >
+            {!isCompact && 'Invite people'}
+          </NavItem>
+          
+          <NavItem
+            onClick={() => help.open()}
+            color="sidebar-muted"
+            icon={<LuCircleHelp />}
+            aria-label="Help & support"
+            size="sm"
+            variant="ghost"
+          >
+            {!isCompact && 'Help & support'}
+          </NavItem>
 
           {isCompact ? (
-            <SidebarSection>
-              <UserMenu />
-            </SidebarSection>
+            <UserMenu />
           ) : (
             <BillingStatus />
           )}
-        </Stack>
-        <SidebarOverlay />
-        <ResizeHandle />
-      </Sidebar>
-    </Resizer>
+        </HStack>
+      </HStack>
+    </Box>
   )
 }
 
@@ -174,16 +173,15 @@ interface AppSidebarlink<Href extends Route = Route> extends NavItemProps {
   href: Route<Href>
   label: string
   badge?: React.ReactNode
+  isCompact?: boolean
 }
 
 const AppSidebarLink = <Href extends Route = Route>(
   props: AppSidebarlink<Href>,
 ) => {
-  const { href, label, hotkey, badge, ...rest } = props
+  const { href, label, hotkey, badge, isCompact, ...rest } = props
   const { push } = useRouter()
   const isActive = useActivePath(href)
-
-  const { variant } = useSidebarContext()
 
   const command = useHotkeysShortcut(hotkey, () => {
     push(href)
@@ -194,19 +192,25 @@ const AppSidebarLink = <Href extends Route = Route>(
       href={href}
       isActive={isActive}
       {...rest}
+      size="sm"
+      variant="ghost"
+      aria-label={label}
       tooltipProps={{
         label: (
           <>
             {label} <Command>{command}</Command>
           </>
         ),
+        placement: 'top' as const,
       }}
     >
-      <Box as="span" noOfLines={1}>
-        {label}
-      </Box>
+      {!isCompact && (
+        <Box as="span" noOfLines={1}>
+          {label}
+        </Box>
+      )}
 
-      {typeof badge !== 'undefined' && variant !== 'compact' ? (
+      {typeof badge !== 'undefined' && !isCompact ? (
         <Badge borderRadius="sm" ms="auto" px="1.5" bg="none">
           {badge}
         </Badge>
