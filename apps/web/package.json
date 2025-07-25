@@ -17,6 +17,7 @@
     "@acme/i18n": "workspace:*",
     "@acme/next": "workspace:*",
     "@acme/theme": "workspace:*",
+    "@acme/theme-aydea": "workspace:*",
     "@acme/ui": "workspace:*",
     "@chakra-ui/react": "^2.10.7",
     "@emotion/react": "^11.14.0",

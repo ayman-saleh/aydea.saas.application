@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import '@fontsource-variable/inter'
+import '../styles/fonts.css'
 import { Metadata } from 'next'
 import { cookies } from 'next/headers'
 

@@ -5,6 +5,7 @@ import { useCallback } from 'react'
 import {
   Container,
   Divider,
+  Flex,
   HStack,
   Heading,
   Stack,
@@ -75,11 +76,9 @@ export const LoginPage = () => {
         spacing="8"
       >
         <Container maxW="container.sm" py="8">
-          <Logo mb="12" width="120px" />
-
-          <Heading as="h2" size="md" mb="4">
-            Log in
-          </Heading>
+          <Flex justify="center" mb="12">
+            <Logo width="200px" />
+          </Flex>
 
           <Providers />
 

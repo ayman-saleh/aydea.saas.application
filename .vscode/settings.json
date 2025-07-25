@@ -11,5 +11,11 @@
     "next/router*",
     "drizzle-orm/mysql-core",
     "drizzle-orm/sqlite-core"
-  ]
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

@@ -22,7 +22,7 @@ export function createAuthService() {
       },
     ) => {
       const redirectTo = options?.redirectTo ?? '/'
-
+      
       if (params.provider) {
         await client.signIn.social({
           provider: params.provider as SocialProvider,

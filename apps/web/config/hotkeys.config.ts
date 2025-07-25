@@ -17,6 +17,14 @@ export const appHotkeys = {
         label: 'Add filter',
         command: 'F',
       },
+      toggleSidebar: {
+        label: 'Toggle sidebar',
+        command: platformSelect({ mac: '⌘ B' }, 'Ctrl+B'),
+      },
+      newWorkflow: {
+        label: 'New workflow',
+        command: platformSelect({ mac: '⌘ S' }, 'Ctrl+S'),
+      },
       logout: {
         label: 'Log out',
         command: platformSelect({ mac: '⌥ ⇧ Q' }, 'Ctrl+Shift+Q'),
@@ -29,6 +37,10 @@ export const appHotkeys = {
       dashboard: {
         label: 'Go to Dashboard',
         command: 'G then D',
+      },
+      deployments: {
+        label: 'Go to Deployments',
+        command: 'G then P',
       },
       inbox: {
         label: 'Go to Inbox',

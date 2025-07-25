@@ -1,7 +1,7 @@
 import { Button, Stack } from '@chakra-ui/react'
 import { useLocalStorageValue } from '@react-hookz/web'
 import { useAuth } from '@saas-ui/auth-provider'
-import { FaGithub } from 'react-icons/fa6'
+import { FaGoogle } from 'react-icons/fa6'
 
 import { LastUsedProvider } from './last-used'
 
@@ -12,20 +12,20 @@ export function Providers() {
 
   return (
     <Stack gap="2" mb="4">
-      <LastUsedProvider value="github">
+      <LastUsedProvider value="google">
         <Button
-          leftIcon={<FaGithub />}
+          leftIcon={<FaGoogle />}
           height="9"
           variant="outline"
           onClick={() =>
             auth
               .logIn({
-                provider: 'github',
+                provider: 'google',
               })
-              .then(() => lastUsed.set('github'))
+              .then(() => lastUsed.set('google'))
           }
         >
-          Continue with Github
+          Continue with Google
         </Button>
       </LastUsedProvider>
     </Stack>

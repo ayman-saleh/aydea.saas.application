@@ -8,6 +8,7 @@ declare let global: {
 
 const settingsSchema = z.object({
   sidebarWidth: z.number().default(280),
+  sidebarVariant: z.enum(['default', 'compact']).default('default'),
   inboxListWidth: z.number().default(280),
   contactsView: z.enum(['list', 'board']).default('board'),
   contactsColumns: z
@@ -20,6 +21,7 @@ type UserSettings = z.infer<typeof settingsSchema>
 
 const defaultSettings: UserSettings = {
   sidebarWidth: 280,
+  sidebarVariant: 'default',
   inboxListWidth: 280,
   contactsView: 'list',
   contactsColumns: ['name', 'email', 'createdAt', 'type', 'status'],

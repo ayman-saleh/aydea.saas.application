@@ -5,6 +5,7 @@ import * as React from 'react'
 import {
   Badge,
   Box,
+  Flex,
   IconButton,
   Spacer,
   Stack,
@@ -36,7 +37,7 @@ import {
   LuInbox,
   LuPlus,
   LuSearch,
-  LuSquareUser,
+  LuRocket,
 } from 'react-icons/lu'
 
 import { useActivePath } from '@acme/next'
@@ -53,6 +54,7 @@ import { AppSidebarTags } from './sidebar-tags'
 import { UserMenu } from './user-menu'
 import { WorkspacesMenu } from './workspaces-menu'
 
+import { Logo } from '@acme/ui/logo'
 export interface AppSidebarProps extends SidebarProps {}
 
 export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
@@ -85,7 +87,13 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
       >
         <Stack flex="1" spacing="4">
           <SidebarToggleButton />
+          <SidebarSection>
+            <Flex align="left" justify="left">
+              <Logo w="150px"/>
+            </Flex>
+          </SidebarSection>
           <SidebarSection direction="row">
+          
             <React.Suspense>
               <WorkspacesMenu compact={isCompact} />
             </React.Suspense>
@@ -110,24 +118,17 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
             <NavGroup>
               <AppSidebarLink
                 href={usePath('/')}
-                label="Dashboard"
+                label="Home"
                 icon={<LuHouse />}
                 hotkey="navigation.dashboard"
               />
               <AppSidebarLink
-                href={usePath('inbox')}
-                isActive={useActivePath('inbox', { end: false })}
-                label="Inbox"
+                href={usePath('deployments')}
+                isActive={useActivePath('deployments', { end: false })}
+                label="Deployments"
                 badge={2}
-                icon={<LuInbox />}
+                icon={<LuRocket />}
                 hotkey="navigation.inbox"
-              />
-              <AppSidebarLink
-                href={usePath('contacts')}
-                isActive={useActivePath('contacts', { end: false })}
-                label="Contacts"
-                icon={<LuSquareUser />}
-                hotkey="navigation.contacts"
               />
             </NavGroup>
 

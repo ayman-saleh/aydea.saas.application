@@ -19,6 +19,17 @@ if (env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET) {
   }
 }
 
+if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET) {
+  console.log('✅ Google OAuth configured with Client ID:', env.GOOGLE_CLIENT_ID.substring(0, 20) + '...')
+  socialProviders.google = {
+    prompt: 'select_account',
+    clientId: env.GOOGLE_CLIENT_ID,
+    clientSecret: env.GOOGLE_CLIENT_SECRET,
+  }
+} else {
+  console.log('❌ Google OAuth not configured - missing CLIENT_ID or CLIENT_SECRET')
+}
+
 export const auth = betterAuth({
   secret: env.AUTH_SECRET,
   database: drizzleAdapter(db, {
