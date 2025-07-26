@@ -31,7 +31,7 @@ const variantSolid = defineStyle((props) => {
   }
 })
 
-const variantGhost = defineStyle(() => {
+const variantGhost = defineStyle((props) => {
   return {
     fontWeight: 'medium',
     _checked: {
@@ -117,40 +117,40 @@ const variantTertiary = defineStyle({
   },
 })
 
-export const sizes = {
+const sizes = {
   lg: defineStyle({
-    h: '10',
+    h: '8',
     minW: '10',
-    fontSize: 'lg',
+    fontSize: 'md',
     px: '4',
-    borderRadius: 'md',
+    rounded: '6',
   }),
   md: defineStyle({
-    h: '8',
-    minW: '8',
-    fontSize: 'md',
-    px: '3',
-    borderRadius: 'sm',
-  }),
-  sm: defineStyle({
     h: '7',
-    minW: '7',
+    minW: '8',
     fontSize: 'sm',
     px: '3',
-    borderRadius: 'sm',
+    rounded: '4',
   }),
-  xs: defineStyle({
+  sm: defineStyle({
     h: '6',
     minW: '6',
-    fontSize: 'xs',
+    fontSize: 'sm',
     px: '2',
-    borderRadius: 'sm',
+    rounded: '3',
+  }),
+  xs: defineStyle({
+    h: '5',
+    minW: '4',
+    fontSize: 'xs',
+    px: '1',
+    rounded: '3',
   }),
 }
 
-export const buttonTheme = defineStyleConfig({
+export default defineStyleConfig({
   defaultProps: {
-    size: 'sm',
+    size: 'md',
     variant: 'secondary',
   },
   variants: {

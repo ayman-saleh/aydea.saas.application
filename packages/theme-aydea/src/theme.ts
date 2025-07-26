@@ -1,20 +1,31 @@
-import { extendTheme, ChakraTheme } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
+import { theme as proTheme } from '@saas-ui-pro/react'
+import { theme as glassTheme } from '@saas-ui/theme-glass'
 
-import colors from './foundations/colors'
-import { fonts, fontSizes, fontWeights, textStyles } from './foundations/typography'
-import sizes from './foundations/sizes'
-import shadows from './foundations/shadows'
+import { components } from './components'
 import semanticTokens from './foundations/semantic-tokens'
-import components from './components'
 
-export const theme = extendTheme({
-  colors,
-  fonts,
-  fontSizes,
-  fontWeights,
-  textStyles,
-  sizes,
-  components,
-  shadows,
-  semanticTokens,
-}) as ChakraTheme
+export const theme = extendTheme(
+  extendTheme(
+    {
+      colors: {
+        neutral: {
+          50: '#f0eeec',
+          100: '#f0eeec',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+        },
+      },
+      components,
+      semanticTokens,
+    },
+    glassTheme,
+  ),
+  proTheme,
+)

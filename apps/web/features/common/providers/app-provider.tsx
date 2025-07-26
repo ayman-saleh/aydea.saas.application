@@ -10,7 +10,7 @@ import { IconContext } from 'react-icons'
 
 import { segments } from '@acme/config'
 import { Link } from '@acme/next'
-import { theme } from '@acme/theme'
+import { theme } from '@acme/theme-aydea'
 import { ModalsProvider } from '@acme/ui/modals'
 
 import { appHotkeys } from '#config/hotkeys.config'

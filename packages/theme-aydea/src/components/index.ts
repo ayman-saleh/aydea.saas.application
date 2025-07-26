@@ -1,75 +1,29 @@
-import Alert from './alert'
-import Button from './button'
-import Card from './card'
-import Checkbox from './checkbox'
-import CloseButton from './close-button'
-import Drawer from './drawer'
-import Heading from './heading'
-import Kbd from './kbd'
-import Menu from './menu'
-import Modal from './modal'
-import Progress from './progress'
-import Popover from './popover'
-import Radio from './radio'
-import Slider from './slider'
-import Switch from './switch'
-import Tooltip from './tooltip'
-import {
-  inputTheme,
-  pinInputTheme,
-  formLabelTheme,
-  numberInputTheme,
-  nativeSelectTheme,
-  textareaTheme,
-} from './form'
+import { badgeTheme } from './badge'
+import { buttonTheme } from './button'
+import { cardTheme } from './card'
+import Form from './form'
+import { menuTheme } from './menu'
+import { navGroupTheme } from './nav-group'
+import { navItemTheme } from './nav-item'
+import { selectTheme } from './select'
+import { structuredListTheme } from './structured-list'
+import { tabsTheme } from './tabs'
+import { tagTheme } from './tag'
+import { toolbarTheme } from './toolbar'
+import { tooltipTheme } from './tooltip'
 
-export { default as Alert } from './alert'
-export { default as Button } from './button'
-export { default as Card } from './card'
-export { default as Checkbox } from './checkbox'
-export { default as CloseButton } from './close-button'
-export { default as Drawer } from './drawer'
-export { default as Heading } from './heading'
-export { default as Kbd } from './kbd'
-export { default as Menu } from './menu'
-export { default as Modal } from './modal'
-export { default as Progress } from './progress'
-export { default as Popover } from './popover'
-export { default as Radio } from './radio'
-export { default as Slider } from './slider'
-export { default as Switch } from './switch'
-export { default as Tooltip } from './tooltip'
-
-export {
-  inputTheme as Input,
-  pinInputTheme as PinInput,
-  formLabelTheme as FormLabel,
-  numberInputTheme as NumberInput,
-  nativeSelectTheme as Select,
-  textareaTheme as Textarea,
-} from './form'
-
-export default {
-  Alert,
-  Button,
-  Card,
-  Checkbox,
-  CloseButton,
-  Drawer,
-  Heading,
-  Kbd,
-  Menu,
-  Modal,
-  Progress,
-  Popover,
-  Radio,
-  Slider,
-  Switch,
-  Tooltip,
-  Input: inputTheme,
-  PinInput: pinInputTheme,
-  FormLabel: formLabelTheme,
-  NumberInput: numberInputTheme,
-  Select: nativeSelectTheme,
-  Textarea: textareaTheme,
+export const components = {
+  Badge: badgeTheme,
+  Button: buttonTheme,
+  Card: cardTheme,
+  Menu: menuTheme,
+  Tabs: tabsTheme,
+  Tag: tagTheme,
+  Tooltip: tooltipTheme,
+  SuiToolbar: toolbarTheme,
+  SuiNavItem: navItemTheme,
+  SuiNavGroup: navGroupTheme,
+  SuiStructuredList: structuredListTheme,
+  SuiSelect: selectTheme,
+  ...Form,
 }

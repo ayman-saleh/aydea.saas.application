@@ -212,14 +212,13 @@ export function DashboardPage(props: WorkspacePageProps) {
 
   return (
     <Page isLoading={isLoading}>
-      <PageHeader title="Dashboard" toolbar={toolbar} footer={footer} />
+      <PageHeader title="Dashboard" toolbar={toolbar} />
       <PageBody
         contentWidth="container.2xl"
         bg="page-body-bg-subtle"
         py={{ base: 4, xl: 8 }}
         px={{ base: 4, xl: 8 }}
       >
-        {body}
       </PageBody>
     </Page>
   )

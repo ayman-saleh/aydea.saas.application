@@ -6,11 +6,9 @@ import {
   Badge,
   Box,
   Flex,
-  IconButton,
   Spacer,
   HStack,
   useBreakpointValue,
-  useColorModeValue,
 } from '@chakra-ui/react'
 import {
   Command,
@@ -22,31 +20,18 @@ import {
 } from '@saas-ui/react'
 import { Route } from 'next'
 import { useRouter } from 'next/navigation'
-import {
-  LuCircleHelp,
-  LuHouse,
-  LuInbox,
-  LuPlus,
-  LuSearch,
-  LuRocket,
-} from 'react-icons/lu'
 
 import { useActivePath } from '@acme/next'
 import { useHelpCenter } from '@acme/ui/help-center'
 import { useModals } from '@acme/ui/modals'
 
-import { usePath } from '#features/common/hooks/use-path'
 import { useUserSettings } from '#lib/user-settings/use-user-settings'
 
 import { BillingStatus } from './billing-status'
-import { GlobalSearchInput } from './global-search-input'
-import { InvitePeopleDialog } from './invite-people'
-import { AppSidebarTags } from './sidebar-tags'
 import { UserMenu } from './user-menu'
 import { LogoMenu } from './logo-menu'
 import { IconMenu } from './icon-menu'
-
-import { LogoIcon, LogoText } from '@acme/ui/logo'
+import { PromptInput } from './prompt-input'
 
 export interface AppSidebarProps {
   variant?: 'default' | 'compact'
@@ -63,6 +48,24 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
   const isCompact = variant === 'compact'
 
   const isMobile = useBreakpointValue({ base: true, md: false })
+
+  // State for PromptInput
+  const [promptValue, setPromptValue] = React.useState('')
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  const handlePromptSubmit = () => {
+    if (promptValue.trim()) {
+      setIsLoading(true)
+      // TODO: Handle the prompt submission logic here
+      console.log('Submitting prompt:', promptValue)
+      
+      // Simulate async operation
+      setTimeout(() => {
+        setIsLoading(false)
+        setPromptValue('')
+      }, 2000)
+    }
+  }
 
   return (
     <Box
@@ -92,8 +95,15 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
 
         <Spacer />
 
-        {/* Tags - centered */}
-        {!isCompact && <AppSidebarTags />}
+        {/* Prompt Input - centered */}
+        {!isCompact && (
+          <PromptInput
+            value={promptValue}
+            onChange={(e) => setPromptValue(e.target.value)}
+            onSubmit={handlePromptSubmit}
+            isLoading={isLoading}
+          />
+        )}
 
         <Spacer />
 

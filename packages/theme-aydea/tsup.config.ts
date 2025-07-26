@@ -1,4 +1,14 @@
 import { defineConfig } from 'tsup'
-import config from '../../tsup.config'
 
-export default defineConfig(config)
+export default defineConfig({
+  target: 'es2019',
+  dts: {
+    resolve: true,
+  },
+  clean: true,
+  sourcemap: true,
+  format: ['esm', 'cjs'],
+  banner: {
+    js: "'use client'",
+  },
+})

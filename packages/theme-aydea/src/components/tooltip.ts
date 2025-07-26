@@ -1,32 +1,18 @@
-import { cssVar, SystemStyleFunction } from '@chakra-ui/theme-tools'
+import { defineCssVars, defineStyleConfig } from '@chakra-ui/styled-system'
 
-const $bg = cssVar('tooltip-bg')
-const $fg = cssVar('tooltip-fg')
-const $arrowBg = cssVar('popper-arrow-bg')
+const vars = defineCssVars('tooltip', ['bg', 'fg'])
 
-const baseStyle: SystemStyleFunction = (props) => {
-  return {
-    display: 'flex',
-    [$bg.variable]: 'colors.white',
-    [$fg.variable]: 'colors.blackAlpha.900',
+export const tooltipTheme = defineStyleConfig({
+  baseStyle: {
+    py: 1,
+    borderRadius: 'base',
+    borderColor: 'gray.300',
+    [vars.bg.variable]: 'colors.whiteAlpha.500',
+    backdropFilter: 'blur(10px) contrast(100%) saturate(190%)',
     _dark: {
-      [$bg.variable]: 'colors.gray.700',
-      [$fg.variable]: 'colors.whiteAlpha.900',
+      borderColor: 'whiteAlpha.300',
+      [vars.bg.variable]: 'colors.grayAlpha.700',
+      backdropFilter: 'blur(10px) saturate(190%) contrast(70%) brightness(80%)',
     },
-    px: '8px',
-    py: '2px',
-    bg: [$bg.reference],
-    [$arrowBg.variable]: [$bg.reference],
-    borderRadius: 'sm',
-    fontWeight: 'medium',
-    fontSize: 'xs',
-    boxShadow: 'md',
-    maxW: '320px',
-    zIndex: 'tooltip',
-    borderWidth: '1px',
-  }
-}
-
-export default {
-  baseStyle,
-}
+  },
+})

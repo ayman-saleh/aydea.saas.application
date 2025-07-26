@@ -55,7 +55,9 @@ export const UserMenu = () => {
         as={IconButton}
         icon={
           <PersonaAvatar
-            size="xs"
+            bg="personaAvatar.bg"
+            textColor="personaAvatar.textColor"
+            size="sm"
             name={currentUser?.name || ''}
             src={currentUser?.avatar || undefined}
           />
