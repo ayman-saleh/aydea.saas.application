@@ -90,7 +90,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
         {/* Logo Section */}
         <Flex align="center" justify="center" minW="fit-content" gap={1}>
           <IconMenu />
-          <LogoMenu />
+          {!isMobile && <LogoMenu />}
         </Flex>
 
         <Spacer />
@@ -107,17 +107,19 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
 
         <Spacer />
 
-        {/* Right Section with User Menu */}
-        <HStack spacing={2} minW="fit-content">
-          {isCompact ? (
-            <UserMenu />
-          ) : (
-            <>
-              <BillingStatus />
+        {/* Right Section with User Menu - hide on mobile */}
+        {!isMobile && (
+          <HStack spacing={2} minW="fit-content">
+            {isCompact ? (
               <UserMenu />
-            </>
-          )}
-        </HStack>
+            ) : (
+              <>
+                <BillingStatus />
+                <UserMenu />
+              </>
+            )}
+          </HStack>
+        )}
       </HStack>
     </Box>
   )

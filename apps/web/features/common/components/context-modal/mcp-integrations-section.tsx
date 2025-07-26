@@ -13,6 +13,7 @@ import {
   MenuList,
   MenuItem,
   Avatar,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { LuPlus, LuPlug2 } from 'react-icons/lu'
 import { MCPIntegrationsSectionProps } from './mcp-types'
@@ -27,6 +28,7 @@ export function MCPIntegrationsSection({
   const availableToAdd = AVAILABLE_INTEGRATIONS.filter(
     available => !integrations.find(i => i.id === available.id)
   )
+  const isMobile = useBreakpointValue({ base: true, md: false })
 
   return (
     <VStack align="start" spacing={3}>

@@ -1,41 +1,53 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
   Avatar,
   AvatarProps,
   Box,
   HStack,
+  Spacer,
   Menu,
   MenuButton,
-  MenuDivider,
-  MenuGroup,
   MenuItem,
   MenuList,
+  MenuDivider,
+  MenuGroup,
+  IconButton,
   Portal,
-  Spacer,
   Text,
   Heading,
   useColorModeValue,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { Has } from '@saas-ui-pro/feature-flags'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import {
-  LuCheck,
   LuPlus,
   LuSettings,
-  LuDollarSign,
+  LuHouse,
+  LuInbox,
+  LuUsers,
+  LuTag,
+  LuCircleHelp,
+  LuLogOut,
+  LuUser,
+  LuCheck,
   LuBriefcase,
+  LuDollarSign,
 } from 'react-icons/lu'
 
+import { useActivePath } from '@acme/next'
 import { LogoIcon } from '@acme/ui/logo'
 import { useModals } from '@acme/ui/modals'
+import { useHelpCenter } from '@acme/ui/help-center'
 
-import { usePath } from '#features/common/hooks/use-path'
+import { InvitePeopleDialog } from './invite-people'
 import { useWorkspace } from '#features/common/hooks/use-workspace'
 import { useWorkspaces } from '#features/common/hooks/use-workspaces'
-import { InvitePeopleDialog } from './invite-people'
+import { usePath } from '#features/common/hooks/use-path'
+import { useUserSettings } from '#lib/user-settings/use-user-settings'
 
 const WorkspaceLogo: React.FC<AvatarProps> = (props) => {
   const { src, ...rest } = props
@@ -53,8 +65,10 @@ const WorkspaceLogo: React.FC<AvatarProps> = (props) => {
 export const IconMenu: React.FC = () => {
   const router = useRouter()
   const modals = useModals()
+  const help = useHelpCenter()
   const workspace = useWorkspace()
   const workspaces = useWorkspaces()
+  const isMobile = useBreakpointValue({ base: true, md: false })
 
   const activeWorkspace = (function () {
     for (const i in workspaces) {
@@ -67,6 +81,11 @@ export const IconMenu: React.FC = () => {
 
   const setWorkspace = (workspace: string) => {
     router.push(`/${workspace}`)
+  }
+
+  const handleNavigation = (path: string) => {
+    const fullPath = path.startsWith('/') ? path : `/${workspace}/${path}`
+    router.push(fullPath)
   }
 
   return (
@@ -153,6 +172,66 @@ export const IconMenu: React.FC = () => {
 
           <MenuDivider />
 
+          {/* Mobile Navigation - only show on mobile */}
+          {isMobile && (
+            <>
+              <MenuGroup title="Navigation">
+                <MenuItem
+                  icon={<LuHouse />}
+                  onClick={() => handleNavigation('/')}
+                  transition="all 0.2s"
+                  _hover={{ bg: 'sidebar-on-muted' }}
+                  _active={{ bg: 'sidebar-on-subtle' }}
+                >
+                  Home
+                </MenuItem>
+                <MenuItem
+                  icon={<LuInbox />}
+                  onClick={() => handleNavigation('inbox')}
+                  transition="all 0.2s"
+                  _hover={{ bg: 'sidebar-on-muted' }}
+                  _active={{ bg: 'sidebar-on-subtle' }}
+                >
+                  Inbox
+                </MenuItem>
+                <MenuItem
+                  icon={<LuUsers />}
+                  onClick={() => handleNavigation('contacts')}
+                  transition="all 0.2s"
+                  _hover={{ bg: 'sidebar-on-muted' }}
+                  _active={{ bg: 'sidebar-on-subtle' }}
+                >
+                  Contacts
+                </MenuItem>
+              </MenuGroup>
+              
+              <MenuDivider />
+              
+              <MenuGroup title="Account">
+                <MenuItem
+                  icon={<LuUser />}
+                  onClick={() => handleNavigation('settings/account')}
+                  transition="all 0.2s"
+                  _hover={{ bg: 'sidebar-on-muted' }}
+                  _active={{ bg: 'sidebar-on-subtle' }}
+                >
+                  Profile
+                </MenuItem>
+                <MenuItem
+                  icon={<LuSettings />}
+                  onClick={() => handleNavigation('settings')}
+                  transition="all 0.2s"
+                  _hover={{ bg: 'sidebar-on-muted' }}
+                  _active={{ bg: 'sidebar-on-subtle' }}
+                >
+                  Settings
+                </MenuItem>
+              </MenuGroup>
+              
+              <MenuDivider />
+            </>
+          )}
+
           {/* Quick Actions */}
           <MenuGroup title="Quick Actions">
             <MenuItem
@@ -213,6 +292,27 @@ export const IconMenu: React.FC = () => {
               Billing
             </MenuItem>
           </MenuGroup>
+
+          {/* Logout - only show on mobile */}
+          {isMobile && (
+            <>
+              <MenuDivider />
+              <MenuItem
+                icon={<LuLogOut />}
+                onClick={() => router.push('/logout')}
+                transition="all 0.2s"
+                _hover={{
+                  bg: 'sidebar-on-muted',
+                }}
+                _active={{
+                  bg: 'sidebar-on-subtle',
+                }}
+                color="red.500"
+              >
+                Log out
+              </MenuItem>
+            </>
+          )}
         </MenuList>
       </Portal>
     </Menu>

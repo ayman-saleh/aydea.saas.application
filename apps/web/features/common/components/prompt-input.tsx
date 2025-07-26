@@ -10,6 +10,7 @@ import {
   IconButton,
   Spinner,
   Box,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { LuArrowUp } from 'react-icons/lu'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -32,6 +33,7 @@ export function PromptInput({
   const [isContextModalOpen, setIsContextModalOpen] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const isMobile = useBreakpointValue({ base: true, md: false })
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -40,7 +42,7 @@ export function PromptInput({
     }
   }
 
-  // Animation variants
+  // Animation variants - different for mobile
   const containerVariants = {
     initial: { 
       scale: 1,
@@ -48,23 +50,23 @@ export function PromptInput({
       width: '100%',
     },
     hover: {
-      scale: 1.02,
-      y: -2,
+      scale: isMobile ? 1 : 1.02,
+      y: isMobile ? 0 : -2,
       width: '100%',
       transition: {
         type: "spring",
-        stiffness: 400,
-        damping: 25,
+        stiffness: isMobile ? 200 : 400,
+        damping: isMobile ? 35 : 25,
       }
     },
     focused: {
-      scale: 1.05,
-      y: -8,
-      width: '60vw',
+      scale: isMobile ? 1 : 1.05,
+      y: isMobile ? 0 : -8,
+      width: isMobile ? '100%' : '60vw',
       transition: {
         type: "spring",
-        stiffness: 300,
-        damping: 20,
+        stiffness: isMobile ? 150 : 300,
+        damping: isMobile ? 30 : 20,
       }
     }
   }
@@ -75,7 +77,7 @@ export function PromptInput({
       scale: 0.9,
     },
     focused: {
-      opacity: 1,
+      opacity: isMobile ? 0.5 : 1,
       scale: 1,
       transition: {
         duration: 0.3,
@@ -86,7 +88,7 @@ export function PromptInput({
 
   return (
     <>
-    <Box position="relative" maxW={isFocused ? "60vw" : "600px"} w="full" transition="max-width 0.3s ease-out">
+    <Box position="relative" maxW={isFocused ? (isMobile ? "100%" : "60vw") : "600px"} w="full" transition="max-width 0.3s ease-out">
       <motion.div
         initial="initial"
         animate={isFocused ? "focused" : isHovered ? "hover" : "initial"}
@@ -107,12 +109,12 @@ export function PromptInput({
           animate={isFocused ? "focused" : "initial"}
           style={{
             position: 'absolute',
-            inset: isFocused ? -8 : -4,
+            inset: isFocused ? (isMobile ? -2 : -8) : -4,
             background: isFocused 
               ? 'linear-gradient(45deg, rgba(107, 117, 208, 0.4), rgba(133, 142, 221, 0.4), rgba(107, 117, 208, 0.3))' 
               : 'linear-gradient(45deg, rgba(107, 117, 208, 0.3), rgba(133, 142, 221, 0.3))',
             borderRadius: '9999px',
-            filter: isFocused ? 'blur(20px)' : 'blur(12px)',
+            filter: isFocused ? (isMobile ? 'blur(8px)' : 'blur(20px)') : 'blur(12px)',
             pointerEvents: 'none',
             zIndex: -1,
           }}

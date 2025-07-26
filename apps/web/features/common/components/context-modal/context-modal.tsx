@@ -14,6 +14,8 @@ import {
   Divider,
   Icon,
   IconButton,
+  useBreakpointValue,
+  Stack,
 } from '@chakra-ui/react'
 import {
   LuPlus,
@@ -43,6 +45,9 @@ export function ContextModal({ isOpen, onClose }: ContextModalProps) {
   const [viewingDocument, setViewingDocument] = useState<Document | null>(null)
   const [integrations, setIntegrations] = useState<Integration[]>(DEFAULT_INTEGRATIONS)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
+  
+  const modalSize = useBreakpointValue({ base: 'full', md: '6xl' })
+  const isMobile = useBreakpointValue({ base: true, md: false })
 
   const addDocument = (type: 'pdf' | 'text' | 'website', title?: string, content?: string, url?: string) => {
     const newDoc: Document = {
@@ -192,7 +197,7 @@ export function ContextModal({ isOpen, onClose }: ContextModalProps) {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="full">
+      <Modal isOpen={isOpen} onClose={onClose} size={modalSize}>
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
         <input
           ref={fileInputRef}
@@ -203,61 +208,73 @@ export function ContextModal({ isOpen, onClose }: ContextModalProps) {
         />
         <ModalContent
           bg="context-modal.bg"
-          borderRadius="none"
-          boxShadow="none"
-          borderWidth="0"
+          borderRadius={isMobile ? "none" : "md"}
+          boxShadow={isMobile ? "none" : "xl"}
+          borderWidth={isMobile ? "0" : "1px"}
           borderColor="context-modal.border"
-          m={0}
+          m={isMobile ? 0 : 4}
+          maxH={isMobile ? "100vh" : "90vh"}
         >
           <ModalCloseButton />
           <ModalBody p={0} overflowY="auto">
-            <Box maxW="1200px" mx="auto" px={6} py={8}>
+            <Box maxW={isMobile ? "100%" : "1200px"} mx="auto" px={isMobile ? 4 : 6} py={isMobile ? 6 : 8}>
               <VStack align="stretch" spacing={0}>
               {sections.map((section, index) => (
                 <Box key={section.label}>
-                  <HStack
-                    py={6}
-                    px={8}
-                    align="start"
-                    spacing={8}
+                  <Box
+                    py={isMobile ? 4 : 6}
+                    px={isMobile ? 4 : 8}
                     _hover={section.expandable ? { bg: 'context-modal.hover-bg' } : {}}
                     cursor={section.expandable ? 'pointer' : 'default'}
                     borderRadius="lg"
                     transition="background 0.2s"
                   >
-                    {/* Label Section */}
-                    <HStack spacing={3} minW="200px" align="center">
-                      <Icon
-                        as={section.icon}
-                        boxSize={4}
-                        color="context-modal.icon-color"
-                      />
-                      <Text
-                        fontSize="sm"
-                        fontWeight="medium"
-                        color="context-modal.label-color"
+                    {/* Mobile: Stack vertically, Desktop: Side by side */}
+                    <Stack 
+                      direction={isMobile ? "column" : "row"}
+                      align={isMobile ? "stretch" : "start"}
+                      spacing={isMobile ? 3 : 8}
+                      w="full"
+                    >
+                      {/* Label Section */}
+                      <HStack 
+                        spacing={3} 
+                        minW={isMobile ? "auto" : "200px"} 
+                        align="center"
                       >
-                        {section.label}
-                      </Text>
-                    </HStack>
+                        <Icon
+                          as={section.icon}
+                          boxSize={4}
+                          color="context-modal.icon-color"
+                        />
+                        <Text
+                          fontSize="sm"
+                          fontWeight="medium"
+                          color="context-modal.label-color"
+                        >
+                          {section.label}
+                        </Text>
+                      </HStack>
 
-                    {/* Content Section */}
-                    <Box flex={1}>
-                      {section.content}
-                    </Box>
+                      {/* Content Section */}
+                      <Box flex={1} w="full">
+                        {section.content}
+                      </Box>
 
-                    {/* Expandable Indicator */}
-                    {section.expandable && (
-                      <IconButton
-                        aria-label="Expand section"
-                        icon={<LuPlus />}
-                        size="xs"
-                        variant="ghost"
-                        color="context-modal.icon-color"
-                        _hover={{ bg: 'context-modal.button-hover' }}
-                      />
-                    )}
-                  </HStack>
+                      {/* Expandable Indicator */}
+                      {section.expandable && (
+                        <IconButton
+                          aria-label="Expand section"
+                          icon={<LuPlus />}
+                          size="xs"
+                          variant="ghost"
+                          color="context-modal.icon-color"
+                          _hover={{ bg: 'context-modal.button-hover' }}
+                          ml={isMobile ? "auto" : 0}
+                        />
+                      )}
+                    </Stack>
+                  </Box>
                   
                   {index < sections.length - 1 && (
                     <Divider borderColor="context-modal.border" />
