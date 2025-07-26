@@ -16724,6 +16724,7 @@ __metadata:
     lint-staged: "npm:^15.5.0"
     pkg-types: "npm:^2.1.0"
     prettier: "npm:^3.5.3"
+    react-icons: "npm:^5.5.0"
     rimraf: "npm:^6.0.1"
     tsx: "npm:^4.19.3"
     turbo: "npm:^2.4.4"

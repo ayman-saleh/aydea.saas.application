@@ -8,7 +8,6 @@ import SuperJSON from 'superjson'
 
 import { getBaseUrl } from '#features/common/util/get-base-url.ts'
 import { getQueryClient } from '#lib/react-query/get-query-client.ts'
-import { ReactQueryDevtools } from '#lib/react-query/react-query-devtools.tsx'
 
 import { api } from './react.ts'
 
@@ -46,7 +45,6 @@ export const TRPCProvider: React.FC<{ children: React.ReactNode }> = (
     <api.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         {props.children}
-        <ReactQueryDevtools />
       </QueryClientProvider>
     </api.Provider>
   )

@@ -10,6 +10,7 @@ import {
   Spacer,
   HStack,
   useBreakpointValue,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import {
   Command,
@@ -42,7 +43,8 @@ import { GlobalSearchInput } from './global-search-input'
 import { InvitePeopleDialog } from './invite-people'
 import { AppSidebarTags } from './sidebar-tags'
 import { UserMenu } from './user-menu'
-import { WorkspacesMenu } from './workspaces-menu'
+import { LogoMenu } from './logo-menu'
+import { IconMenu } from './icon-menu'
 
 import { LogoIcon, LogoText } from '@acme/ui/logo'
 
@@ -69,7 +71,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
       left={0}
       right={0}
       zIndex={100}
-      bg="sidebar.bg"
+      bg={"sidebar.bg"}
       borderTopWidth="1px"
       borderTopColor="sidebar.border"
       h={isCompact ? "60px" : "80px"}
@@ -83,84 +85,27 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
         overflowX="auto"
       >
         {/* Logo Section */}
-        <Flex align="center" justify="center" minW="fit-content">
-          <LogoIcon h="30px" />
-          <LogoText h="30px" />
+        <Flex align="center" justify="center" minW="fit-content" gap={1}>
+          <IconMenu />
+          <LogoMenu />
         </Flex>
-
-        {/* Workspaces and User Menu */}
-        <HStack spacing={2} minW="fit-content">
-          <React.Suspense>
-            <WorkspacesMenu compact={isCompact} />
-          </React.Suspense>
-          {!isCompact && (
-            <React.Suspense>
-              <UserMenu />
-            </React.Suspense>
-          )}
-        </HStack>
-
-        {/* Search */}
-        <Box minW={isCompact ? "auto" : "200px"}>
-          {isCompact ? (
-            <IconButton icon={<LuSearch />} aria-label="Search" size="sm" />
-          ) : (
-            <GlobalSearchInput size="sm" />
-          )}
-        </Box>
-
-        {/* Navigation Items */}
-        <HStack spacing={2} flex="1" justify="center">
-          <AppSidebarLink
-            href={usePath('/')}
-            label="Home"
-            icon={<LuHouse />}
-            hotkey="navigation.dashboard"
-            isCompact={isCompact}
-          />
-          <AppSidebarLink
-            href={usePath('deployments')}
-            isActive={useActivePath('deployments', { end: false })}
-            label="Deployments"
-            badge={2}
-            icon={<LuRocket />}
-            hotkey="navigation.inbox"
-            isCompact={isCompact}
-          />
-        </HStack>
 
         <Spacer />
 
-        {/* Right Section */}
-        <HStack spacing={2} minW="fit-content">
-          {!isCompact && <AppSidebarTags />}
-          
-          <NavItem
-            onClick={() => modals.open(InvitePeopleDialog)}
-            color="sidebar-muted"
-            icon={<LuPlus />}
-            aria-label="Invite people"
-            size="sm"
-            variant="ghost"
-          >
-            {!isCompact && 'Invite people'}
-          </NavItem>
-          
-          <NavItem
-            onClick={() => help.open()}
-            color="sidebar-muted"
-            icon={<LuCircleHelp />}
-            aria-label="Help & support"
-            size="sm"
-            variant="ghost"
-          >
-            {!isCompact && 'Help & support'}
-          </NavItem>
+        {/* Tags - centered */}
+        {!isCompact && <AppSidebarTags />}
 
+        <Spacer />
+
+        {/* Right Section with User Menu */}
+        <HStack spacing={2} minW="fit-content">
           {isCompact ? (
             <UserMenu />
           ) : (
-            <BillingStatus />
+            <>
+              <BillingStatus />
+              <UserMenu />
+            </>
           )}
         </HStack>
       </HStack>
