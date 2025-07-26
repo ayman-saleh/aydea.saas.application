@@ -77,7 +77,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = (props) => {
       bg={"sidebar.bg"}
       borderTopWidth="1px"
       borderTopColor="sidebar.border"
-      h={isCompact ? "60px" : "80px"}
+      h={isCompact ? "80px" : "100px"}
     >
       <HStack
         h="full"

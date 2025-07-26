@@ -1,34 +1,42 @@
 'use client'
 
-import * as React from 'react'
-import {
-  Box,
-  Grid,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Portal,
-  Text,
-  MenuDivider,
-  Heading,
-} from '@chakra-ui/react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
 import {
-  LuCircleHelp,
-  LuHouse,
-  LuRocket,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  Portal,
+  Box,
+  Heading,
+  Text,
+  Grid,
+  GridItem,
+  VStack,
+  HStack,
+  Spacer,
+} from '@chakra-ui/react'
+import {
   LuPlus,
-  LuInbox,
-  LuUsers,
-  LuTag,
+  LuSearch,
   LuSettings,
-  LuUser,
-  LuShield,
+  LuCircleHelp,
+  LuLogOut,
+  LuHouse,
+  LuUsers,
+  LuFileText,
   LuBell,
-  LuKey,
+  LuCreditCard,
   LuDollarSign,
   LuUserPlus,
+  LuChevronDown,
+  LuInbox,
+  LuRocket,
+  LuTag,
+  LuUser,
+  LuShield,
 } from 'react-icons/lu'
 
 import { LogoText } from '@acme/ui/logo'
@@ -48,8 +56,17 @@ interface LogoMenuItem {
 
 export const LogoMenu: React.FC = () => {
   const router = useRouter()
-  const modals = useModals()
   const help = useHelpCenter()
+  const modals = useModals()
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  const usePath = (path: string) => {
+    const segments = path.split('/')
+    if (segments[0] === 'settings') {
+      return `/settings/${segments.slice(1).join('/')}`
+    }
+    return `/${path}`
+  }
 
   const menuItems: LogoMenuItem[] = [
     // Main navigation
@@ -127,6 +144,12 @@ export const LogoMenu: React.FC = () => {
       onClick: () => help.open(),
       section: 'actions',
     },
+    {
+      label: 'Log out',
+      icon: <LuLogOut />,
+      onClick: () => router.push('/logout'),
+      section: 'actions',
+    },
   ]
 
   const handleItemClick = (item: LogoMenuItem) => {
@@ -142,19 +165,31 @@ export const LogoMenu: React.FC = () => {
   const actionItems = menuItems.filter(item => item.section === 'actions')
 
   return (
-    <Menu>
+    <Menu onOpen={() => setIsOpen(true)} onClose={() => setIsOpen(false)}>
       <MenuButton
         as={Box}
         cursor="pointer"
         display="flex"
-        h="20px"
-        w="100px"
+        alignItems="center"
+        h="32px"
         _hover={{
           opacity: 0.8,
         }}
         transition="opacity 0.2s"
       >
-        <LogoText />
+        <HStack spacing={1} align="center" h="full">
+          <Box w="100px" h="20px" display="flex" alignItems="center">
+            <LogoText />
+          </Box>
+          <Box
+            transform={isOpen ? "rotate(180deg)" : "rotate(0deg)"}
+            transition="transform 0.2s ease"
+            display="flex"
+            alignItems="center"
+          >
+            <LuChevronDown size={16} />
+          </Box>
+        </HStack>
       </MenuButton>
       <Portal>
         <MenuList

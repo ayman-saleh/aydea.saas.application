@@ -16,6 +16,7 @@ import {
   Spacer,
   Text,
   Heading,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { Has } from '@saas-ui-pro/feature-flags'
 import Link from 'next/link'
@@ -87,7 +88,19 @@ export const IconMenu: React.FC = () => {
         transition="all 0.2s"
         p={1}
       >
-        <LogoIcon h="30px" />
+        <Box
+          bg={useColorModeValue("white", "gray.800")}
+          borderWidth="1px"
+          borderColor={useColorModeValue("gray.200", "gray.700")}
+          borderRadius="md"
+          p={1}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          boxShadow="sm"
+        >
+          <LogoIcon h="24px" />
+        </Box>
       </MenuButton>
       <Portal>
         <MenuList

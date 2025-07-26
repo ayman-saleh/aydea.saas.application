@@ -16,4 +16,14 @@ export const theme = extendTheme({
   components,
   shadows,
   semanticTokens,
+  styles: {
+    global: {
+      body: {
+        bg: {
+          default: 'alabaster.200', // Light mode
+          _dark: 'gray.900',        // Dark mode
+        },
+      },
+    }
+  }
 }) as ChakraTheme

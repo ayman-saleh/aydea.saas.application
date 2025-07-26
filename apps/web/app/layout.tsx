@@ -33,7 +33,7 @@ export default async function AppRootLayout({
 
   return (
     <html data-theme={colorMode} style={{ colorScheme: colorMode }}>
-      <body className={`chakra-ui-${colorMode}`}>
+      <body>
         <Script colorMode={colorMode} />
         <Provider initialColorMode={colorMode}>{children}</Provider>
 

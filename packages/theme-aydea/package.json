@@ -54,7 +54,8 @@
     "@chakra-ui/theme": "^3.4.7",
     "@chakra-ui/theme-tools": "^2.2.7",
     "@saas-ui-pro/react": "^0.42.0",
-    "@saas-ui/theme": "^2.6.0"
+    "@saas-ui/theme": "^2.6.0",
+    "core-theme": "workspace:*"
   },
   "peerDependencies": {
     "@chakra-ui/react": "2.10.9",

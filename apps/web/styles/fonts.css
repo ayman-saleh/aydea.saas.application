@@ -20,4 +20,70 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap;
+}
+
+/* OffBit Trial Font Family */
+@font-face {
+  font-family: 'OffBit Trial';
+  src: url('/fonts/OffBitTrial-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OffBit Trial';
+  src: url('/fonts/OffBitTrial-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OffBit Trial 101';
+  src: url('/fonts/OffBitTrial-101.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OffBit Trial 101';
+  src: url('/fonts/OffBitTrial-101Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OffBit Trial Dot';
+  src: url('/fonts/OffBitTrial-Dot.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OffBit Trial Dot';
+  src: url('/fonts/OffBitTrial-DotBold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Pangram Pangram Bitmap Fonts */
+@font-face {
+  font-family: 'PP Mondwest';
+  src: url('/fonts/PPMondwest-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Neue Bit';
+  src: url('/fonts/PPNeueBit-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 } 

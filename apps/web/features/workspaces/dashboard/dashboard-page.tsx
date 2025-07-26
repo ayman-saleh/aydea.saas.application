@@ -40,10 +40,13 @@ import { Activity } from './metrics/activity'
 import { Metric } from './metrics/metric'
 import { RevenueChart } from './metrics/revenue-chart'
 import { SalesByCountry } from './metrics/sales-by-country'
+import { DashboardEmptyState } from './empty-state'
 
 export function DashboardPage(props: WorkspacePageProps) {
   const [range, setRange] = useState('30d')
   const [dateRange, setDateRange] = useState(getRangeValue('30d'))
+  const [showEmpty, setShowEmpty] = useState(true) // Start with empty state
+  
   const onPresetChange = (preset: string) => {
     if (preset !== 'custom') {
       setDateRange(getRangeValue(preset as DateRangePresets))
@@ -85,6 +88,11 @@ export function DashboardPage(props: WorkspacePageProps) {
 
   const toolbar = (
     <Toolbar className="overview-toolbar" variant="ghost">
+      <ToolbarButton
+        onClick={() => setShowEmpty(!showEmpty)}
+        label={showEmpty ? "Show Dashboard" : "Show Empty State"}
+        variant="outline"
+      />
       <ToolbarButton
         as="a"
         href="https://twitter.com/intent/tweet?text=Check%20out%20%40saas_js,%20an%20advanced%20component%20library%20for%20SaaS%20products%20build%20with%20%40chakra_ui.%20https%3A//saas-ui.dev%20"
@@ -145,6 +153,8 @@ export function DashboardPage(props: WorkspacePageProps) {
     <LoadingOverlay>
       <LoadingSpinner />
     </LoadingOverlay>
+  ) : !data?.charts?.length || showEmpty ? (
+    <DashboardEmptyState />
   ) : (
     <>
       <IntroTour />
@@ -212,13 +222,15 @@ export function DashboardPage(props: WorkspacePageProps) {
 
   return (
     <Page isLoading={isLoading}>
-      <PageHeader title="Dashboard" toolbar={toolbar} />
+      
       <PageBody
-        contentWidth="container.2xl"
-        bg="page-body-bg-subtle"
-        py={{ base: 4, xl: 8 }}
-        px={{ base: 4, xl: 8 }}
+        contentWidth={!showEmpty && data?.charts?.length ? "container.2xl" : "full"}
+        bg="page.bg"
+        py={!showEmpty && data?.charts?.length ? { base: 4, xl: 8 } : 0}
+        px={!showEmpty && data?.charts?.length ? { base: 4, xl: 8 } : 0}
+        h="calc(100vh - 100px)" // Subtract sidebar height (100px)
       >
+        {body}
       </PageBody>
     </Page>
   )

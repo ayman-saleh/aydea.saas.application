@@ -18,9 +18,16 @@ const tokens = {
         _dark: 'whiteAlpha.900',
       }
     },
+    page:
+    {
+      bg: {
+        default: 'alabaster.200',
+        _dark: 'gray.900',
+      },
+    },
     sidebar: {
       bg: {
-        default: 'neutral.100',
+        default: 'alabaster.200',
         _dark: 'gray.900',
       },
       border: {
@@ -153,6 +160,14 @@ const tokens = {
         default: 'gray.100',
         _dark: 'whiteAlpha.100',
       },
+    },
+    'dots-base': {
+      default: 'neutral.200',
+      _dark: 'neutral.800',
+    },
+    'dots-active': {
+      default: 'primary.400',
+      _dark: 'primary.300',
     },
   },
 }
